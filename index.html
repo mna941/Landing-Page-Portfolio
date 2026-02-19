@@ -1,683 +1,1037 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ThemeMint | Premium Landing Page Templates</title>
-    <meta name="description" content="Explore our collection of premium landing page templates and themes for startups, agencies, and online businesses.">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<html lang="en">
 
-    <!-- Tailwind Config for Custom Colors/Fonts -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            DEFAULT: '#00bfa6', 
-                            dark: '#009e8a',
-                            light: '#e0fcf9'
-                        }
-                    }
-                }
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landing Page Portfolio | ThemeMint</title>
+    <meta name="description"
+        content="Explore our collection of premium landing page templates and themes for startups, agencies, and online businesses." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --accent: #3aaa7a;
+            --accent-dark: #2d8f65;
+            --bg: #f5f7fa;
+            --surface: #ffffff;
+            --border: #e8edf3;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, .08), 0 1px 2px rgba(0, 0, 0, .05);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, .10);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, .15);
+            --radius: 16px;
+            --transition: .25s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, .85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 clamp(1rem, 5vw, 4rem);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            line-height: 1;
+        }
+
+        .nav-logo svg {
+            height: 36px;
+            width: auto;
+            left: 10px
+        }
+
+        .footer-logo-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: .8rem;
+        }
+
+        .footer-logo-wrap svg {
+            height: 44px;
+            width: auto;
+        }
+
+        .nav-cta {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 100px;
+            padding: .45rem 1.2rem;
+            font-size: .875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background var(--transition), transform var(--transition);
+            text-decoration: none;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-dark);
+            transform: translateY(-1px);
+        }
+
+        /* ── HERO ── */
+        .hero {
+            text-align: center;
+            padding: clamp(3rem, 8vw, 7rem) clamp(1rem, 5vw, 4rem) clamp(2rem, 5vw, 4rem);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            background: rgba(0, 191, 166, .1);
+            color: var(--accent);
+            border: 1px solid rgba(0, 191, 166, .3);
+            border-radius: 100px;
+            padding: .35rem 1rem;
+            font-size: .8rem;
+            font-weight: 600;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5.5vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #3aaa7a 0%, #2d8f65 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--text-secondary);
+            max-width: 560px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .stat span {
+            font-size: .8rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* ── SECTION LABEL ── */
+        .section-label {
+            text-align: center;
+            padding: 0 clamp(1rem, 5vw, 4rem);
+            margin-bottom: 2.5rem;
+        }
+
+        .section-label h2 {
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-weight: 700;
+            letter-spacing: -.5px;
+        }
+
+        .section-label p {
+            color: var(--text-secondary);
+            font-size: .95rem;
+            margin-top: .4rem;
+        }
+
+        /* ── GRID ── */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.75rem;
+            padding: 0 clamp(1rem, 5vw, 4rem) clamp(3rem, 6vw, 5rem);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* ── CARD ── */
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow var(--transition), transform var(--transition);
+            cursor: pointer;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-6px);
+        }
+
+        .card:focus-within {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        /* thumbnail */
+        .card-thumb {
+            position: relative;
+            overflow: hidden;
+            height: 210px;
+            background: linear-gradient(135deg, #e0f7f5, #e8f0fe);
+        }
+
+        .card-thumb iframe {
+            width: 166.67%;
+            height: 166.67%;
+            border: none;
+            pointer-events: none;
+            transform: scale(.6);
+            transform-origin: top left;
+            border-radius: 0;
+        }
+
+        .card-thumb-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 55%, rgba(0, 0, 0, .35));
+        }
+
+        .card-tag {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(255, 255, 255, .92);
+            backdrop-filter: blur(8px);
+            border-radius: 100px;
+            padding: .25rem .75rem;
+            font-size: .72rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: .3px;
+        }
+
+        /* body */
+        .card-body {
+            padding: 1.4rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: .6rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: -.3px;
+        }
+
+        .card-desc {
+            font-size: .875rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
+            flex: 1;
+        }
+
+        /* actions */
+        .card-actions {
+            display: flex;
+            gap: .75rem;
+            margin-top: .5rem;
+        }
+
+        .btn-primary {
+            flex: 1;
+            text-align: center;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 100px;
+            padding: .6rem 1rem;
+            font-size: .85rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background var(--transition), transform var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: .4rem;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: var(--bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: .6rem 1rem;
+            font-size: .85rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background var(--transition), border-color var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+        }
+
+        .btn-secondary:hover {
+            background: #eef2f8;
+            border-color: #c8d0dc;
+        }
+
+        /* ── MODAL ── */
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            background: rgba(10, 10, 20, .65);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-backdrop.open {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--surface);
+            border-radius: 20px;
+            width: min(900px, 100%);
+            height: 85vh;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: pop .25s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        @keyframes pop {
+            from {
+                opacity: 0;
+                transform: scale(.95) translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
             }
         }
-    </script>
 
-    <style>
-        /* Custom scrollbar for the modal iframe */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8; 
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
         }
 
-        /* Card hover lift effect */
-        .project-card {
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
-        }
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        .modal-title {
+            font-size: 1rem;
+            font-weight: 700;
         }
 
-        /* Loader for iframe */
-        .loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #00bfa6;
+        .modal-url {
+            font-size: .78rem;
+            color: var(--text-secondary);
+            margin-top: .15rem;
+        }
+
+        .modal-close {
+            background: var(--bg);
+            border: 1px solid var(--border);
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--transition);
         }
 
-        /* Live Preview Thumbnail Styles */
-        .preview-wrap {
+        .modal-close:hover {
+            background: #e0e7ef;
+        }
+
+        .modal-iframe-wrap {
+            flex: 1;
+        }
+
+        .modal-iframe-wrap iframe {
             width: 100%;
             height: 100%;
-            overflow: hidden;
-            position: relative;
-            background-color: #f1f5f9;
-        }
-        .preview-wrap iframe {
-            width: 400%; 
-            height: 400%; 
-            transform: scale(0.25); 
-            transform-origin: 0 0;
             border: none;
-            pointer-events: none; 
+        }
+
+        .modal-footer {
+            padding: .75rem 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: .75rem;
+            justify-content: flex-end;
+            flex-shrink: 0;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            padding: 3rem clamp(1rem, 5vw, 4rem);
+            border-top: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .footer-logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: .6rem;
+        }
+
+        footer p {
+            color: var(--text-secondary);
+            font-size: .9rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            font-size: .85rem;
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        /* ── CONTACT ── */
+        .contact-section {
+            padding: clamp(3rem, 7vw, 6rem) clamp(1rem, 5vw, 4rem);
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+        }
+
+        .contact-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3.5rem;
+            align-items: start;
+        }
+
+        .contact-left .contact-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            background: rgba(58, 170, 122, .1);
+            color: var(--accent);
+            border: 1px solid rgba(58, 170, 122, .3);
+            border-radius: 100px;
+            padding: .3rem .9rem;
+            font-size: .78rem;
+            font-weight: 600;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+        }
+
+        .contact-left h2 {
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.15;
+            margin-bottom: .8rem;
+        }
+
+        .contact-left h2 span {
+            color: var(--accent);
+        }
+
+        .contact-left p {
+            color: var(--text-secondary);
+            font-size: .95rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info-cards {
+            display: flex;
+            flex-direction: column;
+            gap: .9rem;
+        }
+
+        .c-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: .9rem 1.1rem;
+            transition: box-shadow var(--transition), transform var(--transition);
+        }
+
+        .c-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateX(4px);
+        }
+
+        .c-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(58, 170, 122, .15), rgba(58, 170, 122, .05));
+            border: 1px solid rgba(58, 170, 122, .2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            flex-shrink: 0;
+        }
+
+        .c-card-text strong {
+            display: block;
+            font-size: .85rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .c-card-text span {
+            font-size: .8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Form */
+        .contact-form-box {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        .contact-form-box h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: .9rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: .4rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            font-size: .8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            padding: .7rem .95rem;
+            font-family: inherit;
+            font-size: .9rem;
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color var(--transition), box-shadow var(--transition);
+            width: 100%;
+            resize: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(58, 170, 122, .15);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 100px;
+            padding: .85rem 1.5rem;
+            font-size: .95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background var(--transition), transform var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            letter-spacing: .2px;
+        }
+
+        .btn-submit:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 2000;
+            background: #1a2e27;
+            color: #fff;
+            border: 1px solid rgba(58, 170, 122, .4);
+            border-radius: 14px;
+            padding: 1rem 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: .8rem;
+            font-size: .9rem;
+            font-weight: 500;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, .25);
+            transform: translateY(100px);
             opacity: 0;
-            transition: opacity 0.5s ease;
-            background-color: white;
+            transition: transform .4s cubic-bezier(.4, 0, .2, 1), opacity .4s;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast-check {
+            font-size: 1.2rem;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .contact-inner {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stats {
+                gap: 1.2rem;
+            }
+
+            .modal {
+                height: 90vh;
+            }
+
+            .toast {
+                right: 1rem;
+                left: 1rem;
+                bottom: 1.2rem;
+            }
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-brand-light selection:text-brand-dark flex flex-col min-h-screen">
 
-    <!-- Header Section (Shared) -->
-    <header class="w-full bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div onclick="navigateTo('home')" class="cursor-pointer flex items-center gap-2.5 hover:opacity-80 transition-opacity">
-                    <!-- Logo Image Only -->
-                    <img src="ThemeMint Logo.png" alt="ThemeMint Logo" class="w-80 h-13 object-cover" />
-            </div>
-            <nav class="hidden md:flex gap-8 text-sm font-medium text-slate-600">
-                <button onclick="navigateTo('home')" class="hover:text-brand transition-colors focus:outline-none">Templates</button>
-            </nav>
-            <button onclick="navigateTo('contact')" class="px-5 py-2 bg-slate-900 text-white text-sm font-medium rounded-full hover:bg-slate-700 transition-colors focus:outline-none">
-                Get in touch
-            </button>
+<body>
+
+    <!-- NAV -->
+    <nav role="navigation" aria-label="Main navigation">
+        <a href="#" class="nav-logo" aria-label="ThemeMint home">
+            <img src="ThemeMint Logo.png" alt="ThemeMint Logo" style="height:48px;width:auto;display:block;margin-left:110px;" />
+        </a>
+        <a href="#portfolio" class="nav-cta" aria-label="View all templates">View Templates</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+        <div class="hero-badge">✦ Premium Templates</div>
+        <h1 id="hero-heading">Landing Page<br /><span>Portfolio</span></h1>
+        <p>Premium themes &amp; templates crafted for modern brands, startups, and agencies.</p>
+        <div class="hero-stats">
+            <div class="stat"><strong>10</strong><span>Templates</span></div>
+            <div class="stat"><strong>100%</strong><span>Responsive</span></div>
+            <div class="stat"><strong>5★</strong><span>Quality</span></div>
         </div>
-    </header>
+    </section>
 
-    <!-- VIEW: HOME (Landing Page) -->
-    <div id="view-home" class="animate-in fade-in duration-500">
-        <!-- Hero / Intro -->
-        <section class="pt-20 pb-12 px-4 text-center">
-            <div class="max-w-3xl mx-auto">
-                <span class="inline-block py-1 px-3 rounded-full bg-brand-light text-brand-dark text-xs font-semibold mb-6 tracking-wide uppercase">
-                    2024 Collection
-                </span>
-                <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6 leading-tight">
-                    Landing Page Portfolio
-                </h2>
-                <p class="text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto">
-                    Premium themes & templates crafted for modern brands. <br class="hidden md:block"/>
-                    Designed for conversion, speed, and aesthetics.
-                </p>
+    <!-- GRID -->
+    <section id="portfolio" aria-label="Portfolio grid">
+        <div class="section-label">
+            <h2>All Templates</h2>
+            <p>Click "Preview" to see each template live inside the page.</p>
+        </div>
+        <div class="grid" id="cardGrid">
+            <!-- Cards injected by JS -->
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact-section" aria-labelledby="contact-heading">
+        <div class="contact-inner">
+
+            <!-- Left: Info -->
+            <div class="contact-left">
+                <div class="contact-badge">✉ Get in Touch</div>
+                <h2 id="contact-heading">Let's Work<br /><span>Together</span></h2>
+                <p>Have a project in mind? Want a custom landing page template? We'd love to hear from you. Fill out the
+                    form and we'll get back to you within 24 hours.</p>
+                <div class="contact-info-cards">
+                    <div class="c-card">
+                        <div class="c-icon" aria-hidden="true">📧</div>
+                        <div class="c-card-text">
+                            <strong>Email Us</strong>
+                            <span>hh5566970@gmail.com</span>
+                        </div>
+                    </div>
+
+                    <div class="c-card">
+                        <div class="c-icon" aria-hidden="true">📍</div>
+                        <div class="c-card-text">
+                            <strong>Location</strong>
+                            <span>Remote — Worldwide</span>
+                        </div>
+                    </div>
+                    <div class="c-card">
+                        <div class="c-icon" aria-hidden="true">🕐</div>
+                        <div class="c-card-text">
+                            <strong>Response Time</strong>
+                            <span>Within 24 hours</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </section>
 
-        <!-- Main Grid Section -->
-        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
-            
-            <!-- Grid Container -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-                <!-- Card 1: NeuroAI -->
-                <article class="project-card group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm flex flex-col h-full">
-                    <div class="relative h-56 overflow-hidden bg-slate-100">
-                        <div class="preview-wrap">
-                            <iframe 
-                                src="https://neuroai-preview.vercel.app/" 
-                                title="NeuroAI Live Preview"
-                                tabindex="-1"
-                                loading="lazy"
-                                scrolling="no"
-                                onload="this.style.opacity=1"
-                            ></iframe>
+            <!-- Right: Form -->
+            <div class="contact-form-box">
+                <h3>Send a Message</h3>
+                <form id="contactForm" novalidate>
+                    <form id="contactForm" action="https://formspree.io/f/xwkgrqzq" method="POST">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cf-name">Full Name *</label>
+                                <input type="text" id="cf-name" name="name" placeholder="e.g. John Doe" required autocomplete="name" />
+                            </div>
+                            <div class="form-group">
+                                <label for="cf-email">Email Address *</label>
+                                <input type="email" id="cf-email" name="email" placeholder="you@email.com" required autocomplete="email" />
+                            </div>
                         </div>
-                        <div class="absolute inset-0 bg-transparent group-hover:bg-black/5 transition-colors duration-300"></div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 pointer-events-none">
-                            <span class="text-white font-medium text-sm">AI & Technology</span>
+                        <div class="form-group">
+                            <label for="cf-subject">Subject</label>
+                            <select id="cf-subject" name="subject">
+                                <option value="">Select a subject...</option>
+                                <option value="custom">Custom Template Request</option>
+                                <option value="purchase">Purchase Inquiry</option>
+                                <option value="support">Support &amp; Help</option>
+                                <option value="collab">Collaboration</option>
+                                <option value="other">Other</option>
+                            </select>
                         </div>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand transition-colors">NeuroAI</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">
-                            A futuristic, AI-focused landing page featuring dark mode aesthetics and glowing neons.
-                        </p>
-                        <div class="flex gap-3 mt-auto">
-                            <button onclick="openModal('https://neuroai-preview.vercel.app/', 'NeuroAI')" class="flex-1 py-2.5 px-4 bg-slate-50 text-slate-700 text-sm font-medium rounded-lg hover:bg-slate-100 border border-slate-200 transition-colors focus:ring-2 focus:ring-slate-200 focus:outline-none">
-                                Quick Preview
-                            </button>
-                            <a href="https://neuroai-preview.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex-1 py-2.5 px-4 bg-brand text-white text-center text-sm font-medium rounded-lg hover:bg-brand-dark shadow-lg shadow-brand/20 transition-all focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:outline-none">
-                                View Demo
-                            </a>
+                        <div class="form-group">
+                            <label for="cf-message">Message *</label>
+                            <textarea id="cf-message" name="message" placeholder="Tell us about your project or question..." required></textarea>
                         </div>
-                    </div>
-                </article>
-
-                <!-- Card 2: ThemeMint -->
-                <article class="project-card group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm flex flex-col h-full">
-                    <div class="relative h-56 overflow-hidden bg-slate-100">
-                        <div class="preview-wrap">
-                            <iframe 
-                                src="https://theme-mint-preview.vercel.app/" 
-                                title="ThemeMint Live Preview"
-                                tabindex="-1"
-                                loading="lazy"
-                                scrolling="no"
-                                onload="this.style.opacity=1"
-                            ></iframe>
-                        </div>
-                        <div class="absolute inset-0 bg-transparent group-hover:bg-black/5 transition-colors duration-300"></div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 pointer-events-none">
-                            <span class="text-white font-medium text-sm">Multipurpose SaaS</span>
-                        </div>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand transition-colors">ThemeMint</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">
-                            Clean and versatile multipurpose template suitable for SaaS startups and digital products.
-                        </p>
-                        <div class="flex gap-3 mt-auto">
-                            <button onclick="openModal('https://theme-mint-preview.vercel.app/', 'ThemeMint')" class="flex-1 py-2.5 px-4 bg-slate-50 text-slate-700 text-sm font-medium rounded-lg hover:bg-slate-100 border border-slate-200 transition-colors focus:ring-2 focus:ring-slate-200 focus:outline-none">
-                                Quick Preview
-                            </button>
-                            <a href="https://theme-mint-preview.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex-1 py-2.5 px-4 bg-brand text-white text-center text-sm font-medium rounded-lg hover:bg-brand-dark shadow-lg shadow-brand/20 transition-all focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:outline-none">
-                                View Demo
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Card 3: Skill Forge Academy -->
-                <article class="project-card group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm flex flex-col h-full">
-                    <div class="relative h-56 overflow-hidden bg-slate-100">
-                        <div class="preview-wrap">
-                            <iframe 
-                                src="https://skill-forge-academy-preview.vercel.app/" 
-                                title="Skill Forge Academy Live Preview"
-                                tabindex="-1"
-                                loading="lazy"
-                                scrolling="no"
-                                onload="this.style.opacity=1"
-                            ></iframe>
-                        </div>
-                        <div class="absolute inset-0 bg-transparent group-hover:bg-black/5 transition-colors duration-300"></div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 pointer-events-none">
-                            <span class="text-white font-medium text-sm">Education & Courses</span>
-                        </div>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand transition-colors">Skill Forge Academy</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">
-                            Professional online course platform template with curriculum overview and instructor profiles.
-                        </p>
-                        <div class="flex gap-3 mt-auto">
-                            <button onclick="openModal('https://skill-forge-academy-preview.vercel.app/', 'Skill Forge Academy')" class="flex-1 py-2.5 px-4 bg-slate-50 text-slate-700 text-sm font-medium rounded-lg hover:bg-slate-100 border border-slate-200 transition-colors focus:ring-2 focus:ring-slate-200 focus:outline-none">
-                                Quick Preview
-                            </button>
-                            <a href="https://skill-forge-academy-preview.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex-1 py-2.5 px-4 bg-brand text-white text-center text-sm font-medium rounded-lg hover:bg-brand-dark shadow-lg shadow-brand/20 transition-all focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:outline-none">
-                                View Demo
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Card 4: Shop Ease -->
-                <article class="project-card group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm flex flex-col h-full">
-                    <div class="relative h-56 overflow-hidden bg-slate-100">
-                        <div class="preview-wrap">
-                            <iframe 
-                                src="https://shop-ease-e-commerce-preview.vercel.app/" 
-                                title="Shop Ease Live Preview"
-                                tabindex="-1"
-                                loading="lazy"
-                                scrolling="no"
-                                onload="this.style.opacity=1"
-                            ></iframe>
-                        </div>
-                        <div class="absolute inset-0 bg-transparent group-hover:bg-black/5 transition-colors duration-300"></div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 pointer-events-none">
-                            <span class="text-white font-medium text-sm">E-commerce Retail</span>
-                        </div>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand transition-colors">Shop Ease</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">
-                            High-converting e-commerce template optimized for fashion and lifestyle brands.
-                        </p>
-                        <div class="flex gap-3 mt-auto">
-                            <button onclick="openModal('https://shop-ease-e-commerce-preview.vercel.app/', 'Shop Ease')" class="flex-1 py-2.5 px-4 bg-slate-50 text-slate-700 text-sm font-medium rounded-lg hover:bg-slate-100 border border-slate-200 transition-colors focus:ring-2 focus:ring-slate-200 focus:outline-none">
-                                Quick Preview
-                            </button>
-                            <a href="https://shop-ease-e-commerce-preview.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex-1 py-2.5 px-4 bg-brand text-white text-center text-sm font-medium rounded-lg hover:bg-brand-dark shadow-lg shadow-brand/20 transition-all focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:outline-none">
-                                View Demo
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Card 5: Next-Gen Agency -->
-                <article class="project-card group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm flex flex-col h-full">
-                    <div class="relative h-56 overflow-hidden bg-slate-100">
-                        <div class="preview-wrap">
-                            <iframe 
-                                src="https://next-gen-agency-preview.vercel.app/" 
-                                title="Next-Gen Agency Live Preview"
-                                tabindex="-1"
-                                loading="lazy"
-                                scrolling="no"
-                                onload="this.style.opacity=1"
-                            ></iframe>
-                        </div>
-                        <div class="absolute inset-0 bg-transparent group-hover:bg-black/5 transition-colors duration-300"></div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 pointer-events-none">
-                            <span class="text-white font-medium text-sm">Corporate Business</span>
-                        </div>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand transition-colors">Next-Gen Agency</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">
-                            Sleek corporate template for creative agencies, consultancies, and B2B services.
-                        </p>
-                        <div class="flex gap-3 mt-auto">
-                            <button onclick="openModal('https://next-gen-agency-preview.vercel.app/', 'Next-Gen Agency')" class="flex-1 py-2.5 px-4 bg-slate-50 text-slate-700 text-sm font-medium rounded-lg hover:bg-slate-100 border border-slate-200 transition-colors focus:ring-2 focus:ring-slate-200 focus:outline-none">
-                                Quick Preview
-                            </button>
-                            <a href="https://next-gen-agency-preview.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex-1 py-2.5 px-4 bg-brand text-white text-center text-sm font-medium rounded-lg hover:bg-brand-dark shadow-lg shadow-brand/20 transition-all focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:outline-none">
-                                View Demo
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Card 6: Care Plus Medical -->
-                <article class="project-card group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm flex flex-col h-full">
-                    <div class="relative h-56 overflow-hidden bg-slate-100">
-                        <div class="preview-wrap">
-                            <iframe 
-                                src="https://care-plus-medical-preview.vercel.app/" 
-                                title="Care Plus Medical Live Preview"
-                                tabindex="-1"
-                                loading="lazy"
-                                scrolling="no"
-                                onload="this.style.opacity=1"
-                            ></iframe>
-                        </div>
-                        <div class="absolute inset-0 bg-transparent group-hover:bg-black/5 transition-colors duration-300"></div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 pointer-events-none">
-                            <span class="text-white font-medium text-sm">Healthcare & Medical</span>
-                        </div>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand transition-colors">Care Plus Medical</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">
-                            Modern healthcare and medical clinic template with appointment booking and services.
-                        </p>
-                        <div class="flex gap-3 mt-auto">
-                            <button onclick="openModal('https://care-plus-medical-preview.vercel.app/', 'Care Plus Medical')" class="flex-1 py-2.5 px-4 bg-slate-50 text-slate-700 text-sm font-medium rounded-lg hover:bg-slate-100 border border-slate-200 transition-colors focus:ring-2 focus:ring-slate-200 focus:outline-none">
-                                Quick Preview
-                            </button>
-                            <a href="https://care-plus-medical-preview.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex-1 py-2.5 px-4 bg-brand text-white text-center text-sm font-medium rounded-lg hover:bg-brand-dark shadow-lg shadow-brand/20 transition-all focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:outline-none">
-                                View Demo
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Card 7: Lead Boost -->
-                <article class="project-card group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm flex flex-col h-full">
-                    <div class="relative h-56 overflow-hidden bg-slate-100">
-                        <div class="preview-wrap">
-                            <iframe 
-                                src="https://lead-boost-preview.vercel.app/" 
-                                title="Lead Boost Live Preview"
-                                tabindex="-1"
-                                loading="lazy"
-                                scrolling="no"
-                                onload="this.style.opacity=1"
-                            ></iframe>
-                        </div>
-                        <div class="absolute inset-0 bg-transparent group-hover:bg-black/5 transition-colors duration-300"></div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 pointer-events-none">
-                            <span class="text-white font-medium text-sm">Marketing & Leads</span>
-                        </div>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand transition-colors">Lead Boost</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">
-                            High-converting landing page designed for digital agencies and startup growth.
-                        </p>
-                        <div class="flex gap-3 mt-auto">
-                            <button onclick="openModal('https://lead-boost-preview.vercel.app/', 'Lead Boost')" class="flex-1 py-2.5 px-4 bg-slate-50 text-slate-700 text-sm font-medium rounded-lg hover:bg-slate-100 border border-slate-200 transition-colors focus:ring-2 focus:ring-slate-200 focus:outline-none">
-                                Quick Preview
-                            </button>
-                            <a href="https://lead-boost-preview.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex-1 py-2.5 px-4 bg-brand text-white text-center text-sm font-medium rounded-lg hover:bg-brand-dark shadow-lg shadow-brand/20 transition-all focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:outline-none">
-                                View Demo
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Card 8: Launch Pad -->
-                <article class="project-card group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm flex flex-col h-full">
-                    <div class="relative h-56 overflow-hidden bg-slate-100">
-                        <div class="preview-wrap">
-                            <iframe 
-                                src="https://launch-pad-preview.vercel.app/" 
-                                title="Launch Pad Live Preview"
-                                tabindex="-1"
-                                loading="lazy"
-                                scrolling="no"
-                                onload="this.style.opacity=1"
-                            ></iframe>
-                        </div>
-                        <div class="absolute inset-0 bg-transparent group-hover:bg-black/5 transition-colors duration-300"></div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 pointer-events-none">
-                            <span class="text-white font-medium text-sm">Product Launch</span>
-                        </div>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand transition-colors">Launch Pad</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">
-                            Sleek pre-launch template perfect for announcing new products, apps, or services.
-                        </p>
-                        <div class="flex gap-3 mt-auto">
-                            <button onclick="openModal('https://launch-pad-preview.vercel.app/', 'Launch Pad')" class="flex-1 py-2.5 px-4 bg-slate-50 text-slate-700 text-sm font-medium rounded-lg hover:bg-slate-100 border border-slate-200 transition-colors focus:ring-2 focus:ring-slate-200 focus:outline-none">
-                                Quick Preview
-                            </button>
-                            <a href="https://launch-pad-preview.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex-1 py-2.5 px-4 bg-brand text-white text-center text-sm font-medium rounded-lg hover:bg-brand-dark shadow-lg shadow-brand/20 transition-all focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:outline-none">
-                                View Demo
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Card 9: Future Tech Summit -->
-                <article class="project-card group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm flex flex-col h-full">
-                    <div class="relative h-56 overflow-hidden bg-slate-100">
-                        <div class="preview-wrap">
-                            <iframe 
-                                src="https://future-tech-summit-preview.vercel.app/" 
-                                title="Future Tech Summit Live Preview"
-                                tabindex="-1"
-                                loading="lazy"
-                                scrolling="no"
-                                onload="this.style.opacity=1"
-                            ></iframe>
-                        </div>
-                        <div class="absolute inset-0 bg-transparent group-hover:bg-black/5 transition-colors duration-300"></div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 pointer-events-none">
-                            <span class="text-white font-medium text-sm">Events & Conferences</span>
-                        </div>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand transition-colors">Future Tech Summit</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">
-                            Engaging event landing page with schedule, speaker profiles, and ticket registration.
-                        </p>
-                        <div class="flex gap-3 mt-auto">
-                            <button onclick="openModal('https://future-tech-summit-preview.vercel.app/', 'Future Tech Summit')" class="flex-1 py-2.5 px-4 bg-slate-50 text-slate-700 text-sm font-medium rounded-lg hover:bg-slate-100 border border-slate-200 transition-colors focus:ring-2 focus:ring-slate-200 focus:outline-none">
-                                Quick Preview
-                            </button>
-                            <a href="https://future-tech-summit-preview.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex-1 py-2.5 px-4 bg-brand text-white text-center text-sm font-medium rounded-lg hover:bg-brand-dark shadow-lg shadow-brand/20 transition-all focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:outline-none">
-                                View Demo
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Card 10: Launch Kit -->
-                <article class="project-card group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm flex flex-col h-full">
-                    <div class="relative h-56 overflow-hidden bg-slate-100">
-                        <div class="preview-wrap">
-                            <iframe 
-                                src="https://theme-mint-launch-kit-preview.vercel.app/" 
-                                title="Launch Kit Live Preview"
-                                tabindex="-1"
-                                loading="lazy"
-                                scrolling="no"
-                                onload="this.style.opacity=1"
-                            ></iframe>
-                        </div>
-                        <div class="absolute inset-0 bg-transparent group-hover:bg-black/5 transition-colors duration-300"></div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 pointer-events-none">
-                            <span class="text-white font-medium text-sm">Startup Kit</span>
-                        </div>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand transition-colors">Launch Kit</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">
-                            Comprehensive startup launch kit template with multiple sections for features and pricing.
-                        </p>
-                        <div class="flex gap-3 mt-auto">
-                            <button onclick="openModal('https://theme-mint-launch-kit-preview.vercel.app/', 'Launch Kit')" class="flex-1 py-2.5 px-4 bg-slate-50 text-slate-700 text-sm font-medium rounded-lg hover:bg-slate-100 border border-slate-200 transition-colors focus:ring-2 focus:ring-slate-200 focus:outline-none">
-                                Quick Preview
-                            </button>
-                            <a href="https://theme-mint-launch-kit-preview.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex-1 py-2.5 px-4 bg-brand text-white text-center text-sm font-medium rounded-lg hover:bg-brand-dark shadow-lg shadow-brand/20 transition-all focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:outline-none">
-                                View Demo
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
+                        <button type="button" class="btn-submit" id="submitBtn">
+                            <span>✉</span> Send Message
+                        </button>
+                    </form>
             </div>
-        </main>
+
+        </div>
+    </section>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast" role="alert" aria-live="polite">
+        <span class="toast-check">✅</span>
+        <span>Message sent! We'll reply within 24 hours.</span>
     </div>
 
-    <!-- VIEW: CONTACT (Hidden by default) -->
-    <div id="view-contact" class="hidden animate-in fade-in duration-500 flex-grow flex items-center justify-center py-20 px-4">
-        <div class="w-full max-w-xl mx-auto">
-            <div class="text-center mb-10">
-                <span class="inline-block py-1 px-3 rounded-full bg-brand-light text-brand-dark text-xs font-semibold mb-4 tracking-wide uppercase">
-                    Contact
-                </span>
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Let's Work Together</h2>
-                <p class="text-lg text-slate-600">Fill out the form below to send us a direct message via Gmail.</p>
-            </div>
-            
-            <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
-                <form onsubmit="handleContactSubmit(event)" class="space-y-6">
-                    <div>
-                        <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Name</label>
-                        <input type="text" id="name" required class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 focus:bg-white focus:ring-2 focus:ring-brand focus:border-transparent outline-none transition-all placeholder-slate-400" placeholder="John Doe">
-                    </div>
-                    
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Email</label>
-                        <input type="email" id="email" required class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 focus:bg-white focus:ring-2 focus:ring-brand focus:border-transparent outline-none transition-all placeholder-slate-400" placeholder="john@example.com">
-                    </div>
-
-                     <div>
-                        <label for="subject" class="block text-sm font-medium text-slate-700 mb-1">Subject</label>
-                        <input type="text" id="subject" required class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 focus:bg-white focus:ring-2 focus:ring-brand focus:border-transparent outline-none transition-all placeholder-slate-400" placeholder="Project Inquiry">
-                    </div>
-                    
-                    <div>
-                        <label for="message" class="block text-sm font-medium text-slate-700 mb-1">Message</label>
-                        <textarea id="message" rows="5" required class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 focus:bg-white focus:ring-2 focus:ring-brand focus:border-transparent outline-none transition-all placeholder-slate-400" placeholder="Tell me about your project..."></textarea>
-                    </div>
-                    
-                    <button type="submit" class="w-full py-3.5 px-6 bg-brand text-white font-semibold rounded-lg hover:bg-brand-dark transition-colors shadow-lg shadow-brand/20 hover:shadow-xl focus:ring-2 focus:ring-offset-2 focus:ring-brand transform active:scale-95 duration-150">
-                        Send Message with Gmail
-                    </button>
-                </form>
-            </div>
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo-wrap">
+            <img src="logo.png" alt="ThemeMint Logo" style="height:48px;width:auto;display:block;" />
         </div>
-    </div>
-
-    <!-- Footer (Shared) -->
-    <footer class="bg-white border-t border-slate-200 py-12 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-center md:text-left">
-                <p class="text-slate-900 font-semibold mb-1">Designed by You</p>
-                <p class="text-slate-500 text-sm">Explore more premium templates at <button onclick="navigateTo('home')" class="text-brand hover:underline">ThemeMint</button>.</p>
-            </div>
-            <div class="flex gap-6">
-                <a href="#" class="text-slate-400 hover:text-slate-600 transition-colors">
-                    <span class="sr-only">Twitter</span>
-                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg>
-                </a>
-                <a href="#" class="text-slate-400 hover:text-slate-600 transition-colors">
-                    <span class="sr-only">GitHub</span>
-                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" /></svg>
-                </a>
-            </div>
-        </div>
+        <p>Explore more premium templates at <a href="#" aria-label="ThemeMint homepage">ThemeMint</a>.</p>
+        <nav class="footer-links" aria-label="Footer navigation">
+            <a href="#">Home</a>
+            <a href="#portfolio">Templates</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <p style="margin-top:1.5rem;font-size:.78rem">© 2025 ThemeMint · All rights reserved.</p>
     </footer>
 
-    <!-- Modal Logic -->
-    <div id="previewModal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true">
-        <!-- Backdrop -->
-        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
-        
-        <!-- Modal Content -->
-        <div class="relative w-full h-full md:w-[90%] md:h-[90%] mx-auto mt-0 md:mt-10 bg-white rounded-t-2xl md:rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-300">
-            
-            <!-- Modal Header -->
-            <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white">
-                <div class="flex items-center gap-4">
-                    <h3 id="modalTitle" class="text-lg font-bold text-slate-900">Preview</h3>
-                    <a id="modalExternalLink" href="#" target="_blank" class="hidden sm:inline-flex items-center text-xs font-medium text-brand hover:text-brand-dark">
-                        Open in new tab
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3 h-3 ml-1">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                        </svg>
-                    </a>
+    <!-- MODAL -->
+    <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal">
+            <div class="modal-header">
+                <div>
+                    <div class="modal-title" id="modalTitle">Preview</div>
+                    <div class="modal-url" id="modalUrl"></div>
                 </div>
-                
-                <!-- Close Button -->
-                <button onclick="closeModal()" class="p-2 rounded-full hover:bg-slate-100 text-slate-500 hover:text-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-200">
-                    <span class="sr-only">Close</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
+                <button class="modal-close" id="modalClose" aria-label="Close preview">✕</button>
             </div>
-
-            <!-- Iframe Container -->
-            <div class="relative flex-grow bg-slate-50 w-full h-full">
-                <!-- Loader -->
-                <div id="iframeLoader" class="absolute inset-0 flex items-center justify-center bg-slate-50 z-10">
-                    <div class="loader"></div>
-                </div>
-                
-                <iframe 
-                    id="previewFrame" 
-                    src="" 
-                    class="w-full h-full border-0" 
-                    title="Live Preview"
-                    sandbox="allow-scripts allow-same-origin allow-forms"
-                    onload="document.getElementById('iframeLoader').classList.add('hidden')"
-                ></iframe>
+            <div class="modal-iframe-wrap">
+                <iframe id="modalIframe" title="Live preview" allowfullscreen loading="lazy"></iframe>
             </div>
-            
-            <!-- Mobile Footer (Link) -->
-            <div class="md:hidden p-4 bg-white border-t border-slate-100 flex justify-center">
-                 <a id="modalExternalLinkMobile" href="#" target="_blank" class="text-sm font-medium text-brand hover:underline">
-                    Open in browser
-                </a>
+            <div class="modal-footer">
+                <a id="modalOpenBtn" href="#" target="_blank" rel="noopener" class="btn-primary">↗ Open in new tab</a>
             </div>
         </div>
     </div>
 
-    <!-- JavaScript -->
     <script>
-        // --- Single Page App Navigation ---
-        function navigateTo(pageId) {
-            const homeView = document.getElementById('view-home');
-            const contactView = document.getElementById('view-contact');
-
-            if (pageId === 'contact') {
-                homeView.classList.add('hidden');
-                contactView.classList.remove('hidden');
-            } else {
-                // Default to home
-                contactView.classList.add('hidden');
-                homeView.classList.remove('hidden');
+        const projects = [
+            {
+                title: "NeuroAI",
+                tag: "AI / SaaS",
+                desc: "A sleek, futuristic landing page built for AI-powered products and machine learning startups.",
+                url: "https://neuroai-preview.vercel.app/"
+            },
+            {
+                title: "ThemeMint",
+                tag: "Multipurpose",
+                desc: "A clean multipurpose template perfect for SaaS tools, agencies, and creative businesses.",
+                url: "https://theme-mint-preview.vercel.app/"
+            },
+            {
+                title: "Skill Forge Academy",
+                tag: "Education",
+                desc: "A conversion-focused landing page for online courses, bootcamps, and learning platforms.",
+                url: "https://skill-forge-academy-preview.vercel.app/"
+            },
+            {
+                title: "Shop Ease",
+                tag: "E-Commerce",
+                desc: "A polished e-commerce template designed to showcase products and drive sales.",
+                url: "https://shop-ease-e-commerce-preview.vercel.app/"
+            },
+            {
+                title: "Next-Gen Agency",
+                tag: "Agency",
+                desc: "A corporate agency template with bold typography and fluid animations for creative studios.",
+                url: "https://next-gen-agency-preview.vercel.app/"
+            },
+            {
+                title: "Care Plus Medical",
+                tag: "Healthcare",
+                desc: "A professional medical landing page for clinics, hospitals, and healthcare service providers.",
+                url: "https://care-plus-medical-preview.vercel.app/"
+            },
+            {
+                title: "Lead Boost",
+                tag: "Lead Gen",
+                desc: "A high-converting lead generation page with compelling CTAs for marketing campaigns.",
+                url: "https://lead-boost-preview.vercel.app/"
+            },
+            {
+                title: "Launch Pad",
+                tag: "Startup",
+                desc: "A minimal, modern startup launch page ideal for product launches and early signups.",
+                url: "https://launch-pad-preview.vercel.app/"
+            },
+            {
+                title: "Future Tech Summit",
+                tag: "Event",
+                desc: "An immersive event landing page for tech conferences, summits, and community meetups.",
+                url: "https://future-tech-summit-preview.vercel.app/"
+            },
+            {
+                title: "ThemeMint Launch Kit",
+                tag: "Toolkit",
+                desc: "A versatile launch kit template with modular sections for any product or service launch.",
+                url: "https://theme-mint-launch-kit-preview.vercel.app/"
             }
-            // Scroll to top when switching views
-            window.scrollTo(0, 0);
-        }
+        ];
 
-        // --- Modal Logic ---
-        const modal = document.getElementById('previewModal');
-        const frame = document.getElementById('previewFrame');
-        const titleEl = document.getElementById('modalTitle');
-        const linkEl = document.getElementById('modalExternalLink');
-        const linkMobileEl = document.getElementById('modalExternalLinkMobile');
-        const loader = document.getElementById('iframeLoader');
+        const grid = document.getElementById('cardGrid');
+        const backdrop = document.getElementById('modalBackdrop');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalUrl = document.getElementById('modalUrl');
+        const modalIframe = document.getElementById('modalIframe');
+        const modalOpenBtn = document.getElementById('modalOpenBtn');
+        const modalClose = document.getElementById('modalClose');
 
-        function openModal(url, title) {
-            // Show Loader
-            loader.classList.remove('hidden');
-            
-            // Set Content
-            titleEl.textContent = title;
-            frame.src = url;
-            linkEl.href = url;
-            linkMobileEl.href = url;
-
-            // Show Modal
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            
-            // Prevent body scroll
+        function openModal(project) {
+            modalTitle.textContent = project.title;
+            modalUrl.textContent = project.url;
+            modalIframe.src = project.url;
+            modalOpenBtn.href = project.url;
+            backdrop.classList.add('open');
             document.body.style.overflow = 'hidden';
+            modalClose.focus();
         }
 
         function closeModal() {
-            // Hide Modal
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            
-            // Clear Src (stops video/audio)
-            frame.src = '';
-            
-            // Enable body scroll
+            backdrop.classList.remove('open');
             document.body.style.overflow = '';
+            setTimeout(() => { modalIframe.src = ''; }, 300);
         }
 
-        // Close on Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === "Escape" && !modal.classList.contains('hidden')) {
-                closeModal();
-            }
+        projects.forEach((p, i) => {
+            const card = document.createElement('article');
+            card.className = 'card';
+            card.tabIndex = 0;
+            card.setAttribute('aria-label', p.title + ' template card');
+
+            card.innerHTML = `
+      <div class="card-thumb" aria-hidden="true">
+        <iframe src="${p.url}" title="${p.title} preview" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>
+        <div class="card-thumb-overlay"></div>
+        <span class="card-tag">${p.tag}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">${p.title}</div>
+        <p class="card-desc">${p.desc}</p>
+        <div class="card-actions">
+          <button class="btn-primary preview-btn" data-index="${i}" aria-label="Preview ${p.title} inside this page">
+            ▶ Preview
+          </button>
+          <a href="${p.url}" target="_blank" rel="noopener" class="btn-secondary" aria-label="Open ${p.title} in new tab">↗</a>
+        </div>
+      </div>`;
+
+            grid.appendChild(card);
+
+            card.querySelector('.preview-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                openModal(p);
+            });
+
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(p); }
+            });
         });
 
-        // --- Contact Form Logic (Gmail) ---
-        function handleContactSubmit(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value; 
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            
-            // REPLACE THIS WITH YOUR EMAIL ADDRESS
-            const myEmail = "your-email@example.com"; 
-            
-            const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
-            const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${myEmail}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            
-            window.open(gmailLink, '_blank');
-        }
+        modalClose.addEventListener('click', closeModal);
+        backdrop.addEventListener('click', (e) => { if (e.target === backdrop) closeModal(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+        // ── CONTACT FORM ──
+        // Mailto handler for Send Message
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            var name = document.getElementById('cf-name').value.trim();
+            var email = document.getElementById('cf-email').value.trim();
+            var subject = document.getElementById('cf-subject').value;
+            var message = document.getElementById('cf-message').value.trim();
+            if (!name || !email || !message) {
+                [document.getElementById('cf-name'), document.getElementById('cf-email'), document.getElementById('cf-message')].forEach(function(el) {
+                    if (!el.value.trim()) {
+                        el.style.borderColor = '#e53e3e';
+                        el.addEventListener('input', function() { el.style.borderColor = ''; }, { once: true });
+                    }
+                });
+                return;
+            }
+            var mailto = 'mailto:hh5566970@gmail.com'
+                + '?subject=' + encodeURIComponent(subject ? subject : 'Contact from Landing Page')
+                + '&body=' + encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + message);
+            window.open(mailto, '_blank');
+        });
     </script>
 </body>
+
 </html>

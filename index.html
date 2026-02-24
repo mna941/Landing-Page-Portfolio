@@ -1,39 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<link rel="icon" type="image/png" href="/favicon.ico" sizes="32x32" />
-<link rel="shortcut icon" href="/favicon.ico" type="image/png" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Landing Page Portfolio | ThemeMint</title>
-    <meta name="description"
-        content="Explore our collection of premium landing page templates and themes for startups, agencies, and online businesses." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet" />
+
+<link rel="icon" type="image/png" href="favicon.ico" sizes="32x32" />
+<link rel="shortcut icon" href="favicon.ico" type="image/png" />
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThemeMint | Premium Landing Page Studio</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        :root {
+            --primary: #00ff9d;
+            --primary-glow: rgba(0, 255, 157, 0.2);
+            --bg: #0a0a0a;
+            --surface: #141414;
+            --surface-light: #1e1e1e;
+            --text: #ffffff;
+            --text-dim: #a0a0a0;
+            --border: rgba(255, 255, 255, 0.08);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --radius: 12px;
         }
 
-        :root {
-            --accent: #3aaa7a;
-            --accent-dark: #2d8f65;
-            --bg: #f5f7fa;
+        body.light-mode {
+            --bg: #f8f9fa;
             --surface: #ffffff;
-            --border: #e8edf3;
-            --text-primary: #0f172a;
-            --text-secondary: #64748b;
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, .08), 0 1px 2px rgba(0, 0, 0, .05);
-            --shadow-md: 0 4px 20px rgba(0, 0, 0, .10);
-            --shadow-lg: 0 12px 40px rgba(0, 0, 0, .15);
-            --radius: 16px;
-            --transition: .25s cubic-bezier(.4, 0, .2, 1);
+            --surface-light: #f1f3f5;
+            --text: #1a1a1a;
+            --text-dim: #666666;
+            --border: rgba(0, 0, 0, 0.08);
+            --primary: #00c87b;
+            --primary-glow: rgba(0, 200, 123, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
         }
 
         html {
@@ -41,999 +51,1599 @@
         }
 
         body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background: var(--bg);
-            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
             line-height: 1.6;
-            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* ── NAV ── */
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--surface-light);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        /* Navigation */
         nav {
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 100;
-            background: rgba(255, 255, 255, .85);
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            transition: var(--transition);
+            border-bottom: 1px solid transparent;
+        }
+
+        nav.scrolled {
+            background: rgba(10, 10, 10, 0.8);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
-            padding: 0 clamp(1rem, 5vw, 4rem);
+            padding: 1rem 0;
+        }
+
+        body.light-mode nav.scrolled {
+            background: rgba(248, 249, 250, 0.8);
+        }
+
+        .nav-content {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            height: 64px;
+            align-items: center;
         }
 
-        .nav-logo {
+        .logo {
             display: flex;
             align-items: center;
-            text-decoration: none;
-            line-height: 1;
+            gap: 0.5rem;
         }
 
-        .nav-logo svg {
-            height: 36px;
+        .logo img, .footer-logo img {
+            height: 32px;
             width: auto;
-            left: 10px
+            transition: var(--transition);
         }
 
-        .footer-logo-wrap {
+        body.light-mode .logo img, body.light-mode .footer-logo img {
+            filter: none;
+        }
+
+        /* In dark mode, invert the dark parts of the logo while keeping the green */
+        .logo img, .footer-logo img {
+            filter: invert(1) hue-rotate(180deg) brightness(1.2);
+        }
+
+        .nav-links {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: .8rem;
+            gap: 2.5rem;
         }
 
-        .footer-logo-wrap svg {
-            height: 44px;
-            width: auto;
+        .nav-links a {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .nav-cta {
-            background: var(--accent);
-            color: #fff;
-            border: none;
-            border-radius: 100px;
-            padding: .45rem 1.2rem;
-            font-size: .875rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background var(--transition), transform var(--transition);
-            text-decoration: none;
+        .nav-links a:hover {
+            color: var(--primary);
         }
 
-        .nav-cta:hover {
-            background: var(--accent-dark);
-            transform: translateY(-1px);
-        }
-
-        /* ── HERO ── */
+        /* Hero Section */
         .hero {
-            text-align: center;
-            padding: clamp(3rem, 8vw, 7rem) clamp(1rem, 5vw, 4rem) clamp(2rem, 5vw, 4rem);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 120px 0 80px;
         }
 
-        .hero-badge {
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(circle at 50% 50%, black, transparent 80%);
+            opacity: 0.3;
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: var(--primary);
+            filter: blur(150px);
+            opacity: 0.1;
+            z-index: -1;
+            animation: pulseGlow 8s infinite alternate;
+        }
+
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes pulseGlow {
+            from { opacity: 0.05; transform: translate(-50%, -50%) scale(1); }
+            to { opacity: 0.15; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 100%;
+        }
+
+        .hero-tag {
             display: inline-flex;
             align-items: center;
-            gap: .5rem;
-            background: rgba(0, 191, 166, .1);
-            color: var(--accent);
-            border: 1px solid rgba(0, 191, 166, .3);
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
             border-radius: 100px;
-            padding: .35rem 1rem;
-            font-size: .8rem;
+            font-size: 0.75rem;
             font-weight: 600;
-            letter-spacing: .5px;
+            color: var(--primary);
+            margin-bottom: 2rem;
             text-transform: uppercase;
-            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
         }
 
         .hero h1 {
-            font-size: clamp(2rem, 5.5vw, 4rem);
-            font-weight: 800;
-            letter-spacing: -1.5px;
-            line-height: 1.1;
-            margin-bottom: 1.25rem;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.04em;
+            line-height: 1;
         }
 
         .hero h1 span {
-            background: linear-gradient(135deg, #3aaa7a 0%, #2d8f65 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
         }
 
         .hero p {
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            color: var(--text-secondary);
-            max-width: 560px;
-            margin: 0 auto 2.5rem;
+            font-size: 1.15rem;
+            color: var(--text-dim);
+            max-width: 540px;
+            margin-bottom: 3rem;
         }
 
-        .hero-stats {
+        .hero-visual {
+            position: relative;
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
+            align-items: center;
         }
 
-        .stat {
-            text-align: center;
-        }
-
-        .stat strong {
-            display: block;
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--text-primary);
-        }
-
-        .stat span {
-            font-size: .8rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        /* ── SECTION LABEL ── */
-        .section-label {
-            text-align: center;
-            padding: 0 clamp(1rem, 5vw, 4rem);
-            margin-bottom: 2.5rem;
-        }
-
-        .section-label h2 {
-            font-size: clamp(1.4rem, 3vw, 2rem);
-            font-weight: 700;
-            letter-spacing: -.5px;
-        }
-
-        .section-label p {
-            color: var(--text-secondary);
-            font-size: .95rem;
-            margin-top: .4rem;
-        }
-
-        /* ── GRID ── */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.75rem;
-            padding: 0 clamp(1rem, 5vw, 4rem) clamp(3rem, 6vw, 5rem);
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        /* ── CARD ── */
-        .card {
-            background: var(--surface);
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-sm);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: box-shadow var(--transition), transform var(--transition);
-            cursor: pointer;
-        }
-
-        .card:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-6px);
-        }
-
-        .card:focus-within {
-            outline: 2px solid var(--accent);
-            outline-offset: 2px;
-        }
-
-        /* thumbnail */
-        .card-thumb {
+        .mockup-container {
             position: relative;
+            width: 100%;
+            max-width: 600px;
+            aspect-ratio: 16/10;
+            background: var(--surface);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            padding: 10px;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+            transform: perspective(1000px) rotateY(-15deg) rotateX(5deg);
+            transition: var(--transition);
+        }
+
+        .mockup-container:hover {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+        }
+
+        .mockup-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
             overflow: hidden;
-            height: 210px;
-            background: linear-gradient(135deg, #e0f7f5, #e8f0fe);
+            background: #000;
         }
 
-        .card-thumb iframe {
-            width: 166.67%;
-            height: 166.67%;
-            border: none;
-            pointer-events: none;
-            transform: scale(.6);
-            transform-origin: top left;
-            border-radius: 0;
+        .mockup-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
         }
 
-        .card-thumb-overlay {
+        .floating-card {
             position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, transparent 55%, rgba(0, 0, 0, .35));
+            background: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 10;
+            animation: float 4s infinite ease-in-out;
         }
 
-        .card-tag {
+        body.light-mode .floating-card {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .card-1 { top: -20px; right: -20px; animation-delay: 0s; }
+        .card-2 { bottom: 40px; left: -40px; animation-delay: 1s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .scroll-indicator {
             position: absolute;
-            top: 12px;
-            left: 12px;
-            background: rgba(255, 255, 255, .92);
-            backdrop-filter: blur(8px);
-            border-radius: 100px;
-            padding: .25rem .75rem;
-            font-size: .72rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            letter-spacing: .3px;
-        }
-
-        /* body */
-        .card-body {
-            padding: 1.4rem;
-            flex: 1;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
             flex-direction: column;
-            gap: .6rem;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-dim);
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            letter-spacing: -.3px;
+        .mouse {
+            width: 20px;
+            height: 35px;
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            position: relative;
         }
 
-        .card-desc {
-            font-size: .875rem;
-            color: var(--text-secondary);
-            line-height: 1.55;
-            flex: 1;
+        .mouse::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 6px;
+            background: var(--primary);
+            border-radius: 2px;
+            animation: mouseScroll 2s infinite;
         }
 
-        /* actions */
-        .card-actions {
-            display: flex;
-            gap: .75rem;
-            margin-top: .5rem;
+        @keyframes mouseScroll {
+            0% { opacity: 1; transform: translate(-50%, 0); }
+            100% { opacity: 0; transform: translate(-50%, 15px); }
+        }
+
+        @media (max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .hero-btns {
+                justify-content: center;
+            }
+            .hero-visual {
+                display: none;
+            }
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
         }
 
         .btn-primary {
-            flex: 1;
-            text-align: center;
-            background: var(--accent);
-            color: #fff;
-            border: none;
-            border-radius: 100px;
-            padding: .6rem 1rem;
-            font-size: .85rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background var(--transition), transform var(--transition);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: .4rem;
+            background: var(--primary);
+            color: var(--bg);
         }
 
         .btn-primary:hover {
-            background: var(--accent-dark);
-            transform: translateY(-1px);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px var(--primary-glow);
         }
 
         .btn-secondary {
-            background: var(--bg);
-            color: var(--text-primary);
+            background: transparent;
             border: 1px solid var(--border);
-            border-radius: 100px;
-            padding: .6rem 1rem;
-            font-size: .85rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background var(--transition), border-color var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: .4rem;
+            color: var(--text);
         }
 
         .btn-secondary:hover {
-            background: #eef2f8;
-            border-color: #c8d0dc;
+            background: var(--surface);
+            border-color: var(--primary);
         }
 
-        /* ── MODAL ── */
-        .modal-backdrop {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 999;
-            background: rgba(10, 10, 20, .65);
-            backdrop-filter: blur(8px);
+        /* Featured Section */
+        .section {
+            padding: 10rem 0;
+        }
+
+        .section-title {
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+        }
+
+        .featured-card {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            align-items: center;
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 3rem;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .featured-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .featured-img {
+            width: 100%;
+            height: 500px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .featured-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .featured-card:hover .featured-img img {
+            transform: scale(1.05);
+        }
+
+        .featured-info h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(0, 255, 157, 0.1);
+            color: var(--primary);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .featured-info p {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .featured-card {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+                gap: 2rem;
+            }
+            .featured-img {
+                height: 350px;
+            }
+        }
+
+        /* Portfolio Grid */
+        .filter-nav {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: var(--bg);
+            border-color: var(--primary);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .card-thumb {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .card-thumb img {
+            transform: scale(1.1);
+        }
+
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(5px);
+            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1rem;
+            opacity: 0;
+            transition: var(--transition);
         }
 
-        .modal-backdrop.open {
+        .project-card:hover .card-overlay {
+            opacity: 1;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-content h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-content p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-footer {
             display: flex;
-        }
-
-        .modal {
-            background: var(--surface);
-            border-radius: 20px;
-            width: min(900px, 100%);
-            height: 85vh;
-            box-shadow: var(--shadow-lg);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            animation: pop .25s cubic-bezier(.4, 0, .2, 1);
-        }
-
-        @keyframes pop {
-            from {
-                opacity: 0;
-                transform: scale(.95) translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
-
-        .modal-header {
-            display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 1rem 1.5rem;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .tech-icons {
+            display: flex;
+            gap: 0.75rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 1024px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--surface);
+            padding: 6rem 0;
+            border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
-            flex-shrink: 0;
         }
 
-        .modal-title {
-            font-size: 1rem;
-            font-weight: 700;
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
         }
 
-        .modal-url {
-            font-size: .78rem;
-            color: var(--text-secondary);
-            margin-top: .15rem;
+        .stat-item h3 {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            color: var(--text-dim);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .about-text p {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+        }
+
+        .about-img {
+            width: 100%;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        @media (max-width: 1024px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg);
+            z-index: 2000;
+            display: none;
+            overflow-y: auto;
+            animation: modalFadeIn 0.5s var(--transition);
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .modal-close {
-            background: var(--bg);
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--surface);
             border: 1px solid var(--border);
+            color: var(--text);
             border-radius: 50%;
-            width: 36px;
-            height: 36px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            line-height: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background var(--transition);
+            cursor: pointer;
+            z-index: 2100;
+            transition: var(--transition);
         }
 
         .modal-close:hover {
-            background: #e0e7ef;
+            background: var(--primary);
+            color: var(--bg);
+            transform: rotate(90deg);
         }
 
-        .modal-iframe-wrap {
-            flex: 1;
+        .modal-content {
+            max-width: 1000px;
+            margin: 6rem auto;
+            padding: 0 2rem;
         }
 
-        .modal-iframe-wrap iframe {
+        .modal-hero {
+            width: 100%;
+            height: 500px;
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 4rem;
+            border: 1px solid var(--border);
+        }
+
+        .modal-hero img {
             width: 100%;
             height: 100%;
-            border: none;
+            object-fit: cover;
         }
 
-        .modal-footer {
-            padding: .75rem 1.5rem;
-            border-top: 1px solid var(--border);
+        .modal-header {
+            margin-bottom: 4rem;
+        }
+
+        .modal-header h2 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 6rem;
+        }
+
+        .modal-section {
+            margin-bottom: 4rem;
+        }
+
+        .modal-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .feature-list li {
+            margin-bottom: 1rem;
             display: flex;
-            gap: .75rem;
-            justify-content: flex-end;
-            flex-shrink: 0;
+            gap: 1rem;
+            align-items: flex-start;
         }
 
-        /* ── FOOTER ── */
+        .feature-list i {
+            color: var(--primary);
+            margin-top: 0.25rem;
+        }
+
+        .modal-sidebar {
+            background: var(--surface);
+            padding: 2.5rem;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            height: fit-content;
+        }
+
+        @media (max-width: 768px) {
+            .modal-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+            .modal-hero {
+                height: 300px;
+            }
+        }
+
+        /* Footer */
         footer {
-            text-align: center;
-            padding: 3rem clamp(1rem, 5vw, 4rem);
+            padding: 6rem 0;
             border-top: 1px solid var(--border);
             background: var(--surface);
         }
 
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         .footer-logo {
-            font-size: 1.3rem;
-            font-weight: 800;
-            margin-bottom: .6rem;
-        }
-
-        footer p {
-            color: var(--text-secondary);
-            font-size: .9rem;
-        }
-
-        footer a {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
+            display: flex;
+            align-items: center;
         }
 
         .footer-links {
             display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
+            gap: 2rem;
         }
 
         .footer-links a {
-            color: var(--text-secondary);
-            font-size: .85rem;
-            text-decoration: none;
-            transition: color var(--transition);
+            color: var(--text-dim);
+            font-size: 0.9rem;
         }
 
         .footer-links a:hover {
-            color: var(--accent);
+            color: var(--primary);
         }
 
-        /* ── CONTACT ── */
-        .contact-section {
-            padding: clamp(3rem, 7vw, 6rem) clamp(1rem, 5vw, 4rem);
-            background: var(--surface);
-            border-top: 1px solid var(--border);
-        }
-
-        .contact-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3.5rem;
-            align-items: start;
-        }
-
-        .contact-left .contact-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: .4rem;
-            background: rgba(58, 170, 122, .1);
-            color: var(--accent);
-            border: 1px solid rgba(58, 170, 122, .3);
-            border-radius: 100px;
-            padding: .3rem .9rem;
-            font-size: .78rem;
-            font-weight: 600;
-            letter-spacing: .5px;
-            text-transform: uppercase;
-            margin-bottom: 1.2rem;
-        }
-
-        .contact-left h2 {
-            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-            font-weight: 800;
-            letter-spacing: -1px;
-            line-height: 1.15;
-            margin-bottom: .8rem;
-        }
-
-        .contact-left h2 span {
-            color: var(--accent);
-        }
-
-        .contact-left p {
-            color: var(--text-secondary);
-            font-size: .95rem;
-            line-height: 1.7;
-            margin-bottom: 2rem;
-        }
-
-        .contact-info-cards {
-            display: flex;
-            flex-direction: column;
-            gap: .9rem;
-        }
-
-        .c-card {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: .9rem 1.1rem;
-            transition: box-shadow var(--transition), transform var(--transition);
-        }
-
-        .c-card:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateX(4px);
-        }
-
-        .c-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, rgba(58, 170, 122, .15), rgba(58, 170, 122, .05));
-            border: 1px solid rgba(58, 170, 122, .2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.15rem;
-            flex-shrink: 0;
-        }
-
-        .c-card-text strong {
-            display: block;
-            font-size: .85rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .c-card-text span {
-            font-size: .8rem;
-            color: var(--text-secondary);
-        }
-
-        /* Form */
-        .contact-form-box {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 2rem;
-        }
-
-        .contact-form-box h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            padding-bottom: .9rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: .4rem;
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            font-size: .8rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            background: var(--surface);
-            border: 1.5px solid var(--border);
-            border-radius: 10px;
-            padding: .7rem .95rem;
-            font-family: inherit;
-            font-size: .9rem;
-            color: var(--text-primary);
-            outline: none;
-            transition: border-color var(--transition), box-shadow var(--transition);
-            width: 100%;
-            resize: none;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(58, 170, 122, .15);
-        }
-
-        .form-group textarea {
-            min-height: 120px;
-        }
-
-        .btn-submit {
-            width: 100%;
-            background: var(--accent);
-            color: #fff;
-            border: none;
-            border-radius: 100px;
-            padding: .85rem 1.5rem;
-            font-size: .95rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background var(--transition), transform var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: .5rem;
-            letter-spacing: .2px;
-        }
-
-        .btn-submit:hover {
-            background: var(--accent-dark);
-            transform: translateY(-2px);
-        }
-
-        .btn-submit:active {
-            transform: translateY(0);
-        }
-
-        /* Toast */
-        .toast {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 2000;
-            background: #1a2e27;
-            color: #fff;
-            border: 1px solid rgba(58, 170, 122, .4);
-            border-radius: 14px;
-            padding: 1rem 1.4rem;
-            display: flex;
-            align-items: center;
-            gap: .8rem;
-            font-size: .9rem;
-            font-weight: 500;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, .25);
-            transform: translateY(100px);
-            opacity: 0;
-            transition: transform .4s cubic-bezier(.4, 0, .2, 1), opacity .4s;
-            pointer-events: none;
-        }
-
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .toast-check {
-            font-size: 1.2rem;
-        }
-
-        /* ── RESPONSIVE ── */
         @media (max-width: 768px) {
-            .contact-inner {
-                grid-template-columns: 1fr;
+            .footer-content {
+                flex-direction: column;
                 gap: 2rem;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
+                text-align: center;
             }
         }
 
-        @media (max-width: 600px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
+        /* Animations */
+        [data-reveal] {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-            .hero-stats {
-                gap: 1.2rem;
-            }
+        [data-reveal].visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-            .modal {
-                height: 90vh;
-            }
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: var(--bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px var(--primary-glow);
+            border: none;
+        }
 
-            .toast {
-                right: 1rem;
-                left: 1rem;
-                bottom: 1.2rem;
-            }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px var(--primary-glow);
+        }
+
+        .theme-btn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .theme-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
         }
     </style>
 </head>
-
 <body>
 
-    <!-- NAV -->
-    <nav role="navigation" aria-label="Main navigation">
-        <a href="#" class="nav-logo" aria-label="ThemeMint home">
-            <img src="Logo.png" alt="ThemeMint Logo" style="height:48px;width:auto;display:block;margin-left:110px;" />
-        </a>
-        <a href="#portfolio" class="nav-cta" aria-label="View all templates">View Templates</a>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="#" class="logo">
+                    <img src="Logo.png" alt="ThemeMint Logo" style="height:48px;width:auto;display:block;margin-left:110px;">
+                </a>
+                <div style="display: flex; align-items: center; gap: 2rem;">
+                    <ul class="nav-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                    <button id="theme-toggle" class="theme-btn" onclick="toggleTheme()">
+                        <i data-lucide="sun" id="theme-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
     </nav>
 
-    <!-- HERO -->
-    <section class="hero" aria-labelledby="hero-heading">
-        <div class="hero-badge">✦ Premium Templates</div>
-        <h1 id="hero-heading">Landing Page<br /><span>Portfolio</span></h1>
-        <p>Premium themes &amp; templates crafted for modern brands, startups, and agencies.</p>
-        <div class="hero-stats">
-            <div class="stat"><strong>10</strong><span>Templates</span></div>
-            <div class="stat"><strong>100%</strong><span>Responsive</span></div>
-            <div class="stat"><strong>5★</strong><span>Quality</span></div>
-        </div>
-    </section>
-
-    <!-- GRID -->
-    <section id="portfolio" aria-label="Portfolio grid">
-        <div class="section-label">
-            <h2>All Templates</h2>
-            <p>Click "Preview" to see each template live inside the page.</p>
-        </div>
-        <div class="grid" id="cardGrid">
-            <!-- Cards injected by JS -->
-        </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="contact-section" aria-labelledby="contact-heading">
-        <div class="contact-inner">
-
-            <!-- Left: Info -->
-            <div class="contact-left">
-                <div class="contact-badge">✉ Get in Touch</div>
-                <h2 id="contact-heading">Let's Work<br /><span>Together</span></h2>
-                <p>Have a project in mind? Want a custom landing page template? We'd love to hear from you. Fill out the
-                    form and we'll get back to you within 24 hours.</p>
-                <div class="contact-info-cards">
-                    <div class="c-card">
-                        <div class="c-icon" aria-hidden="true">📧</div>
-                        <div class="c-card-text">
-                            <strong>Email Us</strong>
-                            <span>hh5566970@gmail.com</span>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-bg"></div>
+        <div class="hero-glow"></div>
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content" data-reveal>
+                    <div class="hero-tag">
+                        <i data-lucide="sparkles" style="width: 14px;"></i>
+                        New Collection 2024
+                    </div>
+                    <h1>Premium Landing Pages <span>Crafted for Conversion</span></h1>
+                    <p>A curated collection of high-quality landing pages for SaaS, startups, agencies, and digital products. Treated like premium products, built for results.</p>
+                    <div class="hero-btns">
+                        <a href="#portfolio" class="btn btn-primary">Explore Portfolio <i data-lucide="arrow-right"></i></a>
+                        <a href="#featured" class="btn btn-secondary">View Featured Work</a>
+                    </div>
+                    
+                    <div style="margin-top: 4rem; display: flex; align-items: center; gap: 2rem;">
+                        <div style="display: flex; -webkit-mask-image: linear-gradient(to right, black 80%, transparent);">
+                            <img src="https://picsum.photos/seed/u1/40/40" style="border-radius: 50%; border: 2px solid var(--bg); margin-right: -15px;" alt="User">
+                            <img src="https://picsum.photos/seed/u2/40/40" style="border-radius: 50%; border: 2px solid var(--bg); margin-right: -15px;" alt="User">
+                            <img src="https://picsum.photos/seed/u3/40/40" style="border-radius: 50%; border: 2px solid var(--bg); margin-right: -15px;" alt="User">
+                            <img src="https://picsum.photos/seed/u4/40/40" style="border-radius: 50%; border: 2px solid var(--bg);" alt="User">
+                        </div>
+                        <div style="font-size: 0.85rem; color: var(--text-dim);">
+                            <span style="color: white; font-weight: 700;">4,000+</span> designers using our templates
                         </div>
                     </div>
+                </div>
 
-                    <div class="c-card">
-                        <div class="c-icon" aria-hidden="true">📍</div>
-                        <div class="c-card-text">
-                            <strong>Location</strong>
-                            <span>Remote — Worldwide</span>
+                <div class="hero-visual" data-reveal>
+                    <div class="mockup-container">
+                        <div class="mockup-screen">
+                            <iframe src="https://neuroai-preview.vercel.app/" style="width: 100%; height: 100%; border: none;" loading="lazy"></iframe>
                         </div>
-                    </div>
-                    <div class="c-card">
-                        <div class="c-icon" aria-hidden="true">🕐</div>
-                        <div class="c-card-text">
-                            <strong>Response Time</strong>
-                            <span>Within 24 hours</span>
+                        
+                        <div class="floating-card card-1">
+                            <div style="width: 40px; height: 40px; background: var(--primary); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--bg);">
+                                <i data-lucide="zap"></i>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase;">Performance</div>
+                                <div style="font-weight: 700;">99+ Score</div>
+                            </div>
+                        </div>
+
+                        <div class="floating-card card-2">
+                            <div style="width: 40px; height: 40px; background: #3b82f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white;">
+                                <i data-lucide="shield-check"></i>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase;">Security</div>
+                                <div style="font-weight: 700;">Enterprise Ready</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Right: Form -->
-            <div class="contact-form-box">
-                <h3>Send a Message</h3>
-                <form id="contactForm" novalidate>
-                    <form id="contactForm" action="https://formspree.io/f/xwkgrqzq" method="POST">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="cf-name">Full Name *</label>
-                                <input type="text" id="cf-name" name="name" placeholder="e.g. John Doe" required autocomplete="name" />
-                            </div>
-                            <div class="form-group">
-                                <label for="cf-email">Email Address *</label>
-                                <input type="email" id="cf-email" name="email" placeholder="you@email.com" required autocomplete="email" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="cf-subject">Subject</label>
-                            <select id="cf-subject" name="subject">
-                                <option value="">Select a subject...</option>
-                                <option value="custom">Custom Template Request</option>
-                                <option value="purchase">Purchase Inquiry</option>
-                                <option value="support">Support &amp; Help</option>
-                                <option value="collab">Collaboration</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="cf-message">Message *</label>
-                            <textarea id="cf-message" name="message" placeholder="Tell us about your project or question..." required></textarea>
-                        </div>
-                        <button type="button" class="btn-submit" id="submitBtn">
-                            <span>✉</span> Send Message
-                        </button>
-                    </form>
-            </div>
-
+        </div>
+        
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="mouse"></div>
         </div>
     </section>
 
-    <!-- TOAST -->
-    <div class="toast" id="toast" role="alert" aria-live="polite">
-        <span class="toast-check">✅</span>
-        <span>Message sent! We'll reply within 24 hours.</span>
-    </div>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-logo-wrap">
-            <img src="Logo.png" alt="ThemeMint Logo" style="height:48px;width:auto;display:block;" />
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item" data-reveal>
+                    <h3>10+</h3>
+                    <p>Premium Templates</p>
+                </div>
+                <div class="stat-item" data-reveal>
+                    <h3>100%</h3>
+                    <p>Conversion Focused</p>
+                </div>
+                <div class="stat-item" data-reveal>
+                    <h3>4K+</h3>
+                    <p>Happy Users</p>
+                </div>
+                <div class="stat-item" data-reveal>
+                    <h3>24/7</h3>
+                    <p>Expert Support</p>
+                </div>
+            </div>
         </div>
-        <p>Explore more premium templates at <a href="#" aria-label="ThemeMint homepage">ThemeMint</a>.</p>
-        <nav class="footer-links" aria-label="Footer navigation">
-            <a href="#">Home</a>
-            <a href="#portfolio">Templates</a>
-            <a href="#contact">Contact</a>
-        </nav>
-        <p style="margin-top:1.5rem;font-size:.78rem">© 2025 ThemeMint · All rights reserved.</p>
+    </section>
+
+    <!-- Featured Section -->
+    <section class="section" id="featured">
+        <div class="container">
+            <div class="section-title" data-reveal>
+                <h2>Featured Collection</h2>
+                <p>The pinnacle of our design studio. Our most successful and impactful landing pages.</p>
+            </div>
+            <div class="featured-grid" id="featured-container">
+                <!-- Featured items injected here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="section" id="portfolio">
+        <div class="container">
+            <div class="section-title" data-reveal>
+                <h2>Full Portfolio</h2>
+                <p>Browse our complete library of high-end landing page templates.</p>
+            </div>
+
+            <!-- Filters -->
+            <div class="filter-nav" data-reveal>
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="SaaS">SaaS</button>
+                <button class="filter-btn" data-filter="Agency">Agency</button>
+                <button class="filter-btn" data-filter="E-commerce">E-commerce</button>
+                <button class="filter-btn" data-filter="Medical">Medical</button>
+                <button class="filter-btn" data-filter="Marketing">Marketing</button>
+                <button class="filter-btn" data-filter="Education">Education</button>
+            </div>
+
+            <div class="portfolio-grid" id="portfolio-container">
+                <!-- Portfolio items injected here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text" data-reveal>
+                    <h2>The Studio Behind the Screens</h2>
+                    <p>ThemeMint is a creative design studio focused on building conversion-driven landing pages for modern businesses. We believe that every pixel should serve a purpose.</p>
+                    <p>Our mission is to empower startups and established brands with digital assets that don't just look good, but perform exceptionally.</p>
+                    <a href="#contact" class="btn btn-primary">Work With Us</a>
+                </div>
+                <div class="about-img" data-reveal>
+                    <img src="https://picsum.photos/seed/studio/800/600" alt="Studio" referrerPolicy="no-referrer">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="logo.png" alt="ThemeMint Logo">
+                </div>
+                <div class="footer-links">
+                    <a href="#">Twitter</a>
+                    <a href="#">LinkedIn</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Dribbble</a>
+                </div>
+                <p style="color: var(--text-dim); font-size: 0.8rem;">&copy; 2024 ThemeMint Studio. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 
-    <!-- MODAL -->
-    <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-        <div class="modal">
-            <div class="modal-header">
-                <div>
-                    <div class="modal-title" id="modalTitle">Preview</div>
-                    <div class="modal-url" id="modalUrl"></div>
-                </div>
-                <button class="modal-close" id="modalClose" aria-label="Close preview">✕</button>
-            </div>
-            <div class="modal-iframe-wrap">
-                <iframe id="modalIframe" title="Live preview" allowfullscreen loading="lazy"></iframe>
-            </div>
-            <div class="modal-footer">
-                <a id="modalOpenBtn" href="#" target="_blank" rel="noopener" class="btn-primary">↗ Open in new tab</a>
-            </div>
+    <!-- Case Study Modal -->
+    <div class="modal" id="case-study-modal">
+        <button class="modal-close" onclick="closeModal()">
+            <i data-lucide="x"></i>
+        </button>
+        <div class="modal-content" id="modal-content">
+            <!-- Modal content injected here -->
         </div>
     </div>
 
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i data-lucide="arrow-up"></i>
+    </button>
+
     <script>
+        // Project Data
         const projects = [
             {
-                title: "NeuroAI",
-                tag: "AI / SaaS",
-                desc: "A sleek, futuristic landing page built for AI-powered products and machine learning startups.",
-                url: "https://neuroai-preview.vercel.app/"
+                id: 1,
+                name: "NeuroAI",
+                category: "SaaS",
+                tagline: "The Future of Intelligence",
+                shortDesc: "Advanced AI-driven data intelligence for modern enterprises.",
+                description: "NeuroAI is a powerful SaaS platform built to help modern enterprises harness the full potential of artificial intelligence. It enables organizations to analyze complex datasets, automate decision-making, and gain real-time insights through an intuitive and visually rich interface. Designed for scalability and performance, NeuroAI bridges the gap between raw data and actionable intelligence. Its clean dashboards and advanced analytics empower teams to move faster, smarter, and with confidence. Whether used for predictive analysis, automation, or optimization, NeuroAI adapts to evolving business needs. The platform is built with enterprise-grade reliability, ensuring data security and seamless collaboration across teams.",
+                problem: "Enterprises often deal with massive volumes of data that are difficult to process, analyze, and interpret in real time. Traditional analytics tools are slow, complex, and require heavy manual effort.",
+                solution: "NeuroAI transforms raw data into meaningful insights using AI-powered analytics and real-time visualization, allowing businesses to make faster and smarter decisions.",
+                features: ["Real-time data processing and visualization", "AI-driven analytics and predictions", "Customizable dashboards", "Team collaboration tools", "Enterprise-level security"],
+                techStackDetails: [
+                    "HTML5 — Semantic, SEO-optimized structure",
+                    "CSS3 — Modern layouts using Flexbox & Grid",
+                    "JavaScript (Vanilla JS) — Interactive dashboards & UI behavior",
+                    "Responsive Design — Optimized for all screen sizes",
+                    "Performance Optimized — Lightweight and fast-loading"
+                ],
+                audience: "Data Scientists, CTOs, Product Teams, Enterprise Decision Makers",
+                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Performance Optimized"],
+                image: "https://picsum.photos/seed/neuroai/1200/800",
+                link: "https://neuroai-preview.vercel.app/",
+                featured: true
             },
             {
-                title: "ThemeMint",
-                tag: "Multipurpose",
-                desc: "A clean multipurpose template perfect for SaaS tools, agencies, and creative businesses.",
-                url: "https://theme-mint-preview.vercel.app/"
+                id: 2,
+                name: "ThemeMint",
+                category: "SaaS",
+                tagline: "Build, Launch, Scale Faster",
+                shortDesc: "A comprehensive toolkit for rapid UI development.",
+                description: "ThemeMint is a modern SaaS-focused landing page designed to help startups and digital products present their value with clarity and confidence. It combines bold visuals with conversion-optimized layouts to communicate features, benefits, and pricing effectively. The design is clean, flexible, and built to adapt to various SaaS use cases. ThemeMint focuses on storytelling, guiding users from problem awareness to solution adoption. Its modular sections make it easy to highlight features, integrations, and testimonials. Perfect for early-stage startups and growing SaaS products looking to establish a strong online presence.",
+                problem: "Many SaaS startups struggle to explain their product clearly and fail to convert visitors into users.",
+                solution: "ThemeMint provides a clear, structured layout that communicates value instantly and encourages user action.",
+                features: ["Conversion-focused hero section", "Feature and benefit breakdown", "Pricing and CTA sections", "Responsive layout", "Clean modern UI"],
+                techStackDetails: [
+                    "HTML5 — Clean and scalable page structure",
+                    "CSS3 — Conversion-focused layout and styling",
+                    "JavaScript (Vanilla JS) — Smooth interactions and navigation",
+                    "Responsive Design — Mobile-first approach",
+                    "Clean Code Architecture — Easy to customize and extend"
+                ],
+                audience: "SaaS Startups, Indie Founders, Product Launch Teams",
+                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Clean Code Architecture"],
+                image: "https://picsum.photos/seed/mint/1200/800",
+                link: "https://theme-mint-preview.vercel.app/",
+                featured: true
             },
             {
-                title: "Skill Forge Academy",
-                tag: "Education",
-                desc: "A conversion-focused landing page for online courses, bootcamps, and learning platforms.",
-                url: "https://skill-forge-academy-preview.vercel.app/"
+                id: 3,
+                name: "Skill Forge Academy",
+                category: "Education",
+                tagline: "Learn Skills That Matter",
+                shortDesc: "Online learning platform for creative professionals.",
+                description: "Skill Forge Academy is an educational landing page crafted to promote online courses, training programs, and learning platforms. It focuses on clarity, trust, and engagement to encourage learners to enroll. The layout emphasizes course value, instructor credibility, and learning outcomes. With structured sections and smooth flow, it helps users understand the learning journey. The design supports both technical and non-technical education products. Ideal for academies, bootcamps, and e-learning startups.",
+                problem: "Online learners often feel overwhelmed by unclear course structures and lack of trust.",
+                solution: "Skill Forge Academy presents courses in a clear, engaging, and confidence-building format.",
+                features: ["Course highlights", "Instructor profiles", "Learning outcomes", "Enrollment CTA", "Mobile-friendly design"],
+                techStackDetails: [
+                    "HTML5 — Structured course and content sections",
+                    "CSS3 — Readable typography and layout system",
+                    "JavaScript (Vanilla JS) — Interactive sections and smooth scroll",
+                    "Responsive Design — Optimized for learners on all devices",
+                    "Accessibility-Friendly Markup — Clear UI and spacing"
+                ],
+                audience: "Students, Professionals, Online Learners",
+                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Accessibility-Friendly"],
+                image: "https://picsum.photos/seed/skillforge/1200/800",
+                link: "https://skill-forge-academy-preview.vercel.app/",
+                featured: true
             },
             {
-                title: "Shop Ease",
-                tag: "E-Commerce",
-                desc: "A polished e-commerce template designed to showcase products and drive sales.",
-                url: "https://shop-ease-e-commerce-preview.vercel.app/"
+                id: 4,
+                name: "Shop Ease",
+                category: "E-commerce",
+                tagline: "Simple Shopping, Smarter Sales",
+                shortDesc: "Modern, fast, and conversion-optimized e-commerce.",
+                description: "Shop Ease is a modern e-commerce landing page designed to showcase products with clarity and style. It focuses on clean layouts, strong visuals, and smooth user experience to drive conversions. The design highlights featured products, benefits, and trust signals. It is optimized for fast browsing and easy purchasing decisions. Ideal for startups and small businesses entering online retail.",
+                problem: "Many online stores lose customers due to cluttered layouts and confusing navigation.",
+                solution: "Shop Ease simplifies product presentation and purchasing flow to increase conversions.",
+                features: ["Product showcase sections", "Promotional banners", "Clear CTAs", "Responsive grid layout", "Trust indicators"],
+                techStackDetails: [
+                    "HTML5 — Product-focused semantic structure",
+                    "CSS3 — Grid-based product layouts",
+                    "JavaScript (Vanilla JS) — UI interactions and CTA behavior",
+                    "Responsive Design — Seamless shopping experience on mobile",
+                    "Optimized UI Performance — Fast rendering and clean visuals"
+                ],
+                audience: "Online Shoppers, Small Businesses, E-commerce Brands",
+                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Optimized UI Performance"],
+                image: "https://picsum.photos/seed/shopease/1200/800",
+                link: "https://shop-ease-e-commerce-preview.vercel.app/",
+                featured: false
             },
             {
-                title: "Next-Gen Agency",
-                tag: "Agency",
-                desc: "A corporate agency template with bold typography and fluid animations for creative studios.",
-                url: "https://next-gen-agency-preview.vercel.app/"
+                id: 5,
+                name: "Next Gen Agency",
+                category: "Agency",
+                tagline: "Creative Solutions for Modern Brands",
+                shortDesc: "Immersive agency portfolio with bold creative direction.",
+                description: "Next Gen Agency is a bold, creative landing page built for digital agencies and studios. It highlights services, expertise, and past work in a visually engaging way. The layout builds credibility and positions the agency as a premium service provider. Designed to attract clients and generate leads, it balances creativity with clarity.",
+                problem: "Agencies often struggle to stand out in a crowded digital market.",
+                solution: "Next Gen Agency presents services and value in a confident, professional format.",
+                features: ["Service highlights", "Portfolio showcase", "Client-focused CTAs", "Modern animations", "Strong branding"],
+                techStackDetails: [
+                    "HTML5 — Professional agency layout structure",
+                    "CSS3 — Creative animations and modern styling",
+                    "JavaScript (Vanilla JS) — Interactive UI and hover effects",
+                    "Responsive Design — Fully adaptive agency showcase",
+                    "Scalable Styling System — Easy branding customization"
+                ],
+                audience: "Startups, Businesses, Brands, Founders",
+                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Scalable Styling"],
+                image: "https://picsum.photos/seed/agency/1200/800",
+                link: "https://next-gen-agency-preview.vercel.app/",
+                featured: false
             },
             {
-                title: "Care Plus Medical",
-                tag: "Healthcare",
-                desc: "A professional medical landing page for clinics, hospitals, and healthcare service providers.",
-                url: "https://care-plus-medical-preview.vercel.app/"
+                id: 6,
+                name: "Care Plus",
+                category: "Medical",
+                tagline: "Healthcare You Can Trust",
+                shortDesc: "Streamlined healthcare management for modern clinics.",
+                description: "Care Plus is a healthcare landing page designed to communicate trust, clarity, and professionalism. It presents medical services in a calm and accessible way. The design focuses on patient confidence, service transparency, and easy navigation. Ideal for clinics, hospitals, and health service providers.",
+                problem: "Patients often feel uncertain due to unclear medical information online.",
+                solution: "Care Plus delivers clear, reassuring, and structured healthcare information.",
+                features: ["Service listings", "Appointment CTA", "Trust-focused layout", "Clean medical UI", "Responsive design"],
+                techStackDetails: [
+                    "HTML5 — Trust-focused and structured markup",
+                    "CSS3 — Clean medical UI with calm visuals",
+                    "JavaScript (Vanilla JS) — Interactive navigation and CTAs",
+                    "Responsive Design — Optimized for patients on all devices",
+                    "Accessibility-Oriented Design — Clear contrast and readability"
+                ],
+                audience: "Patients, Clinics, Healthcare Providers",
+                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Accessibility-Oriented"],
+                image: "https://picsum.photos/seed/careplus/1200/800",
+                link: "https://care-plus-medical-preview.vercel.app/",
+                featured: false
             },
             {
-                title: "Lead Boost",
-                tag: "Lead Gen",
-                desc: "A high-converting lead generation page with compelling CTAs for marketing campaigns.",
-                url: "https://lead-boost-preview.vercel.app/"
+                id: 7,
+                name: "Lead Boost",
+                category: "Marketing",
+                tagline: "Turn Visitors into Customers",
+                shortDesc: "Conversion-focused landing page for marketing teams.",
+                description: "Lead Boost is a marketing-focused landing page built to capture and convert leads. It uses persuasive content, strong CTAs, and conversion-driven layouts. The design emphasizes value propositions and results. Perfect for marketers and growth-focused businesses.",
+                problem: "Businesses struggle to convert traffic into qualified leads.",
+                solution: "Lead Boost optimizes messaging and layout to maximize conversions.",
+                features: ["Lead capture forms", "Conversion-focused sections", "Strong CTAs", "Analytics-ready structure", "Clean UI"],
+                techStackDetails: [
+                    "HTML5 — Conversion-driven layout structure",
+                    "CSS3 — Marketing-focused design and spacing",
+                    "JavaScript (Vanilla JS) — Lead forms and CTA interactions",
+                    "Responsive Design — Mobile-optimized conversion flow",
+                    "Performance Optimization — Lightweight and fast"
+                ],
+                audience: "Marketers, Agencies, Business Owners",
+                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Performance Optimization"],
+                image: "https://picsum.photos/seed/leadboost/1200/800",
+                link: "https://lead-boost-preview.vercel.app/",
+                featured: false
             },
             {
-                title: "Launch Pad",
-                tag: "Startup",
-                desc: "A minimal, modern startup launch page ideal for product launches and early signups.",
-                url: "https://launch-pad-preview.vercel.app/"
+                id: 8,
+                name: "Launch Pad",
+                category: "SaaS",
+                tagline: "Launch Smarter. Grow Faster.",
+                shortDesc: "Growth tools and validation for early-stage startups.",
+                description: "Launch Pad is a startup-focused landing page designed to help founders and product teams launch their ideas with clarity and confidence. It provides a structured storytelling flow that introduces the product, highlights its value, and drives early adoption. The design emphasizes speed, simplicity, and conversion, making it ideal for MVPs and early-stage products. Launch Pad guides visitors from problem awareness to solution understanding in a smooth and engaging way. Its modern layout and focused sections ensure that key messages are delivered without distractions. Built for momentum, it helps startups make a strong first impression and validate their ideas quickly.",
+                problem: "Many startups struggle to clearly communicate their product vision and fail to convert early visitors into users or investors.",
+                solution: "Launch Pad offers a clear, launch-ready structure that presents the product story, benefits, and CTAs in a compelling and conversion-driven format.",
+                features: ["Startup-focused hero section", "Clear product value proposition", "Feature highlights with benefits", "Strong call-to-action placement", "Fully responsive launch layout"],
+                techStackDetails: [
+                    "HTML5 — Launch-ready semantic structure",
+                    "CSS3 — Modern startup layouts using Grid & Flexbox",
+                    "JavaScript (Vanilla JS) — Interactive sections and smooth transitions",
+                    "Responsive Design — Perfect for MVP and early-stage products",
+                    "Clean & Modular Code — Easy iteration and scaling"
+                ],
+                audience: "Startup Founders, Indie Hackers, Product Managers, Early-Stage Teams",
+                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Clean & Modular Code"],
+                image: "https://picsum.photos/seed/launchpad/1200/800",
+                link: "https://launch-pad-preview.vercel.app/",
+                featured: false
             },
             {
-                title: "Future Tech Summit",
-                tag: "Event",
-                desc: "An immersive event landing page for tech conferences, summits, and community meetups.",
-                url: "https://future-tech-summit-preview.vercel.app/"
+                id: 9,
+                name: "Future Tech Summit",
+                category: "Marketing",
+                tagline: "Where Innovation Meets the Future",
+                shortDesc: "Global tech conference landing page with full event info.",
+                description: "Future Tech Summit is a modern event landing page crafted for technology conferences, summits, and innovation-driven events. It is designed to generate excitement, communicate event value, and drive registrations. The layout highlights speakers, agenda, and key themes in a visually engaging manner. With a strong focus on credibility and anticipation, it positions the event as a must-attend experience. The design balances information and inspiration, ensuring visitors quickly understand what the event offers. Ideal for tech expos, startup events, and innovation forums, it delivers a professional and high-impact online presence.",
+                problem: "Event organizers often struggle to capture attention and clearly communicate the value of attending their events.",
+                solution: "Future Tech Summit presents event details, speakers, and highlights in a structured, visually appealing format that drives registrations.",
+                features: ["Speaker and agenda sections", "Event highlights and themes", "Registration-focused CTAs", "Countdown or timeline layout", "Engaging visual storytelling"],
+                techStackDetails: [
+                    "HTML5 — Structured event sections and content",
+                    "CSS3 — Visual hierarchy and engaging layouts",
+                    "JavaScript (Vanilla JS) — Countdown timers and dynamic UI",
+                    "Responsive Design — Event-ready across all devices",
+                    "Accessible & Readable UI — Clear event information flow"
+                ],
+                audience: "Tech Professionals, Entrepreneurs, Developers, Event Attendees",
+                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Accessible & Readable UI"],
+                image: "https://picsum.photos/seed/techsummit/1200/800",
+                link: "https://future-tech-summit-preview.vercel.app/",
+                featured: false
             },
             {
-                title: "ThemeMint Launch Kit",
-                tag: "Toolkit",
-                desc: "A versatile launch kit template with modular sections for any product or service launch.",
-                url: "https://theme-mint-launch-kit-preview.vercel.app/"
+                id: 10,
+                name: "ThemeMint Launch Kit",
+                category: "SaaS",
+                tagline: "Everything You Need to Launch Faster",
+                shortDesc: "Comprehensive toolkit for successful product launches.",
+                description: "ThemeMint Launch Kit is a product-focused landing page designed to showcase a complete launch-ready UI and design kit. It communicates value through clarity, structure, and visual consistency. The page highlights what’s included, how it helps users, and why it saves time and effort. Built with creators and developers in mind, it positions the kit as a practical and premium solution. The layout focuses on benefits, usability, and real-world application. Ideal for designers, developers, and startups, it helps users understand the product quickly and make confident purchasing decisions.",
+                problem: "Creators and developers often waste time building launch pages and UI from scratch, slowing down product launches.",
+                solution: "ThemeMint Launch Kit provides a ready-to-use, professionally designed system that accelerates product launches and ensures consistency.",
+                features: ["Pre-built launch sections", "Modular and reusable components", "Clean, modern UI design", "Easy customization", "Launch-ready structure"],
+                techStackDetails: [
+                    "HTML5 — Modular, reusable layout components",
+                    "CSS3 — Scalable design system and styling",
+                    "JavaScript (Vanilla JS) — UI interactions and component behavior",
+                    "Responsive Design — Framework-free adaptive layout",
+                    "Maintainable Codebase — Creator-friendly customization"
+                ],
+                audience: "Designers, Developers, Startup Teams, Product Creators",
+                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Maintainable Codebase"],
+                image: "https://picsum.photos/seed/launchkit/1200/800",
+                link: "https://theme-mint-launch-kit-preview.vercel.app/",
+                featured: false
             }
         ];
 
-        const grid = document.getElementById('cardGrid');
-        const backdrop = document.getElementById('modalBackdrop');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalUrl = document.getElementById('modalUrl');
-        const modalIframe = document.getElementById('modalIframe');
-        const modalOpenBtn = document.getElementById('modalOpenBtn');
-        const modalClose = document.getElementById('modalClose');
+        // DOM Elements
+        const featuredContainer = document.getElementById('featured-container');
+        const portfolioContainer = document.getElementById('portfolio-container');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const modal = document.getElementById('case-study-modal');
+        const modalContent = document.getElementById('modal-content');
+        const navbar = document.getElementById('navbar');
+        const backToTopBtn = document.getElementById('backToTop');
+        const heroCanvas = document.getElementById('hero-canvas');
+        const themeIcon = document.getElementById('theme-icon');
 
-        function openModal(project) {
-            modalTitle.textContent = project.title;
-            modalUrl.textContent = project.url;
-            modalIframe.src = project.url;
-            modalOpenBtn.href = project.url;
-            backdrop.classList.add('open');
-            document.body.style.overflow = 'hidden';
-            modalClose.focus();
-        }
+        // Initialize Lucide
+        lucide.createIcons();
 
-        function closeModal() {
-            backdrop.classList.remove('open');
-            document.body.style.overflow = '';
-            setTimeout(() => { modalIframe.src = ''; }, 300);
-        }
-
-        projects.forEach((p, i) => {
-            const card = document.createElement('article');
-            card.className = 'card';
-            card.tabIndex = 0;
-            card.setAttribute('aria-label', p.title + ' template card');
-
-            card.innerHTML = `
-      <div class="card-thumb" aria-hidden="true">
-        <iframe src="${p.url}" title="${p.title} preview" loading="lazy" tabindex="-1" aria-hidden="true"></iframe>
-        <div class="card-thumb-overlay"></div>
-        <span class="card-tag">${p.tag}</span>
-      </div>
-      <div class="card-body">
-        <div class="card-title">${p.title}</div>
-        <p class="card-desc">${p.desc}</p>
-        <div class="card-actions">
-          <button class="btn-primary preview-btn" data-index="${i}" aria-label="Preview ${p.title} inside this page">
-            ▶ Preview
-          </button>
-          <a href="${p.url}" target="_blank" rel="noopener" class="btn-secondary" aria-label="Open ${p.title} in new tab">↗</a>
-        </div>
-      </div>`;
-
-            grid.appendChild(card);
-
-            card.querySelector('.preview-btn').addEventListener('click', (e) => {
-                e.stopPropagation();
-                openModal(p);
-            });
-
-            card.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(p); }
-            });
-        });
-
-        modalClose.addEventListener('click', closeModal);
-        backdrop.addEventListener('click', (e) => { if (e.target === backdrop) closeModal(); });
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
-
-        // ── CONTACT FORM ──
-        // Mailto handler for Send Message
-        document.getElementById('submitBtn').addEventListener('click', function() {
-            var name = document.getElementById('cf-name').value.trim();
-            var email = document.getElementById('cf-email').value.trim();
-            var subject = document.getElementById('cf-subject').value;
-            var message = document.getElementById('cf-message').value.trim();
-            if (!name || !email || !message) {
-                [document.getElementById('cf-name'), document.getElementById('cf-email'), document.getElementById('cf-message')].forEach(function(el) {
-                    if (!el.value.trim()) {
-                        el.style.borderColor = '#e53e3e';
-                        el.addEventListener('input', function() { el.style.borderColor = ''; }, { once: true });
-                    }
-                });
-                return;
+        // Theme Toggle Logic
+        window.toggleTheme = function() {
+            const body = document.body;
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                themeIcon.setAttribute('data-lucide', 'moon');
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeIcon.setAttribute('data-lucide', 'sun');
+                localStorage.setItem('theme', 'dark');
             }
-            var mailto = 'mailto:hh5566970@gmail.com'
-                + '?subject=' + encodeURIComponent(subject ? subject : 'Contact from Landing Page')
-                + '&body=' + encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + message);
-            window.open(mailto, '_blank');
+            lucide.createIcons();
+        }
+
+        // Check for saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+            themeIcon.setAttribute('data-lucide', 'moon');
+            lucide.createIcons();
+        }
+
+        // Hero Background Animation
+        const ctx = heroCanvas.getContext('2d');
+        let particles = [];
+
+        function initCanvas() {
+            heroCanvas.width = window.innerWidth;
+            heroCanvas.height = document.querySelector('.hero').offsetHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * heroCanvas.width;
+                this.y = Math.random() * heroCanvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 0.4 - 0.2;
+                this.speedY = Math.random() * 0.4 - 0.2;
+                this.opacity = Math.random() * 0.5;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > heroCanvas.width || this.y < 0 || this.y > heroCanvas.height) {
+                    this.reset();
+                }
+            }
+            draw() {
+                ctx.fillStyle = `rgba(0, 255, 157, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function createParticles() {
+            particles = [];
+            const count = Math.floor((heroCanvas.width * heroCanvas.height) / 15000);
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', () => {
+            initCanvas();
+            createParticles();
         });
+
+        initCanvas();
+        createParticles();
+        animateParticles();
+
+        // Scroll to Top Function
+        window.scrollToTop = function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Render Featured
+        function renderFeatured() {
+            const featured = projects.filter(p => p.featured);
+            featuredContainer.innerHTML = featured.map(p => `
+                <div class="featured-card" data-reveal>
+                    <div class="featured-img" style="position: relative;">
+                        <iframe src="${p.link}" style="width: 100%; height: 100%; border: none; border-radius: 16px; pointer-events: none;" loading="lazy"></iframe>
+                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer;" onclick="openModal(${p.id})"></div>
+                    </div>
+                    <div class="featured-info">
+                        <span class="badge">${p.category}</span>
+                        <h3>${p.name}</h3>
+                        <p>${p.shortDesc}</p>
+                        <div class="hero-btns">
+                            <button class="btn btn-primary" onclick="openModal(${p.id})">View Case Study</button>
+                            <a href="${p.link}" target="_blank" class="btn btn-secondary">Live Preview <i data-lucide="external-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        // Render Portfolio
+        function renderPortfolio(filter = 'all') {
+            const filtered = filter === 'all' 
+                ? projects 
+                : projects.filter(p => p.category === filter);
+
+            portfolioContainer.innerHTML = filtered.map(p => `
+                <div class="project-card" data-reveal>
+                    <div class="card-thumb" style="height: 300px;">
+                        <iframe src="${p.link}" style="width: 100%; height: 100%; border: none; pointer-events: none;" loading="lazy"></iframe>
+                        <div class="card-overlay">
+                            <button class="btn btn-primary" onclick="openModal(${p.id})">View Details</button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <span class="badge" style="margin-bottom: 0.5rem;">${p.category}</span>
+                        <h4>${p.name}</h4>
+                        <p>${p.shortDesc}</p>
+                        <div class="card-footer">
+                            <div class="tech-icons">
+                                <i data-lucide="code-2" style="width: 16px;"></i>
+                                <i data-lucide="layout" style="width: 16px;"></i>
+                                <i data-lucide="zap" style="width: 16px;"></i>
+                            </div>
+                            <a href="${p.link}" target="_blank" style="color: var(--primary); font-size: 0.8rem; font-weight: 700;">LIVE DEMO</a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        // Modal Logic
+        window.openModal = function(id) {
+            const p = projects.find(item => item.id === id);
+            modalContent.innerHTML = `
+                <div class="modal-hero">
+                    <iframe src="${p.link}" style="width: 100%; height: 100%; border: none;" loading="lazy"></iframe>
+                </div>
+                <div class="modal-header">
+                    <span class="badge">${p.category}</span>
+                    <h2>${p.name}</h2>
+                    <p style="font-size: 1.5rem; color: var(--text-dim);">${p.tagline}</p>
+                </div>
+                <div class="modal-grid">
+                    <div class="modal-left">
+                        <div class="modal-section">
+                            <h3>Overview</h3>
+                            <p style="font-size: 1.1rem; color: var(--text-dim);">${p.description}</p>
+                        </div>
+                        <div class="modal-section">
+                            <h3>Problem & Solution</h3>
+                            <div style="margin-bottom: 1.5rem;">
+                                <h4 style="color: white; margin-bottom: 0.5rem;">The Problem</h4>
+                                <p style="color: var(--text-dim);">${p.problem}</p>
+                            </div>
+                            <div>
+                                <h4 style="color: var(--primary); margin-bottom: 0.5rem;">The Solution</h4>
+                                <p style="color: var(--text-dim);">${p.solution}</p>
+                            </div>
+                        </div>
+                        <div class="modal-section">
+                            <h3>Key Features</h3>
+                            <ul class="feature-list">
+                                ${p.features.map(f => `<li><i data-lucide="check-circle"></i> <span>${f}</span></li>`).join('')}
+                            </ul>
+                        </div>
+                        <div class="modal-section">
+                            <h3>Tech Stack</h3>
+                            <ul class="feature-list">
+                                ${p.techStackDetails.map(t => `<li><i data-lucide="code-2"></i> <span>${t}</span></li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="modal-right">
+                        <div class="modal-sidebar">
+                            <div style="margin-bottom: 2rem;">
+                                <h4 style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dim); margin-bottom: 1rem;">Target Audience</h4>
+                                <p style="font-weight: 600;">${p.audience}</p>
+                            </div>
+                            <a href="${p.link}" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;">Launch Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+        }
+
+        window.closeModal = function() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Filter Logic
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderPortfolio(btn.dataset.filter);
+                revealOnScroll();
+            });
+        });
+
+        // Scroll Reveal
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('[data-reveal]');
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const revealTop = el.getBoundingClientRect().top;
+                const revealPoint = 150;
+                if (revealTop < windowHeight - revealPoint) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', () => {
+            revealOnScroll();
+            
+            // Navbar Scroll Effect
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            // Back to Top Visibility
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        // Initial Render
+        renderFeatured();
+        renderPortfolio();
+        revealOnScroll();
+
     </script>
 </body>
-
 </html>

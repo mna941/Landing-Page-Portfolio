@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<link rel="icon" type="image/png" href="favicon.ico" sizes="32x32" />
-<link rel="shortcut icon" href="favicon.ico" type="image/png" />
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ThemeMint | Premium Landing Page Studio</title>
@@ -293,6 +289,12 @@
             border-radius: 12px;
             overflow: hidden;
             background: #000;
+            position: relative;
+        }
+
+        .mockup-screen .iframe-wrapper iframe {
+            width: 1440px;
+            height: 900px;
         }
 
         .mockup-screen img {
@@ -467,6 +469,22 @@
             border-radius: 16px;
             overflow: hidden;
             border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .iframe-wrapper {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .iframe-wrapper iframe {
+            width: 1440px;
+            height: 900px;
+            border: none;
+            transform-origin: 0 0;
+            pointer-events: none;
         }
 
         .featured-img img {
@@ -567,6 +585,11 @@
             height: 250px;
             overflow: hidden;
             position: relative;
+        }
+
+        .card-thumb .iframe-wrapper iframe {
+            width: 1280px;
+            height: 800px;
         }
 
         .card-thumb img {
@@ -764,6 +787,12 @@
             overflow: hidden;
             margin-bottom: 4rem;
             border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .modal-hero .iframe-wrapper iframe {
+            width: 1440px;
+            height: 900px;
         }
 
         .modal-hero img {
@@ -942,7 +971,7 @@
         <div class="container">
             <div class="nav-content">
                 <a href="#" class="logo">
-                    <img src="Logo.png" alt="ThemeMint Logo" style="height:48px;width:auto;display:block;margin-left:110px;">
+                    <img src="logo.png" alt="ThemeMint Logo">
                 </a>
                 <div style="display: flex; align-items: center; gap: 2rem;">
                     <ul class="nav-links">
@@ -994,7 +1023,9 @@
                 <div class="hero-visual" data-reveal>
                     <div class="mockup-container">
                         <div class="mockup-screen">
-                            <iframe src="https://neuroai-preview.vercel.app/" style="width: 100%; height: 100%; border: none;" loading="lazy"></iframe>
+                            <div class="iframe-wrapper">
+                                <iframe src="https://neuroai-preview.vercel.app/" loading="lazy"></iframe>
+                            </div>
                         </div>
                         
                         <div class="floating-card card-1">
@@ -1081,6 +1112,9 @@
                 <button class="filter-btn" data-filter="Medical">Medical</button>
                 <button class="filter-btn" data-filter="Marketing">Marketing</button>
                 <button class="filter-btn" data-filter="Education">Education</button>
+                <button class="filter-btn" data-filter="Transportation">Transportation</button>
+                <button class="filter-btn" data-filter="Food">Food</button>
+                <button class="filter-btn" data-filter="Service">Service</button>
             </div>
 
             <div class="portfolio-grid" id="portfolio-container">
@@ -1144,6 +1178,75 @@
         const projects = [
             {
                 id: 1,
+                name: "Zoom Taxi",
+                category: "Transportation",
+                tagline: "Fast. Reliable. On-Demand Mobility",
+                shortDesc: "Modern transportation platform for fast, reliable ride booking.",
+                description: "Zoom Taxi is a modern transportation platform designed to provide fast, reliable, and user-friendly ride booking experiences. The platform connects passengers with nearby drivers in real time, enabling quick pickups, transparent pricing, and seamless ride management. Built with a clean and intuitive interface, Zoom Taxi focuses on speed, accessibility, and trust. Users can easily book rides, track drivers live, and manage trips without confusion. The landing page is optimized for conversions, clearly highlighting service benefits, coverage, and ease of use. Zoom Taxi is ideal for urban commuters, travelers, and businesses seeking dependable ride solutions.",
+                problem: "Traditional taxi services often suffer from delayed pickups, unclear pricing, poor user experience, and lack of real-time tracking, leading to frustration and distrust among users.",
+                solution: "Zoom Taxi solves these issues by offering real-time ride booking, transparent fare information, and live driver tracking through a streamlined digital experience that prioritizes convenience and reliability.",
+                features: ["Instant ride booking", "Real-time driver tracking", "Transparent pricing system", "User-friendly booking interface", "Mobile-first responsive design"],
+                techStackDetails: [
+                    "HTML5 — Semantic and SEO-friendly structure",
+                    "CSS3 — Modern layouts with Flexbox & Grid",
+                    "JavaScript (Vanilla JS) — Interactive UI and smooth user flow",
+                    "Responsive Design — Optimized for mobile and desktop",
+                    "Performance Optimized — Fast loading and lightweight assets"
+                ],
+                audience: "Urban commuters, travelers, and businesses seeking dependable ride solutions.",
+                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Performance Optimized"],
+                image: "https://picsum.photos/seed/zoomtaxi/1200/800",
+                link: "https://zoom-taxi-preview.vercel.app/",
+                featured: true
+            },
+            {
+                id: 2,
+                name: "Bite Haven",
+                category: "Food",
+                tagline: "Bold Flavors. Fast Service. Better Experience",
+                shortDesc: "High-impact fast food restaurant landing page for menus and orders.",
+                description: "Bite Haven is a high-impact fast food restaurant landing page crafted to showcase menu offerings, promotions, and brand personality in a visually engaging way. The platform focuses on appetizing visuals, clear navigation, and strong call-to-action placement to drive online orders and customer engagement. Designed with bold colors and modern typography, Bite Haven creates an instant craving-driven connection with users. The layout highlights best-selling items, categories, and special deals while maintaining a smooth and enjoyable browsing experience. It is built to help restaurants increase conversions and strengthen their digital presence.",
+                problem: "Many restaurant websites lack visual appeal, clear menus, and strong CTAs, causing visitors to leave without placing an order or visiting the restaurant.",
+                solution: "Bite Haven delivers a visually rich, conversion-focused landing page that highlights food items clearly, guides users effortlessly through the menu, and encourages quick action through prominent CTAs.",
+                features: ["Visually rich food-focused design", "Clear menu categories and sections", "Strong call-to-action buttons", "Smooth scrolling navigation", "Brand-focused color system"],
+                techStackDetails: [
+                    "HTML5 — Clean, structured markup",
+                    "CSS3 — Custom styling with animations and hover effects",
+                    "JavaScript (Vanilla JS) — Smooth scrolling and UI interactions",
+                    "Responsive Design — Optimized for all devices",
+                    "Conversion Optimized UI — Designed to drive orders and engagement"
+                ],
+                audience: "Foodies, hungry customers, restaurant owners.",
+                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Conversion Optimized UI"],
+                image: "https://picsum.photos/seed/bitehaven/1200/800",
+                link: "https://bite-haven-preview.vercel.app/",
+                featured: true
+            },
+            {
+                id: 3,
+                name: "Green Yard",
+                category: "Service",
+                tagline: "Professional Outdoor Care Made Simple",
+                shortDesc: "Professional service landing page for garden maintenance and lawn care.",
+                description: "Green Yard is a professional service landing page designed for garden maintenance, lawn care, and outdoor landscaping businesses. The platform presents services clearly and professionally, building trust with potential customers through clean layouts, service highlights, and strong visual hierarchy. The design emphasizes reliability, expertise, and eco-friendly practices while guiding users toward service inquiries and bookings. Green Yard is ideal for local service providers looking to establish credibility and attract consistent clients through a modern online presence.",
+                problem: "Many lawn and garden service providers rely on outdated or unclear websites that fail to communicate professionalism, service quality, and trust.",
+                solution: "Green Yard provides a clean, structured, and trustworthy digital experience that clearly explains services, showcases expertise, and encourages users to contact or book services easily.",
+                features: ["Clear service breakdowns", "Trust-focused professional design", "Easy contact and inquiry flow", "Service-specific sections with visuals", "Local business–friendly layout"],
+                techStackDetails: [
+                    "HTML5 — Semantic and accessible structure",
+                    "CSS3 — Modern layouts using Flexbox & Grid",
+                    "JavaScript (Vanilla JS) — Interactive elements and smooth UX",
+                    "Responsive Design — Mobile-first optimization",
+                    "SEO-Friendly Structure — Built for discoverability"
+                ],
+                audience: "Homeowners, property managers, local businesses.",
+                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "SEO-Friendly Structure"],
+                image: "https://picsum.photos/seed/greenyard/1200/800",
+                link: "https://green-yard-preview.vercel.app/",
+                featured: true
+            },
+            {
+                id: 4,
                 name: "NeuroAI",
                 category: "SaaS",
                 tagline: "The Future of Intelligence",
@@ -1163,10 +1266,10 @@
                 tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Performance Optimized"],
                 image: "https://picsum.photos/seed/neuroai/1200/800",
                 link: "https://neuroai-preview.vercel.app/",
-                featured: true
+                featured: false
             },
             {
-                id: 2,
+                id: 5,
                 name: "ThemeMint",
                 category: "SaaS",
                 tagline: "Build, Launch, Scale Faster",
@@ -1186,10 +1289,10 @@
                 tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Clean Code Architecture"],
                 image: "https://picsum.photos/seed/mint/1200/800",
                 link: "https://theme-mint-preview.vercel.app/",
-                featured: true
+                featured: false
             },
             {
-                id: 3,
+                id: 6,
                 name: "Skill Forge Academy",
                 category: "Education",
                 tagline: "Learn Skills That Matter",
@@ -1209,10 +1312,10 @@
                 tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Accessibility-Friendly"],
                 image: "https://picsum.photos/seed/skillforge/1200/800",
                 link: "https://skill-forge-academy-preview.vercel.app/",
-                featured: true
+                featured: false
             },
             {
-                id: 4,
+                id: 7,
                 name: "Shop Ease",
                 category: "E-commerce",
                 tagline: "Simple Shopping, Smarter Sales",
@@ -1235,7 +1338,7 @@
                 featured: false
             },
             {
-                id: 5,
+                id: 8,
                 name: "Next Gen Agency",
                 category: "Agency",
                 tagline: "Creative Solutions for Modern Brands",
@@ -1258,7 +1361,7 @@
                 featured: false
             },
             {
-                id: 6,
+                id: 9,
                 name: "Care Plus",
                 category: "Medical",
                 tagline: "Healthcare You Can Trust",
@@ -1281,7 +1384,7 @@
                 featured: false
             },
             {
-                id: 7,
+                id: 10,
                 name: "Lead Boost",
                 category: "Marketing",
                 tagline: "Turn Visitors into Customers",
@@ -1304,7 +1407,7 @@
                 featured: false
             },
             {
-                id: 8,
+                id: 11,
                 name: "Launch Pad",
                 category: "SaaS",
                 tagline: "Launch Smarter. Grow Faster.",
@@ -1327,7 +1430,7 @@
                 featured: false
             },
             {
-                id: 9,
+                id: 12,
                 name: "Future Tech Summit",
                 category: "Marketing",
                 tagline: "Where Innovation Meets the Future",
@@ -1350,7 +1453,7 @@
                 featured: false
             },
             {
-                id: 10,
+                id: 13,
                 name: "ThemeMint Launch Kit",
                 category: "SaaS",
                 tagline: "Everything You Need to Launch Faster",
@@ -1485,8 +1588,10 @@
             const featured = projects.filter(p => p.featured);
             featuredContainer.innerHTML = featured.map(p => `
                 <div class="featured-card" data-reveal>
-                    <div class="featured-img" style="position: relative;">
-                        <iframe src="${p.link}" style="width: 100%; height: 100%; border: none; border-radius: 16px; pointer-events: none;" loading="lazy"></iframe>
+                    <div class="featured-img">
+                        <div class="iframe-wrapper">
+                            <iframe src="${p.link}" loading="lazy"></iframe>
+                        </div>
                         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer;" onclick="openModal(${p.id})"></div>
                     </div>
                     <div class="featured-info">
@@ -1501,6 +1606,7 @@
                 </div>
             `).join('');
             lucide.createIcons();
+            updateIframeScales();
         }
 
         // Render Portfolio
@@ -1511,8 +1617,10 @@
 
             portfolioContainer.innerHTML = filtered.map(p => `
                 <div class="project-card" data-reveal>
-                    <div class="card-thumb" style="height: 300px;">
-                        <iframe src="${p.link}" style="width: 100%; height: 100%; border: none; pointer-events: none;" loading="lazy"></iframe>
+                    <div class="card-thumb">
+                        <div class="iframe-wrapper">
+                            <iframe src="${p.link}" loading="lazy"></iframe>
+                        </div>
                         <div class="card-overlay">
                             <button class="btn btn-primary" onclick="openModal(${p.id})">View Details</button>
                         </div>
@@ -1533,6 +1641,7 @@
                 </div>
             `).join('');
             lucide.createIcons();
+            updateIframeScales();
         }
 
         // Modal Logic
@@ -1540,7 +1649,9 @@
             const p = projects.find(item => item.id === id);
             modalContent.innerHTML = `
                 <div class="modal-hero">
-                    <iframe src="${p.link}" style="width: 100%; height: 100%; border: none;" loading="lazy"></iframe>
+                    <div class="iframe-wrapper">
+                        <iframe src="${p.link}" loading="lazy"></iframe>
+                    </div>
                 </div>
                 <div class="modal-header">
                     <span class="badge">${p.category}</span>
@@ -1556,7 +1667,7 @@
                         <div class="modal-section">
                             <h3>Problem & Solution</h3>
                             <div style="margin-bottom: 1.5rem;">
-                                <h4 style="color: white; margin-bottom: 0.5rem;">The Problem</h4>
+                                <h4 style="color: var(--text); margin-bottom: 0.5rem;">The Problem</h4>
                                 <p style="color: var(--text-dim);">${p.problem}</p>
                             </div>
                             <div>
@@ -1591,6 +1702,7 @@
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
             lucide.createIcons();
+            setTimeout(updateIframeScales, 10);
         }
 
         window.closeModal = function() {
@@ -1640,9 +1752,35 @@
         });
 
         // Initial Render
+        function updateIframeScales() {
+            document.querySelectorAll('.iframe-wrapper').forEach(wrapper => {
+                const iframe = wrapper.querySelector('iframe');
+                if (!iframe) return;
+                
+                // Determine target width based on container class
+                let targetWidth = 1440;
+                if (wrapper.closest('.card-thumb')) {
+                    targetWidth = 1280;
+                } else if (wrapper.closest('.mockup-screen')) {
+                    targetWidth = 1440;
+                }
+                
+                const containerWidth = wrapper.offsetWidth;
+                if (containerWidth === 0) return; // Skip if hidden
+                
+                const scale = containerWidth / targetWidth;
+                iframe.style.width = targetWidth + 'px';
+                iframe.style.height = (wrapper.offsetHeight / scale) + 'px';
+                iframe.style.transform = `scale(${scale})`;
+            });
+        }
+
+        window.addEventListener('resize', updateIframeScales);
+
         renderFeatured();
         renderPortfolio();
         revealOnScroll();
+        updateIframeScales();
 
     </script>
 </body>

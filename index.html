@@ -107,25 +107,17 @@
             padding: 1rem 0;
         }
 
-        .logo-brand {
+        .nav-content {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 0.75rem;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text);
-            letter-spacing: -0.02em;
         }
 
-        .logo-brand i {
-            color: var(--primary);
-            width: 28px;
-            height: 28px;
-        }
-
-        .logo-brand span {
-            color: var(--primary);
+        .logo img,
+        .footer-logo img {
+            height: 48px;
+            width: auto;
+            transition: var(--transition);
         }
 
         .nav-links {
@@ -1027,9 +1019,8 @@
     <nav id="navbar">
         <div class="container">
             <div class="nav-content">
-                <a href="#" class="logo-brand">
-                    <i data-lucide="sparkles"></i>
-                    Theme<span>Mint</span>
+                <a href="#" class="logo">
+                    <img src="Logo.png" alt="ThemeMint Logo">
                 </a>
                 <div style="display: flex; align-items: center; gap: 2rem;">
                     <ul class="nav-links">
@@ -1218,10 +1209,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <a href="#" class="logo-brand">
-                        <i data-lucide="sparkles"></i>
-                        Theme<span>Mint</span>
-                    </a>
+                    <img src="logo.png" alt="ThemeMint Logo">
                 </div>
                 <div class="footer-links">
                     <a href="#">Twitter</a>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,9 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;500;700&display=swap"
+        rel="stylesheet">
     <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -54,7 +57,10 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3, h4 {
+        h1,
+        h2,
+        h3,
+        h4 {
             font-family: 'Space Grotesk', sans-serif;
             font-weight: 700;
             line-height: 1.1;
@@ -80,13 +86,16 @@
         ::-webkit-scrollbar {
             width: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: var(--bg);
         }
+
         ::-webkit-scrollbar-thumb {
             background: var(--surface-light);
             border-radius: 10px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: var(--primary);
         }
@@ -125,18 +134,21 @@
             gap: 0.5rem;
         }
 
-        .logo img, .footer-logo img {
+        .logo img,
+        .footer-logo img {
             height: 32px;
             width: auto;
             transition: var(--transition);
         }
 
-        body.light-mode .logo img, body.light-mode .footer-logo img {
+        body.light-mode .logo img,
+        body.light-mode .footer-logo img {
             filter: none;
         }
 
         /* In dark mode, invert the dark parts of the logo while keeping the green */
-        .logo img, .footer-logo img {
+        .logo img,
+        .footer-logo img {
             filter: invert(1) hue-rotate(180deg) brightness(1.2);
         }
 
@@ -174,7 +186,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background-image: 
+            background-image:
                 linear-gradient(var(--border) 1px, transparent 1px),
                 linear-gradient(90deg, var(--border) 1px, transparent 1px);
             background-size: 50px 50px;
@@ -207,8 +219,15 @@
         }
 
         @keyframes pulseGlow {
-            from { opacity: 0.05; transform: translate(-50%, -50%) scale(1); }
-            to { opacity: 0.15; transform: translate(-50%, -50%) scale(1.2); }
+            from {
+                opacity: 0.05;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            to {
+                opacity: 0.15;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
         }
 
         .hero-grid {
@@ -274,7 +293,7 @@
             border-radius: 20px;
             border: 1px solid var(--border);
             padding: 10px;
-            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5);
             transform: perspective(1000px) rotateY(-15deg) rotateX(5deg);
             transition: var(--transition);
         }
@@ -294,13 +313,7 @@
 
         .mockup-screen .iframe-wrapper iframe {
             width: 1440px;
-            height: 3000px;
-            animation: autoScroll 40s linear infinite alternate;
-        }
-
-        @keyframes autoScroll {
-            from { transform: scale(var(--scale, 0.25)) translateY(0); }
-            to { transform: scale(var(--scale, 0.25)) translateY(-50%); }
+            height: 900px;
         }
 
         .mockup-screen img {
@@ -328,12 +341,28 @@
             background: rgba(255, 255, 255, 0.8);
         }
 
-        .card-1 { top: -20px; right: -20px; animation-delay: 0s; }
-        .card-2 { bottom: 40px; left: -40px; animation-delay: 1s; }
+        .card-1 {
+            top: -20px;
+            right: -20px;
+            animation-delay: 0s;
+        }
+
+        .card-2 {
+            bottom: 40px;
+            left: -40px;
+            animation-delay: 1s;
+        }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
         }
 
         .scroll-indicator {
@@ -373,8 +402,15 @@
         }
 
         @keyframes mouseScroll {
-            0% { opacity: 1; transform: translate(-50%, 0); }
-            100% { opacity: 0; transform: translate(-50%, 15px); }
+            0% {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-50%, 15px);
+            }
         }
 
         @media (max-width: 1024px) {
@@ -382,13 +418,16 @@
                 grid-template-columns: 1fr;
                 text-align: center;
             }
+
             .hero p {
                 margin-left: auto;
                 margin-right: auto;
             }
+
             .hero-btns {
                 justify-content: center;
             }
+
             .hero-visual {
                 display: none;
             }
@@ -483,6 +522,30 @@
             height: 100%;
             overflow: hidden;
             position: relative;
+            background-color: var(--surface-light);
+        }
+
+        .iframe-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transform: translateX(-100%);
+            animation: loading 2s infinite;
+            z-index: 1;
+        }
+
+        @keyframes loading {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .iframe-wrapper.loaded::before {
+            display: none;
         }
 
         .iframe-wrapper iframe {
@@ -490,7 +553,8 @@
             height: 900px;
             border: none;
             transform-origin: 0 0;
-            transform: scale(var(--scale, 1));
+            z-index: 2;
+            transition: opacity 0.5s ease;
         }
 
         .featured-img img {
@@ -534,6 +598,7 @@
                 padding: 2rem;
                 gap: 2rem;
             }
+
             .featured-img {
                 height: 350px;
             }
@@ -559,7 +624,8 @@
             transition: var(--transition);
         }
 
-        .filter-btn.active, .filter-btn:hover {
+        .filter-btn.active,
+        .filter-btn:hover {
             background: var(--primary);
             color: var(--bg);
             border-color: var(--primary);
@@ -583,7 +649,7 @@
         .project-card:hover {
             transform: translateY(-10px);
             border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
         .card-thumb {
@@ -752,8 +818,15 @@
         }
 
         @keyframes modalFadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .modal-close {
@@ -788,7 +861,7 @@
 
         .modal-hero {
             width: 100%;
-            height: 600px;
+            height: 500px;
             border-radius: 24px;
             overflow: hidden;
             margin-bottom: 4rem;
@@ -796,31 +869,9 @@
             position: relative;
         }
 
-        .modal-hero .iframe-wrapper {
-            overflow-y: auto;
-            overflow-x: hidden;
-            cursor: ns-resize;
-            scrollbar-width: thin;
-            scrollbar-color: var(--primary) transparent;
-        }
-
-        .modal-hero .iframe-wrapper::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .modal-hero .iframe-wrapper::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .modal-hero .iframe-wrapper::-webkit-scrollbar-thumb {
-            background-color: var(--primary);
-            border-radius: 20px;
-        }
-
         .modal-hero .iframe-wrapper iframe {
             width: 1440px;
-            height: 5000px; /* Large height to show more content */
-            pointer-events: none; /* Prevent iframe from stealing scroll events */
+            height: 900px;
         }
 
         .modal-hero img {
@@ -881,6 +932,7 @@
                 grid-template-columns: 1fr;
                 gap: 4rem;
             }
+
             .modal-hero {
                 height: 300px;
             }
@@ -992,14 +1044,16 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- Navigation -->
     <nav id="navbar">
         <div class="container">
             <div class="nav-content">
-<a href="#" class="logo">
-                    <img src="Logo.png" alt="ThemeMint Logo" style="height:48px;width:auto;display:block;margin-left:110px;">
+                <a href="#" class="logo">
+                    <img src="Logo.png" alt="ThemeMint Logo"
+                        style="height:48px;width:auto;display:block;margin-left:110px;">
                 </a>
                 <div style="display: flex; align-items: center; gap: 2rem;">
                     <ul class="nav-links">
@@ -1029,18 +1083,28 @@
                         New Collection 2024
                     </div>
                     <h1>Premium Landing Pages <span>Crafted for Conversion</span></h1>
-                    <p>A curated collection of high-quality landing pages for SaaS, startups, agencies, and digital products. Treated like premium products, built for results.</p>
+                    <p>A curated collection of high-quality landing pages for SaaS, startups, agencies, and digital
+                        products. Treated like premium products, built for results.</p>
                     <div class="hero-btns">
-                        <a href="#portfolio" class="btn btn-primary">Explore Portfolio <i data-lucide="arrow-right"></i></a>
+                        <a href="#portfolio" class="btn btn-primary">Explore Portfolio <i
+                                data-lucide="arrow-right"></i></a>
                         <a href="#featured" class="btn btn-secondary">View Featured Work</a>
                     </div>
-                    
+
                     <div style="margin-top: 4rem; display: flex; align-items: center; gap: 2rem;">
-                        <div style="display: flex; -webkit-mask-image: linear-gradient(to right, black 80%, transparent);">
-                            <img src="https://picsum.photos/seed/u1/40/40" style="border-radius: 50%; border: 2px solid var(--bg); margin-right: -15px;" alt="User">
-                            <img src="https://picsum.photos/seed/u2/40/40" style="border-radius: 50%; border: 2px solid var(--bg); margin-right: -15px;" alt="User">
-                            <img src="https://picsum.photos/seed/u3/40/40" style="border-radius: 50%; border: 2px solid var(--bg); margin-right: -15px;" alt="User">
-                            <img src="https://picsum.photos/seed/u4/40/40" style="border-radius: 50%; border: 2px solid var(--bg);" alt="User">
+                        <div
+                            style="display: flex; -webkit-mask-image: linear-gradient(to right, black 80%, transparent);">
+                            <img src="https://picsum.photos/seed/u1/40/40"
+                                style="border-radius: 50%; border: 2px solid var(--bg); margin-right: -15px;"
+                                alt="User">
+                            <img src="https://picsum.photos/seed/u2/40/40"
+                                style="border-radius: 50%; border: 2px solid var(--bg); margin-right: -15px;"
+                                alt="User">
+                            <img src="https://picsum.photos/seed/u3/40/40"
+                                style="border-radius: 50%; border: 2px solid var(--bg); margin-right: -15px;"
+                                alt="User">
+                            <img src="https://picsum.photos/seed/u4/40/40"
+                                style="border-radius: 50%; border: 2px solid var(--bg);" alt="User">
                         </div>
                         <div style="font-size: 0.85rem; color: var(--text-dim);">
                             <span style="color: white; font-weight: 700;">4,000+</span> designers using our templates
@@ -1052,26 +1116,31 @@
                     <div class="mockup-container">
                         <div class="mockup-screen">
                             <div class="iframe-wrapper">
-                                <iframe src="https://neuroai-preview.vercel.app/" loading="lazy"></iframe>
+                                <iframe src="https://neuroai-preview.vercel.app/" loading="eager"
+                                    onload="this.parentElement.classList.add('loaded')"></iframe>
                             </div>
                         </div>
-                        
+
                         <div class="floating-card card-1">
-                            <div style="width: 40px; height: 40px; background: var(--primary); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--bg);">
+                            <div
+                                style="width: 40px; height: 40px; background: var(--primary); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--bg);">
                                 <i data-lucide="zap"></i>
                             </div>
                             <div>
-                                <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase;">Performance</div>
+                                <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase;">
+                                    Performance</div>
                                 <div style="font-weight: 700;">99+ Score</div>
                             </div>
                         </div>
 
                         <div class="floating-card card-2">
-                            <div style="width: 40px; height: 40px; background: #3b82f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white;">
+                            <div
+                                style="width: 40px; height: 40px; background: #3b82f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white;">
                                 <i data-lucide="shield-check"></i>
                             </div>
                             <div>
-                                <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase;">Security</div>
+                                <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase;">
+                                    Security</div>
                                 <div style="font-weight: 700;">Enterprise Ready</div>
                             </div>
                         </div>
@@ -1079,7 +1148,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="scroll-indicator">
             <span>Scroll</span>
             <div class="mouse"></div>
@@ -1157,8 +1226,10 @@
             <div class="about-content">
                 <div class="about-text" data-reveal>
                     <h2>The Studio Behind the Screens</h2>
-                    <p>ThemeMint is a creative design studio focused on building conversion-driven landing pages for modern businesses. We believe that every pixel should serve a purpose.</p>
-                    <p>Our mission is to empower startups and established brands with digital assets that don't just look good, but perform exceptionally.</p>
+                    <p>ThemeMint is a creative design studio focused on building conversion-driven landing pages for
+                        modern businesses. We believe that every pixel should serve a purpose.</p>
+                    <p>Our mission is to empower startups and established brands with digital assets that don't just
+                        look good, but perform exceptionally.</p>
                     <a href="#contact" class="btn btn-primary">Work With Us</a>
                 </div>
                 <div class="about-img" data-reveal>
@@ -1181,7 +1252,8 @@
                     <a href="#">Instagram</a>
                     <a href="#">Dribbble</a>
                 </div>
-                <p style="color: var(--text-dim); font-size: 0.8rem;">&copy; 2024 ThemeMint Studio. All rights reserved.</p>
+                <p style="color: var(--text-dim); font-size: 0.8rem;">&copy; 2024 ThemeMint Studio. All rights reserved.
+                </p>
             </div>
         </div>
     </footer>
@@ -1520,10 +1592,10 @@
         lucide.createIcons();
 
         // Theme Toggle Logic
-        window.toggleTheme = function() {
+        window.toggleTheme = function () {
             const body = document.body;
             body.classList.toggle('light-mode');
-            
+
             if (body.classList.contains('light-mode')) {
                 themeIcon.setAttribute('data-lucide', 'moon');
                 localStorage.setItem('theme', 'light');
@@ -1604,7 +1676,7 @@
         animateParticles();
 
         // Scroll to Top Function
-        window.scrollToTop = function() {
+        window.scrollToTop = function () {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
@@ -1618,7 +1690,7 @@
                 <div class="featured-card" data-reveal>
                     <div class="featured-img">
                         <div class="iframe-wrapper">
-                            <iframe src="${p.link}" loading="lazy"></iframe>
+                            <iframe src="${p.link}" loading="eager" onload="this.parentElement.classList.add('loaded')"></iframe>
                         </div>
                         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer;" onclick="openModal(${p.id})"></div>
                     </div>
@@ -1634,20 +1706,20 @@
                 </div>
             `).join('');
             lucide.createIcons();
-            updateIframeScales();
+            setTimeout(updateIframeScales, 100);
         }
 
         // Render Portfolio
         function renderPortfolio(filter = 'all') {
-            const filtered = filter === 'all' 
-                ? projects 
+            const filtered = filter === 'all'
+                ? projects
                 : projects.filter(p => p.category === filter);
 
             portfolioContainer.innerHTML = filtered.map(p => `
                 <div class="project-card" data-reveal>
                     <div class="card-thumb">
                         <div class="iframe-wrapper">
-                            <iframe src="${p.link}" loading="lazy"></iframe>
+                            <iframe src="${p.link}" loading="lazy" onload="this.parentElement.classList.add('loaded')"></iframe>
                         </div>
                         <div class="card-overlay">
                             <button class="btn btn-primary" onclick="openModal(${p.id})">View Details</button>
@@ -1669,16 +1741,16 @@
                 </div>
             `).join('');
             lucide.createIcons();
-            updateIframeScales();
+            setTimeout(updateIframeScales, 100);
         }
 
         // Modal Logic
-        window.openModal = function(id) {
+        window.openModal = function (id) {
             const p = projects.find(item => item.id === id);
             modalContent.innerHTML = `
                 <div class="modal-hero">
                     <div class="iframe-wrapper">
-                        <iframe src="${p.link}" loading="lazy"></iframe>
+                        <iframe src="${p.link}" loading="eager" onload="this.parentElement.classList.add('loaded')"></iframe>
                     </div>
                 </div>
                 <div class="modal-header">
@@ -1730,10 +1802,10 @@
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
             lucide.createIcons();
-            setTimeout(updateIframeScales, 10);
+            setTimeout(updateIframeScales, 50);
         }
 
-        window.closeModal = function() {
+        window.closeModal = function () {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
         }
@@ -1763,7 +1835,7 @@
 
         window.addEventListener('scroll', () => {
             revealOnScroll();
-            
+
             // Navbar Scroll Effect
             if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
@@ -1781,32 +1853,30 @@
 
         // Initial Render
         function updateIframeScales() {
-            document.querySelectorAll('.iframe-wrapper').forEach(wrapper => {
-                const iframe = wrapper.querySelector('iframe');
-                if (!iframe) return;
-                
-                // Determine target width based on container class
-                let targetWidth = 1440;
-                if (wrapper.closest('.card-thumb')) {
-                    targetWidth = 1280;
-                } else if (wrapper.closest('.mockup-screen')) {
-                    targetWidth = 1440;
-                }
-                
-                const containerWidth = wrapper.offsetWidth;
-                if (containerWidth === 0) return; // Skip if hidden
-                
-                const scale = containerWidth / targetWidth;
-                iframe.style.width = targetWidth + 'px';
-                iframe.style.setProperty('--scale', scale);
-                
-                // For modal hero, we want a tall iframe that scrolls within the wrapper
-                if (wrapper.closest('.modal-hero')) {
-                    iframe.style.height = '5000px'; 
-                    // The wrapper height is fixed by CSS, overflow-y: auto handles the rest
-                } else {
-                    iframe.style.height = (wrapper.offsetHeight / scale) + 'px';
-                }
+            requestAnimationFrame(() => {
+                document.querySelectorAll('.iframe-wrapper').forEach(wrapper => {
+                    const iframe = wrapper.querySelector('iframe');
+                    if (!iframe) return;
+
+                    // Determine target width based on container class
+                    let targetWidth = 1440;
+                    if (wrapper.closest('.card-thumb')) {
+                        targetWidth = 1240;
+                    } else if (wrapper.closest('.featured-img')) {
+                        targetWidth = 1440;
+                    } else if (wrapper.closest('.modal-hero')) {
+                        targetWidth = 1440;
+                    }
+
+                    const containerWidth = wrapper.offsetWidth;
+                    const containerHeight = wrapper.offsetHeight;
+                    if (containerWidth === 0) return;
+
+                    const scale = containerWidth / targetWidth;
+                    iframe.style.width = targetWidth + 'px';
+                    iframe.style.height = (containerHeight / scale) + 'px';
+                    iframe.style.transform = `scale(${scale})`;
+                });
             });
         }
 
@@ -1819,4 +1889,5 @@
 
     </script>
 </body>
+
 </html>

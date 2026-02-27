@@ -15,27 +15,16 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            --primary: #00ff9d;
-            --primary-glow: rgba(0, 255, 157, 0.2);
-            --bg: #0a0a0a;
-            --surface: #141414;
-            --surface-light: #1e1e1e;
-            --text: #ffffff;
-            --text-dim: #a0a0a0;
-            --border: rgba(255, 255, 255, 0.08);
-            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            --radius: 12px;
-        }
-
-        body.light-mode {
+            --primary: #00c87b;
+            --primary-glow: rgba(0, 200, 123, 0.1);
             --bg: #f8f9fa;
             --surface: #ffffff;
             --surface-light: #f1f3f5;
             --text: #1a1a1a;
             --text-dim: #666666;
             --border: rgba(0, 0, 0, 0.08);
-            --primary: #00c87b;
-            --primary-glow: rgba(0, 200, 123, 0.1);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --radius: 12px;
         }
 
         * {
@@ -112,44 +101,31 @@
         }
 
         nav.scrolled {
-            background: rgba(10, 10, 10, 0.8);
+            background: rgba(248, 249, 250, 0.8);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
             padding: 1rem 0;
         }
 
-        body.light-mode nav.scrolled {
-            background: rgba(248, 249, 250, 0.8);
-        }
-
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
+        .logo-brand {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.02em;
         }
 
-        .logo img,
-        .footer-logo img {
-            height: 32px;
-            width: auto;
-            transition: var(--transition);
+        .logo-brand i {
+            color: var(--primary);
+            width: 28px;
+            height: 28px;
         }
 
-        body.light-mode .logo img,
-        body.light-mode .footer-logo img {
-            filter: none;
-        }
-
-        /* In dark mode, invert the dark parts of the logo while keeping the green */
-        .logo img,
-        .footer-logo img {
-            filter: invert(1) hue-rotate(180deg) brightness(1.2);
+        .logo-brand span {
+            color: var(--primary);
         }
 
         .nav-links {
@@ -1051,9 +1027,9 @@
     <nav id="navbar">
         <div class="container">
             <div class="nav-content">
-                <a href="#" class="logo">
-                    <img src="Logo.png" alt="ThemeMint Logo"
-                        style="height:48px;width:auto;display:block;margin-left:110px;">
+                <a href="#" class="logo-brand">
+                    <i data-lucide="sparkles"></i>
+                    Theme<span>Mint</span>
                 </a>
                 <div style="display: flex; align-items: center; gap: 2rem;">
                     <ul class="nav-links">
@@ -1062,9 +1038,6 @@
                         <li><a href="#about">About</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
-                    <button id="theme-toggle" class="theme-btn" onclick="toggleTheme()">
-                        <i data-lucide="sun" id="theme-icon"></i>
-                    </button>
                 </div>
             </div>
         </div>
@@ -1093,7 +1066,7 @@
 
                     <div style="margin-top: 4rem; display: flex; align-items: center; gap: 2rem;">
                         <div
-                            style="display: flex; -webkit-mask-image: linear-gradient(to right, black 80%, transparent);">
+                            style="display: flex; -webkit-mask-image: linear-gradient(to right, black 80%, transparent); mask-image: linear-gradient(to right, black 80%, transparent);">
                             <img src="https://picsum.photos/seed/u1/40/40"
                                 style="border-radius: 50%; border: 2px solid var(--bg); margin-right: -15px;"
                                 alt="User">
@@ -1116,7 +1089,7 @@
                     <div class="mockup-container">
                         <div class="mockup-screen">
                             <div class="iframe-wrapper">
-                                <iframe src="https://neuroai-preview.vercel.app/" loading="eager"
+                                <iframe src="https://veloura-bakery-preview.vercel.app/" loading="eager"
                                     onload="this.parentElement.classList.add('loaded')"></iframe>
                             </div>
                         </div>
@@ -1233,7 +1206,8 @@
                     <a href="#contact" class="btn btn-primary">Work With Us</a>
                 </div>
                 <div class="about-img" data-reveal>
-                    <img src="https://picsum.photos/seed/studio/800/600" alt="Studio" referrerPolicy="no-referrer">
+                    <img src="https://images.unsplash.com/photo-1762096070873-63e82ab143ca?q=80&w=687&auto=format&fit=crop"
+                        alt="ThemeMint Design Studio" referrerPolicy="no-referrer">
                 </div>
             </div>
         </div>
@@ -1244,7 +1218,10 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <img src="logo.png" alt="ThemeMint Logo">
+                    <a href="#" class="logo-brand">
+                        <i data-lucide="sparkles"></i>
+                        Theme<span>Mint</span>
+                    </a>
                 </div>
                 <div class="footer-links">
                     <a href="#">Twitter</a>
@@ -1276,6 +1253,75 @@
     <script>
         // Project Data
         const projects = [
+            {
+                id: 14,
+                name: "Fork & Fire",
+                category: "Food",
+                tagline: "Where Flavor Meets Flame",
+                shortDesc: "Premium restaurant landing page designed to highlight a bold, fire-inspired dining experience.",
+                description: "Fork & Fire is a premium restaurant landing page designed to highlight a bold, fire-inspired dining experience. The website focuses on rich visuals, elegant typography, and a balanced layout that reflects both passion and professionalism. It showcases signature dishes, chef specials, and the restaurant’s unique atmosphere in a way that instantly builds appetite and trust. The design blends modern aesthetics with warmth, making it ideal for upscale cafés, grills, and contemporary restaurants looking to create a strong digital impression.",
+                problem: "Many restaurant websites fail to communicate their brand story and food quality effectively, resulting in low engagement and weak customer interest.",
+                solution: "Fork & Fire presents a visually immersive and brand-driven landing page that highlights food presentation, ambiance, and menu clarity—encouraging users to explore, visit, or place an order.",
+                features: ["Elegant, fire-inspired visual theme", "High-quality food imagery and hero sections", "Clear menu highlights and featured dishes", "Smooth scrolling and intuitive navigation", "Strong branding through typography and colors"],
+                techStackDetails: [
+                    "HTML5 — Semantic and SEO-friendly structure",
+                    "CSS3 — Custom layouts, transitions, and visual effects",
+                    "JavaScript (Vanilla JS) — Smooth scrolling and interactive elements",
+                    "Responsive Design — Fully optimized for mobile, tablet, and desktop",
+                    "Performance Optimized UI — Fast loading and clean user experience"
+                ],
+                audience: "Food lovers, café visitors, restaurant owners, and modern dining brands.",
+                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Performance Optimized"],
+                image: "https://picsum.photos/seed/forkfire/1200/800",
+                link: "https://fork-fire-preview.vercel.app/",
+                featured: false
+            },
+            {
+                id: 15,
+                name: "Veloura Bakery",
+                category: "Food",
+                tagline: "Crafted with Love. Baked to Perfection",
+                shortDesc: "Soft, elegant bakery landing page designed to showcase handcrafted baked goods.",
+                description: "Veloura Bakery is a soft, elegant bakery landing page designed to showcase handcrafted baked goods in a warm and inviting way. The design emphasizes pastel tones, smooth spacing, and mouth-watering product visuals to create a comforting user experience. From fresh breads to luxury desserts, the layout guides visitors through products effortlessly while highlighting quality, freshness, and craftsmanship. It’s built to boost brand trust, product discovery, and customer engagement.",
+                problem: "Many bakery websites feel cluttered or outdated, making premium products look ordinary and reducing customer interest.",
+                solution: "Veloura Bakery delivers a clean, aesthetically pleasing landing page that elevates product presentation and emotionally connects with customers through design and storytelling.",
+                features: ["Soft, elegant bakery-themed UI", "Product-focused sections with clean spacing", "Clear highlights for best-selling items", "Smooth scrolling and simple navigation", "Brand-consistent color palette and typography"],
+                techStackDetails: [
+                    "HTML5 — Well-structured content layout",
+                    "CSS3 — Smooth animations and refined styling",
+                    "JavaScript (Vanilla JS) — UI interactions and scrolling effects",
+                    "Responsive Design — Seamless experience on all devices",
+                    "User-Centered Layout — Designed for clarity and comfort"
+                ],
+                audience: "Bakery customers, dessert lovers, café brands, and small food businesses.",
+                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "User-Centered Layout"],
+                image: "https://picsum.photos/seed/veloura/1200/800",
+                link: "https://veloura-bakery-preview.vercel.app/",
+                featured: false
+            },
+            {
+                id: 16,
+                name: "Café Ember",
+                category: "Food",
+                tagline: "Warm Moments. Perfect Brews",
+                shortDesc: "Cozy and modern café landing page built to reflect warmth, comfort, and lifestyle appeal.",
+                description: "Café Ember is a cozy and modern café landing page built to reflect warmth, comfort, and lifestyle appeal. The design uses earthy tones, minimal layouts, and atmospheric imagery to create an inviting digital café experience. It highlights beverages, snacks, and café ambiance while encouraging visitors to relax, explore, and visit in person. The layout focuses on storytelling, mood, and brand personality rather than cluttered content.",
+                problem: "Many café websites lack emotional connection and atmosphere, failing to represent the in-store experience online.",
+                solution: "Café Ember recreates the café’s cozy vibe digitally through thoughtful design, smooth navigation, and visually rich sections that engage users instantly.",
+                features: ["Cozy, lifestyle-focused visual design", "Strong hero section with brand messaging", "Highlighted drinks and café specials", "Smooth scrolling and minimal navigation", "Atmosphere-driven color scheme"],
+                techStackDetails: [
+                    "HTML5 — Clean and accessible markup",
+                    "CSS3 — Custom styling, transitions, and layout control",
+                    "JavaScript (Vanilla JS) — Interactive UI and smooth effects",
+                    "Responsive Design — Optimized for every screen size",
+                    "Brand-First UI — Focused on mood and storytelling"
+                ],
+                audience: "Coffee lovers, café visitors, lifestyle brands, and boutique cafés.",
+                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Brand-First UI"],
+                image: "https://picsum.photos/seed/cafeember/1200/800",
+                link: "https://cafe-ember-preview.vercel.app/",
+                featured: false
+            },
             {
                 id: 1,
                 name: "Zoom Taxi",
@@ -1586,32 +1632,8 @@
         const navbar = document.getElementById('navbar');
         const backToTopBtn = document.getElementById('backToTop');
         const heroCanvas = document.getElementById('hero-canvas');
-        const themeIcon = document.getElementById('theme-icon');
-
         // Initialize Lucide
         lucide.createIcons();
-
-        // Theme Toggle Logic
-        window.toggleTheme = function () {
-            const body = document.body;
-            body.classList.toggle('light-mode');
-
-            if (body.classList.contains('light-mode')) {
-                themeIcon.setAttribute('data-lucide', 'moon');
-                localStorage.setItem('theme', 'light');
-            } else {
-                themeIcon.setAttribute('data-lucide', 'sun');
-                localStorage.setItem('theme', 'dark');
-            }
-            lucide.createIcons();
-        }
-
-        // Check for saved theme
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light-mode');
-            themeIcon.setAttribute('data-lucide', 'moon');
-            lucide.createIcons();
-        }
 
         // Hero Background Animation
         const ctx = heroCanvas.getContext('2d');

@@ -175,6 +175,10 @@
         .mockup-screen .iframe-wrapper iframe {
             width: 1440px;
             height: 900px;
+            border: none;
+            transform-origin: 0 0;
+            z-index: 2;
+            transition: opacity 0.5s ease;
         }
 
         .mockup-screen img {
@@ -492,1031 +496,626 @@
         }
 
         /* Modal */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg);
-            z-index: 2000;
-            display: none;
-            overflow-y: auto;
-            animation: modalFadeIn 0.5s var(--transition);
-        }
+        // Modal-related HTML and variables removed
 
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
+        // Back to Top Button
+        <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+            <i data-lucide="arrow-up"></i>
+        </button>
+
+        <script>
+            // Project Data
+            const projects = [
+                {
+                    id: 14,
+                    slug: "fork-fire",
+                    name: "Fork & Fire",
+                    category: "Food",
+                    tagline: "Where Flavor Meets Flame",
+                    shortDesc: "Premium restaurant landing page designed to highlight a bold, fire-inspired dining experience.",
+                    description: "Fork & Fire is a premium restaurant landing page designed to highlight a bold, fire-inspired dining experience. The website focuses on rich visuals, elegant typography, and a balanced layout that reflects both passion and professionalism. It showcases signature dishes, chef specials, and the restaurant’s unique atmosphere in a way that instantly builds appetite and trust. The design blends modern aesthetics with warmth, making it ideal for upscale cafés, grills, and contemporary restaurants looking to create a strong digital impression.",
+                    problem: "Many restaurant websites fail to communicate their brand story and food quality effectively, resulting in low engagement and weak customer interest.",
+                    solution: "Fork & Fire presents a visually immersive and brand-driven landing page that highlights food presentation, ambiance, and menu clarity—encouraging users to explore, visit, or place an order.",
+                    features: ["Elegant, fire-inspired visual theme", "High-quality food imagery and hero sections", "Clear menu highlights and featured dishes", "Smooth scrolling and intuitive navigation", "Strong branding through typography and colors"],
+                    techStackDetails: [
+                        "HTML5 — Semantic and SEO-friendly structure",
+                        "CSS3 — Custom layouts, transitions, and visual effects",
+                        "JavaScript (Vanilla JS) — Smooth scrolling and interactive elements",
+                        "Responsive Design — Fully optimized for mobile, tablet, and desktop",
+                        "Performance Optimized UI — Fast loading and clean user experience"
+                    ],
+                    audience: "Food lovers, café visitors, restaurant owners, and modern dining brands.",
+                    tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Performance Optimized"],
+                    image: "https://picsum.photos/seed/forkfire/1200/800",
+                    link: "https://fork-fire-preview.vercel.app/",
+                    featured: false
+                },
+                {
+                    id: 15,
+                    slug: "veloura-bakery",
+                    name: "Veloura Bakery",
+                    category: "Food",
+                    tagline: "Crafted with Love. Baked to Perfection",
+                    shortDesc: "Soft, elegant bakery landing page designed to showcase handcrafted baked goods.",
+                    description: "Veloura Bakery is a soft, elegant bakery landing page designed to showcase handcrafted baked goods in a warm and inviting way. The design emphasizes pastel tones, smooth spacing, and mouth-watering product visuals to create a comforting user experience. From fresh breads to luxury desserts, the layout guides visitors through products effortlessly while highlighting quality, freshness, and craftsmanship. It’s built to boost brand trust, product discovery, and customer engagement.",
+                    problem: "Many bakery websites feel cluttered or outdated, making premium products look ordinary and reducing customer interest.",
+                    solution: "Veloura Bakery delivers a clean, aesthetically pleasing landing page that elevates product presentation and emotionally connects with customers through design and storytelling.",
+                    features: ["Soft, elegant bakery-themed UI", "Product-focused sections with clean spacing", "Clear highlights for best-selling items", "Smooth scrolling and simple navigation", "Brand-consistent color palette and typography"],
+                    techStackDetails: [
+                        "HTML5 — Well-structured content layout",
+                        "CSS3 — Smooth animations and refined styling",
+                        "JavaScript (Vanilla JS) — UI interactions and scrolling effects",
+                        "Responsive Design — Seamless experience on all devices",
+                        "User-Centered Layout — Designed for clarity and comfort"
+                    ],
+                    audience: "Bakery customers, dessert lovers, café brands, and small food businesses.",
+                    tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "User-Centered Layout"],
+                    image: "https://picsum.photos/seed/veloura/1200/800",
+                    link: "https://veloura-bakery-preview.vercel.app/",
+                    featured: false
+                },
+                {
+                    id: 16,
+                    slug: "cafe-ember",
+                    name: "Café Ember",
+                    category: "Food",
+                    tagline: "Warm Moments. Perfect Brews",
+                    shortDesc: "Cozy and modern café landing page built to reflect warmth, comfort, and lifestyle appeal.",
+                    description: "Café Ember is a cozy and modern café landing page built to reflect warmth, comfort, and lifestyle appeal. The design uses earthy tones, minimal layouts, and atmospheric imagery to create an inviting digital café experience. It highlights beverages, snacks, and café ambiance while encouraging visitors to relax, explore, and visit in person. The layout focuses on storytelling, mood, and brand personality rather than cluttered content.",
+                    problem: "Many café websites lack emotional connection and atmosphere, failing to represent the in-store experience online.",
+                    solution: "Café Ember recreates the café’s cozy vibe digitally through thoughtful design, smooth navigation, and visually rich sections that engage users instantly.",
+                    features: ["Cozy, lifestyle-focused visual design", "Strong hero section with brand messaging", "Highlighted drinks and café specials", "Smooth scrolling and minimal navigation", "Atmosphere-driven color scheme"],
+                    techStackDetails: [
+                        "HTML5 — Clean and accessible markup",
+                        "CSS3 — Custom styling, transitions, and layout control",
+                        "JavaScript (Vanilla JS) — Interactive UI and smooth effects",
+                        "Responsive Design — Optimized for every screen size",
+                        "Brand-First UI — Focused on mood and storytelling"
+                    ],
+                    audience: "Coffee lovers, café visitors, lifestyle brands, and boutique cafés.",
+                    tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Brand-First UI"],
+                    image: "https://picsum.photos/seed/cafeember/1200/800",
+                    link: "https://cafe-ember-preview.vercel.app/",
+                    featured: false
+                },
+                {
+                    id: 1,
+                    slug: "zoom-taxi",
+                    name: "Zoom Taxi",
+                    category: "Transportation",
+                    tagline: "Fast. Reliable. On-Demand Mobility",
+                    shortDesc: "Modern transportation platform for fast, reliable ride booking.",
+                    description: "Zoom Taxi is a modern transportation platform designed to provide fast, reliable, and user-friendly ride booking experiences. The platform connects passengers with nearby drivers in real time, enabling quick pickups, transparent pricing, and seamless ride management. Built with a clean and intuitive interface, Zoom Taxi focuses on speed, accessibility, and trust. Users can easily book rides, track drivers live, and manage trips without confusion. The landing page is optimized for conversions, clearly highlighting service benefits, coverage, and ease of use. Zoom Taxi is ideal for urban commuters, travelers, and businesses seeking dependable ride solutions.",
+                    problem: "Traditional taxi services often suffer from delayed pickups, unclear pricing, poor user experience, and lack of real-time tracking, leading to frustration and distrust among users.",
+                    solution: "Zoom Taxi solves these issues by offering real-time ride booking, transparent fare information, and live driver tracking through a streamlined digital experience that prioritizes convenience and reliability.",
+                    features: ["Instant ride booking", "Real-time driver tracking", "Transparent pricing system", "User-friendly booking interface", "Mobile-first responsive design"],
+                    techStackDetails: [
+                        "HTML5 — Semantic and SEO-friendly structure",
+                        "CSS3 — Modern layouts with Flexbox & Grid",
+                        "JavaScript (Vanilla JS) — Interactive UI and smooth user flow",
+                        "Responsive Design — Optimized for mobile and desktop",
+                        "Performance Optimized — Fast loading and lightweight assets"
+                    ],
+                    audience: "Urban commuters, travelers, and businesses seeking dependable ride solutions.",
+                    tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Performance Optimized"],
+                    image: "https://picsum.photos/seed/zoomtaxi/1200/800",
+                    link: "https://zoom-taxi-preview.vercel.app/",
+                    featured: true
+                },
+                {
+                    id: 2,
+                    slug: "bite-haven",
+                    name: "Bite Haven",
+                    category: "Food",
+                    tagline: "Bold Flavors. Fast Service. Better Experience",
+                    shortDesc: "High-impact fast food restaurant landing page for menus and orders.",
+                    description: "Bite Haven is a high-impact fast food restaurant landing page crafted to showcase menu offerings, promotions, and brand personality in a visually engaging way. The platform focuses on appetizing visuals, clear navigation, and strong call-to-action placement to drive online orders and customer engagement. Designed with bold colors and modern typography, Bite Haven creates an instant craving-driven connection with users. The layout highlights best-selling items, categories, and special deals while maintaining a smooth and enjoyable browsing experience. It is built to help restaurants increase conversions and strengthen their digital presence.",
+                    problem: "Many restaurant websites lack visual appeal, clear menus, and strong CTAs, causing visitors to leave without placing an order or visiting the restaurant.",
+                    solution: "Bite Haven delivers a visually rich, conversion-focused landing page that highlights food items clearly, guides users effortlessly through the menu, and encourages quick action through prominent CTAs.",
+                    features: ["Visually rich food-focused design", "Clear menu categories and sections", "Strong call-to-action buttons", "Smooth scrolling navigation", "Brand-focused color system"],
+                    techStackDetails: [
+                        "HTML5 — Clean, structured markup",
+                        "CSS3 — Custom styling with animations and hover effects",
+                        "JavaScript (Vanilla JS) — Smooth scrolling and UI interactions",
+                        "Responsive Design — Optimized for all devices",
+                        "Conversion Optimized UI — Designed to drive orders and engagement"
+                    ],
+                    audience: "Foodies, hungry customers, restaurant owners.",
+                    tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Conversion Optimized UI"],
+                    image: "https://picsum.photos/seed/bitehaven/1200/800",
+                    link: "https://bite-haven-preview.vercel.app/",
+                    featured: true
+                },
+                {
+                    id: 3,
+                    slug: "green-yard",
+                    name: "Green Yard",
+                    category: "Service",
+                    tagline: "Professional Outdoor Care Made Simple",
+                    shortDesc: "Professional service landing page for garden maintenance and lawn care.",
+                    description: "Green Yard is a professional service landing page designed for garden maintenance, lawn care, and outdoor landscaping businesses. The platform presents services clearly and professionally, building trust with potential customers through clean layouts, service highlights, and strong visual hierarchy. The design emphasizes reliability, expertise, and eco-friendly practices while guiding users toward service inquiries and bookings. Green Yard is ideal for local service providers looking to establish credibility and attract consistent clients through a modern online presence.",
+                    problem: "Many lawn and garden service providers rely on outdated or unclear websites that fail to communicate professionalism, service quality, and trust.",
+                    solution: "Green Yard provides a clean, structured, and trustworthy digital experience that clearly explains services, showcases expertise, and encourages users to contact or book services easily.",
+                    features: ["Clear service breakdowns", "Trust-focused professional design", "Easy contact and inquiry flow", "Service-specific sections with visuals", "Local business–friendly layout"],
+                    techStackDetails: [
+                        "HTML5 — Semantic and accessible structure",
+                        "CSS3 — Modern layouts using Flexbox & Grid",
+                        "JavaScript (Vanilla JS) — Interactive elements and smooth UX",
+                        "Responsive Design — Mobile-first optimization",
+                        "SEO-Friendly Structure — Built for discoverability"
+                    ],
+                    audience: "Homeowners, property managers, local businesses.",
+                    tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "SEO-Friendly Structure"],
+                    image: "https://picsum.photos/seed/greenyard/1200/800",
+                    link: "https://green-yard-preview.vercel.app/",
+                    featured: true
+                },
+                {
+                    id: 4,
+                    slug: "neuroai",
+                    name: "NeuroAI",
+                    category: "SaaS",
+                    tagline: "The Future of Intelligence",
+                    shortDesc: "Advanced AI-driven data intelligence for modern enterprises.",
+                    description: "NeuroAI is a powerful SaaS platform built to help modern enterprises harness the full potential of artificial intelligence. It enables organizations to analyze complex datasets, automate decision-making, and gain real-time insights through an intuitive and visually rich interface. Designed for scalability and performance, NeuroAI bridges the gap between raw data and actionable intelligence. Its clean dashboards and advanced analytics empower teams to move faster, smarter, and with confidence. Whether used for predictive analysis, automation, or optimization, NeuroAI adapts to evolving business needs. The platform is built with enterprise-grade reliability, ensuring data security and seamless collaboration across teams.",
+                    problem: "Enterprises often deal with massive volumes of data that are difficult to process, analyze, and interpret in real time. Traditional analytics tools are slow, complex, and require heavy manual effort.",
+                    solution: "NeuroAI transforms raw data into meaningful insights using AI-powered analytics and real-time visualization, allowing businesses to make faster and smarter decisions.",
+                    features: ["Real-time data processing and visualization", "AI-driven analytics and predictions", "Customizable dashboards", "Team collaboration tools", "Enterprise-level security"],
+                    techStackDetails: [
+                        "HTML5 — Semantic, SEO-optimized structure",
+                        "CSS3 — Modern layouts using Flexbox & Grid",
+                        "JavaScript (Vanilla JS) — Interactive dashboards & UI behavior",
+                        "Responsive Design — Optimized for all screen sizes",
+                        "Performance Optimized — Lightweight and fast-loading"
+                    ],
+                    audience: "Data Scientists, CTOs, Product Teams, Enterprise Decision Makers",
+                    tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Performance Optimized"],
+                    image: "https://picsum.photos/seed/neuroai/1200/800",
+                    link: "https://neuroai-preview.vercel.app/",
+                    featured: false
+                },
+                {
+                    id: 5,
+                    slug: "thememint",
+                    name: "ThemeMint",
+                    category: "SaaS",
+                    tagline: "Build, Launch, Scale Faster",
+                    shortDesc: "A comprehensive toolkit for rapid UI development.",
+                    description: "ThemeMint is a modern SaaS-focused landing page designed to help startups and digital products present their value with clarity and confidence. It combines bold visuals with conversion-optimized layouts to communicate features, benefits, and pricing effectively. The design is clean, flexible, and built to adapt to various SaaS use cases. ThemeMint focuses on storytelling, guiding users from problem awareness to solution adoption. Its modular sections make it easy to highlight features, integrations, and testimonials. Perfect for early-stage startups and growing SaaS products looking to establish a strong online presence.",
+                    problem: "Many SaaS startups struggle to explain their product clearly and fail to convert visitors into users.",
+                    solution: "ThemeMint provides a clear, structured layout that communicates value instantly and encourages user action.",
+                    features: ["Conversion-focused hero section", "Feature and benefit breakdown", "Pricing and CTA sections", "Responsive layout", "Clean modern UI"],
+                    techStackDetails: [
+                        "HTML5 — Clean and scalable page structure",
+                        "CSS3 — Conversion-focused layout and styling",
+                        "JavaScript (Vanilla JS) — Smooth interactions and navigation",
+                        "Responsive Design — Mobile-first approach",
+                        "Clean Code Architecture — Easy to customize and extend"
+                    ],
+                    audience: "SaaS Startups, Indie Founders, Product Launch Teams",
+                    tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Clean Code Architecture"],
+                    image: "https://picsum.photos/seed/mint/1200/800",
+                    link: "https://theme-mint-preview.vercel.app/",
+                    featured: false
+                },
+                {
+                    id: 6,
+                    slug: "skill-forge-academy",
+                    name: "Skill Forge Academy",
+                    category: "Education",
+                    tagline: "Learn Skills That Matter",
+                    shortDesc: "Online learning platform for creative professionals.",
+                    description: "Skill Forge Academy is an educational landing page crafted to promote online courses, training programs, and learning platforms. It focuses on clarity, trust, and engagement to encourage learners to enroll. The layout emphasizes course value, instructor credibility, and learning outcomes. With structured sections and smooth flow, it helps users understand the learning journey. The design supports both technical and non-technical education products. Ideal for academies, bootcamps, and e-learning startups.",
+                    problem: "Online learners often feel overwhelmed by unclear course structures and lack of trust.",
+                    solution: "Skill Forge Academy presents courses in a clear, engaging, and confidence-building format.",
+                    features: ["Course highlights", "Instructor profiles", "Learning outcomes", "Enrollment CTA", "Mobile-friendly design"],
+                    techStackDetails: [
+                        "HTML5 — Structured course and content sections",
+                        "CSS3 — Readable typography and layout system",
+                        "JavaScript (Vanilla JS) — Interactive sections and smooth scroll",
+                        "Responsive Design — Optimized for learners on all devices",
+                        "Accessibility-Friendly Markup — Clear UI and spacing"
+                    ],
+                    audience: "Students, Professionals, Online Learners",
+                    tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Accessibility-Friendly"],
+                    image: "https://picsum.photos/seed/skillforge/1200/800",
+                    link: "https://skill-forge-academy-preview.vercel.app/",
+                    featured: false
+                },
+                {
+                    id: 7,
+                    slug: "shop-ease",
+                    name: "Shop Ease",
+                    category: "E-commerce",
+                    tagline: "Simple Shopping, Smarter Sales",
+                    shortDesc: "Modern, fast, and conversion-optimized e-commerce.",
+                    description: "Shop Ease is a modern e-commerce landing page designed to showcase products with clarity and style. It focuses on clean layouts, strong visuals, and smooth user experience to drive conversions. The design highlights featured products, benefits, and trust signals. It is optimized for fast browsing and easy purchasing decisions. Ideal for startups and small businesses entering online retail.",
+                    problem: "Many online stores lose customers due to cluttered layouts and confusing navigation.",
+                    solution: "Shop Ease simplifies product presentation and purchasing flow to increase conversions.",
+                    features: ["Product showcase sections", "Promotional banners", "Clear CTAs", "Responsive grid layout", "Trust indicators"],
+                    techStackDetails: [
+                        "HTML5 — Product-focused semantic structure",
+                        "CSS3 — Grid-based product layouts",
+                        "JavaScript (Vanilla JS) — UI interactions and CTA behavior",
+                        "Responsive Design — Seamless shopping experience on mobile",
+                        "Optimized UI Performance — Fast rendering and clean visuals"
+                    ],
+                    audience: "Online Shoppers, Small Businesses, E-commerce Brands",
+                    tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Optimized UI Performance"],
+                    image: "https://picsum.photos/seed/shopease/1200/800",
+                    link: "https://shop-ease-e-commerce-preview.vercel.app/",
+                    featured: false
+                },
+                {
+                    id: 8,
+                    slug: "next-gen-agency",
+                    name: "Next Gen Agency",
+                    category: "Agency",
+                    tagline: "Creative Solutions for Modern Brands",
+                    shortDesc: "Immersive agency portfolio with bold creative direction.",
+                    description: "Next Gen Agency is a bold, creative landing page built for digital agencies and studios. It highlights services, expertise, and past work in a visually engaging way. The layout builds credibility and positions the agency as a premium service provider. Designed to attract clients and generate leads, it balances creativity with clarity.",
+                    problem: "Agencies often struggle to stand out in a crowded digital market.",
+                    solution: "Next Gen Agency presents services and value in a confident, professional format.",
+                    features: ["Service highlights", "Portfolio showcase", "Client-focused CTAs", "Modern animations", "Strong branding"],
+                    techStackDetails: [
+                        "HTML5 — Professional agency layout structure",
+                        "CSS3 — Creative animations and modern styling",
+                        "JavaScript (Vanilla JS) — Interactive UI and hover effects",
+                        "Responsive Design — Fully adaptive agency showcase",
+                        "Scalable Styling System — Easy branding customization"
+                    ],
+                    audience: "Startups, Businesses, Brands, Founders",
+                    tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Scalable Styling"],
+                    image: "https://picsum.photos/seed/agency/1200/800",
+                    link: "https://next-gen-agency-preview.vercel.app/",
+                    featured: false
+                },
+                {
+                    id: 9,
+                    slug: "care-plus",
+                    name: "Care Plus",
+                    category: "Medical",
+                    tagline: "Healthcare You Can Trust",
+                    shortDesc: "Streamlined healthcare management for modern clinics.",
+                    description: "Care Plus is a healthcare landing page designed to communicate trust, clarity, and professionalism. It presents medical services in a calm and accessible way. The design focuses on patient confidence, service transparency, and easy navigation. Ideal for clinics, hospitals, and health service providers.",
+                    problem: "Patients often feel uncertain due to unclear medical information online.",
+                    solution: "Care Plus delivers clear, reassuring, and structured healthcare information.",
+                    features: ["Service listings", "Appointment CTA", "Trust-focused layout", "Clean medical UI", "Responsive design"],
+                    techStackDetails: [
+                        "HTML5 — Trust-focused and structured markup",
+                        "CSS3 — Clean medical UI with calm visuals",
+                        "JavaScript (Vanilla JS) — Interactive navigation and CTAs",
+                        "Responsive Design — Optimized for patients on all devices",
+                        "Accessibility-Oriented Design — Clear contrast and readability"
+                    ],
+                    audience: "Patients, Clinics, Healthcare Providers",
+                    tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Accessibility-Oriented"],
+                    image: "https://picsum.photos/seed/careplus/1200/800",
+                    link: "https://care-plus-medical-preview.vercel.app/",
+                    featured: false
+                },
+                {
+                    id: 10,
+                    slug: "lead-boost",
+                    name: "Lead Boost",
+                    category: "Marketing",
+                    tagline: "Turn Visitors into Customers",
+                    shortDesc: "Conversion-focused landing page for marketing teams.",
+                    description: "Lead Boost is a marketing-focused landing page built to capture and convert leads. It uses persuasive content, strong CTAs, and conversion-driven layouts. The design emphasizes value propositions and results. Perfect for marketers and growth-focused businesses.",
+                    problem: "Businesses struggle to convert traffic into qualified leads.",
+                    solution: "Lead Boost optimizes messaging and layout to maximize conversions.",
+                    features: ["Lead capture forms", "Conversion-focused sections", "Strong CTAs", "Analytics-ready structure", "Clean UI"],
+                    techStackDetails: [
+                        "HTML5 — Conversion-driven layout structure",
+                        "CSS3 — Marketing-focused design and spacing",
+                        "JavaScript (Vanilla JS) — Lead forms and CTA interactions",
+                        "Responsive Design — Mobile-optimized conversion flow",
+                        "Performance Optimization — Lightweight and fast"
+                    ],
+                    audience: "Marketers, Agencies, Business Owners",
+                    tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Performance Optimization"],
+                    image: "https://picsum.photos/seed/leadboost/1200/800",
+                    link: "https://lead-boost-preview.vercel.app/",
+                    featured: false
+                },
+                {
+                    id: 11,
+                    slug: "launch-pad",
+                    name: "Launch Pad",
+                    category: "SaaS",
+                    tagline: "Launch Smarter. Grow Faster.",
+                    shortDesc: "Growth tools and validation for early-stage startups.",
+                    description: "Launch Pad is a startup-focused landing page designed to help founders and product teams launch their ideas with clarity and confidence. It provides a structured storytelling flow that introduces the product, highlights its value, and drives early adoption. The design emphasizes speed, simplicity, and conversion, making it ideal for MVPs and early-stage products. Launch Pad guides visitors from problem awareness to solution understanding in a smooth and engaging way. Its modern layout and focused sections ensure that key messages are delivered without distractions. Built for momentum, it helps startups make a strong first impression and validate their ideas quickly.",
+                    problem: "Many startups struggle to clearly communicate their product vision and fail to convert early visitors into users or investors.",
+                    solution: "Launch Pad offers a clear, launch-ready structure that presents the product story, benefits, and CTAs in a compelling and conversion-driven format.",
+                    features: ["Startup-focused hero section", "Clear product value proposition", "Feature highlights with benefits", "Strong call-to-action placement", "Fully responsive launch layout"],
+                    techStackDetails: [
+                        "HTML5 — Launch-ready semantic structure",
+                        "CSS3 — Modern startup layouts using Grid & Flexbox",
+                        "JavaScript (Vanilla JS) — Interactive sections and smooth transitions",
+                        "Responsive Design — Perfect for MVP and early-stage products",
+                        "Clean & Modular Code — Easy iteration and scaling"
+                    ],
+                    audience: "Startup Founders, Indie Hackers, Product Managers, Early-Stage Teams",
+                    tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Clean & Modular Code"],
+                    image: "https://picsum.photos/seed/launchpad/1200/800",
+                    link: "https://launch-pad-preview.vercel.app/",
+                    featured: false
+                },
+                {
+                    id: 12,
+                    slug: "future-tech-summit",
+                    name: "Future Tech Summit",
+                    category: "Marketing",
+                    tagline: "Where Innovation Meets the Future",
+                    shortDesc: "Global tech conference landing page with full event info.",
+                    description: "Future Tech Summit is a modern event landing page crafted for technology conferences, summits, and innovation-driven events. It is designed to generate excitement, communicate event value, and drive registrations. The layout highlights speakers, agenda, and key themes in a visually engaging manner. With a strong focus on credibility and anticipation, it positions the event as a must-attend experience. The design balances information and inspiration, ensuring visitors quickly understand what the event offers. Ideal for tech expos, startup events, and innovation forums, it delivers a professional and high-impact online presence.",
+                    problem: "Event organizers often struggle to capture attention and clearly communicate the value of attending their events.",
+                    solution: "Future Tech Summit presents event details, speakers, and highlights in a structured, visually appealing format that drives registrations.",
+                    features: ["Speaker and agenda sections", "Event highlights and themes", "Registration-focused CTAs", "Countdown or timeline layout", "Engaging visual storytelling"],
+                    techStackDetails: [
+                        "HTML5 — Structured event sections and content",
+                        "CSS3 — Visual hierarchy and engaging layouts",
+                        "JavaScript (Vanilla JS) — Countdown timers and dynamic UI",
+                        "Responsive Design — Event-ready across all devices",
+                        "Accessible & Readable UI — Clear event information flow"
+                    ],
+                    audience: "Tech Professionals, Entrepreneurs, Developers, Event Attendees",
+                    tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Accessible & Readable UI"],
+                    image: "https://picsum.photos/seed/techsummit/1200/800",
+                    link: "https://future-tech-summit-preview.vercel.app/",
+                    featured: false
+                },
+                {
+                    id: 13,
+                    slug: "thememint-launch-kit",
+                    name: "ThemeMint Launch Kit",
+                    category: "SaaS",
+                    tagline: "Everything You Need to Launch Faster",
+                    shortDesc: "Comprehensive toolkit for successful product launches.",
+                    description: "ThemeMint Launch Kit is a product-focused landing page designed to showcase a complete launch-ready UI and design kit. It communicates value through clarity, structure, and visual consistency. The page highlights what’s included, how it helps users, and why it saves time and effort. Built with creators and developers in mind, it positions the kit as a practical and premium solution. The layout focuses on benefits, usability, and real-world application. Ideal for designers, developers, and startups, it helps users understand the product quickly and make confident purchasing decisions.",
+                    problem: "Creators and developers often waste time building launch pages and UI from scratch, slowing down product launches.",
+                    solution: "ThemeMint Launch Kit provides a ready-to-use, professionally designed system that accelerates product launches and ensures consistency.",
+                    features: ["Pre-built launch sections", "Modular and reusable components", "Clean, modern UI design", "Easy customization", "Launch-ready structure"],
+                    techStackDetails: [
+                        "HTML5 — Modular, reusable layout components",
+                        "CSS3 — Scalable design system and styling",
+                        "JavaScript (Vanilla JS) — UI interactions and component behavior",
+                        "Responsive Design — Framework-free adaptive layout",
+                        "Maintainable Codebase — Creator-friendly customization"
+                    ],
+                    audience: "Designers, Developers, Startup Teams, Product Creators",
+                    tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Maintainable Codebase"],
+                    image: "https://picsum.photos/seed/launchkit/1200/800",
+                    link: "https://theme-mint-launch-kit-preview.vercel.app/",
+                    featured: false
+                }
+            ];
+
+            // DOM Elements
+            const featuredContainer = document.getElementById('featured-container');
+            const portfolioContainer = document.getElementById('portfolio-container');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const navbar = document.getElementById('navbar');
+            const backToTopBtn = document.getElementById('backToTop');
+            const heroCanvas = document.getElementById('hero-canvas');
+            // Initialize Lucide
+            lucide.createIcons();
+
+            // Hero Background Animation
+            const ctx = heroCanvas.getContext('2d');
+            let particles = [];
+
+            function initCanvas() {
+                heroCanvas.width = window.innerWidth;
+                heroCanvas.height = document.querySelector('.hero').offsetHeight;
             }
 
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .modal-close {
-            position: fixed;
-            top: 2rem;
-            right: 2rem;
-            width: 50px;
-            height: 50px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            color: var(--text);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 2100;
-            transition: var(--transition);
-        }
-
-        .modal-close:hover {
-            background: var(--primary);
-            color: var(--bg);
-            transform: rotate(90deg);
-        }
-
-        .modal-content {
-            max-width: 1000px;
-            margin: 6rem auto;
-            padding: 0 2rem;
-        }
-
-        .modal-hero {
-            width: 100%;
-            height: 500px;
-            border-radius: 24px;
-            overflow: hidden;
-            margin-bottom: 4rem;
-            border: 1px solid var(--border);
-            position: relative;
-        }
-
-        .modal-hero .iframe-wrapper iframe {
-            width: 1440px;
-            height: 900px;
-        }
-
-        .modal-hero img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .modal-header {
-            margin-bottom: 4rem;
-        }
-
-        .modal-header h2 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-
-        .modal-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 6rem;
-        }
-
-        .modal-section {
-            margin-bottom: 4rem;
-        }
-
-        .modal-section h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .feature-list li {
-            margin-bottom: 1rem;
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-        }
-
-        .feature-list i {
-            color: var(--primary);
-            margin-top: 0.25rem;
-        }
-
-        .modal-sidebar {
-            background: var(--surface);
-            padding: 2.5rem;
-            border-radius: 24px;
-            border: 1px solid var(--border);
-            height: fit-content;
-        }
-
-        @media (max-width: 768px) {
-            .modal-grid {
-                grid-template-columns: 1fr;
-                gap: 4rem;
-            }
-
-            .modal-hero {
-                height: 300px;
-            }
-        }
-
-
-        .theme-btn {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            color: var(--text);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .theme-btn:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-    </style>
-</head>
-
-<body>
-
-    <!-- Navigation -->
-    <nav id="navbar">
-        <div class="container">
-            <div class="nav-content">
-                <a href="#" class="logo">
-                    <img src="Logo.png" alt="ThemeMint Logo">
-                </a>
-                <div style="display: flex; align-items: center; gap: 2rem;">
-                    <ul class="nav-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#portfolio">Portfolio</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <canvas id="hero-canvas"></canvas>
-        <div class="hero-bg"></div>
-        <div class="hero-glow"></div>
-        <div class="hero-glow-2"></div>
-        <div class="container">
-            <div class="hero-grid">
-                <div class="hero-content" data-reveal>
-                    <div class="hero-tag">
-                        <i data-lucide="sparkles" style="width: 14px;"></i>
-                        New Collection 2024
-                    </div>
-                    <h1>Premium Landing Pages <span>Crafted for Conversion</span></h1>
-                    <p>A curated collection of high-quality landing pages for SaaS, startups, agencies, and digital
-                        products. Treated like premium products, built for results.</p>
-                    <div class="hero-btns">
-                        <a href="#portfolio" class="btn btn-primary">Explore Portfolio <i
-                                data-lucide="arrow-right"></i></a>
-                        <a href="#featured" class="btn btn-secondary">View Featured Work</a>
-                    </div>
-
-                    <div style="margin-top: 4rem; display: flex; align-items: center; gap: 2rem;">
-                        <div
-                            style="display: flex; -webkit-mask-image: linear-gradient(to right, black 80%, transparent); mask-image: linear-gradient(to right, black 80%, transparent);">
-                            <img src="https://picsum.photos/seed/u1/40/40"
-                                style="border-radius: 50%; border: 2px solid var(--bg); margin-right: -15px;"
-                                alt="User">
-                            <img src="https://picsum.photos/seed/u2/40/40"
-                                style="border-radius: 50%; border: 2px solid var(--bg); margin-right: -15px;"
-                                alt="User">
-                            <img src="https://picsum.photos/seed/u3/40/40"
-                                style="border-radius: 50%; border: 2px solid var(--bg); margin-right: -15px;"
-                                alt="User">
-                            <img src="https://picsum.photos/seed/u4/40/40"
-                                style="border-radius: 50%; border: 2px solid var(--bg);" alt="User">
-                        </div>
-                        <div style="font-size: 0.85rem; color: var(--text-dim);">
-                            <span style="color: white; font-weight: 700;">4,000+</span> designers using our templates
-                        </div>
-                    </div>
-                </div>
-
-                <div class="hero-visual" data-reveal>
-                    <div class="mockup-container">
-                        <div class="mockup-screen">
-                            <div class="iframe-wrapper">
-                                <iframe src="https://veloura-bakery-preview.vercel.app/" loading="eager"
-                                    onload="this.parentElement.classList.add('loaded')"></iframe>
-                            </div>
-                        </div>
-
-                        <div class="floating-card card-1">
-                            <div
-                                style="width: 40px; height: 40px; background: var(--primary); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--bg);">
-                                <i data-lucide="zap"></i>
-                            </div>
-                            <div>
-                                <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase;">
-                                    Performance</div>
-                                <div style="font-weight: 700;">99+ Score</div>
-                            </div>
-                        </div>
-
-                        <div class="floating-card card-2">
-                            <div
-                                style="width: 40px; height: 40px; background: #3b82f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white;">
-                                <i data-lucide="shield-check"></i>
-                            </div>
-                            <div>
-                                <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase;">
-                                    Security</div>
-                                <div style="font-weight: 700;">Enterprise Ready</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="scroll-indicator">
-            <span>Scroll</span>
-            <div class="mouse"></div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item" data-reveal>
-                    <h3>10+</h3>
-                    <p>Premium Templates</p>
-                </div>
-                <div class="stat-item" data-reveal>
-                    <h3>100%</h3>
-                    <p>Conversion Focused</p>
-                </div>
-                <div class="stat-item" data-reveal>
-                    <h3>4K+</h3>
-                    <p>Happy Users</p>
-                </div>
-                <div class="stat-item" data-reveal>
-                    <h3>24/7</h3>
-                    <p>Expert Support</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Featured Section -->
-    <section class="section" id="featured">
-        <div class="container">
-            <div class="section-title" data-reveal>
-                <h2>Featured Collection</h2>
-                <p>The pinnacle of our design studio. Our most successful and impactful landing pages.</p>
-            </div>
-            <div class="featured-grid" id="featured-container">
-                <!-- Featured items injected here -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section class="section" id="portfolio">
-        <div class="container">
-            <div class="section-title" data-reveal>
-                <h2>Full Portfolio</h2>
-                <p>Browse our complete library of high-end landing page templates.</p>
-            </div>
-        </div>
-
-        <!-- Filters -->
-        <div class="filter-nav" data-reveal>
-            <button class="filter-btn active" data-filter="all">All Projects</button>
-            <button class="filter-btn" data-filter="SaaS">SaaS</button>
-            <button class="filter-btn" data-filter="Agency">Agency</button>
-            <button class="filter-btn" data-filter="E-commerce">E-commerce</button>
-            <button class="filter-btn" data-filter="Medical">Medical</button>
-            <button class="filter-btn" data-filter="Marketing">Marketing</button>
-            <button class="filter-btn" data-filter="Education">Education</button>
-            <button class="filter-btn" data-filter="Transportation">Transportation</button>
-            <button class="filter-btn" data-filter="Food">Food</button>
-            <button class="filter-btn" data-filter="Service">Service</button>
-        </div>
-
-        <div class="portfolio-grid" id="portfolio-container">
-            <!-- Portfolio items injected here -->
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="section" id="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text" data-reveal>
-                    <h2>The Studio Behind the Screens</h2>
-                    <p>ThemeMint is a creative digital design studio focused on building modern, high-performance
-                        landing pages for startups, agencies, and digital creators.</p>
-                    <p>We believe great design is more than just aesthetics — it should communicate clearly, guide users
-                        naturally, and ultimately drive meaningful results. Every template we create is designed with
-                        purpose, balancing visual elegance with usability and performance.</p>
-                    <p>Our work focuses on helping startups and entrepreneurs launch faster with professionally designed
-                        landing pages that are clean, responsive, and easy to customize.</p>
-                    <p>At ThemeMint, we carefully craft each template with attention to detail — from typography and
-                        layout structure to performance optimization and conversion strategy.</p>
-                    <p>Our mission is to empower startups and established brands with digital assets that don't just
-                        look good, but perform exceptionally.</p>
-                    <a href="#contact" class="btn btn-primary">Work With Us</a>
-                </div>
-                <div class="about-img" data-reveal>
-                    <img src="https://images.unsplash.com/photo-1762096070873-63e82ab143ca?q=80&w=687&auto=format&fit=crop"
-                        alt="ThemeMint Design Studio" referrerPolicy="no-referrer">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-grid">
-                <!-- Column 1: Brand -->
-                <div class="footer-col brand">
-                    <a href="#" class="footer-logo">
-                        <img src="Logo.png" alt="ThemeMint Logo">
-                    </a>
-                    <p class="footer-desc">Premium digital design studio crafting high-performance landing pages for startups and agencies. Built for conversion, designed for impact.</p>
-                </div>
-
-                <!-- Column 2: Explore -->
-                <div class="footer-col">
-                    <h4>Explore</h4>
-                    <ul class="footer-list">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#portfolio">Our Portfolio</a></li>
-                        <li><a href="#featured">Featured Work</a></li>
-                        <li><a href="#about">The Studio</a></li>
-                    </ul>
-                </div>
-
-                <!-- Column 3: Categories -->
-                <div class="footer-col">
-                    <h4>Categories</h4>
-                    <ul class="footer-list">
-                        <li><a href="#portfolio">SaaS Solutions</a></li>
-                        <li><a href="#portfolio">Agency Templates</a></li>
-                        <li><a href="#portfolio">E-commerce Packs</a></li>
-                        <li><a href="#portfolio">Digital Products</a></li>
-                    </ul>
-                </div>
-
-                <!-- Column 4: Connect -->
-                <div class="footer-col">
-                    <h4>Connect</h4>
-                    <div class="footer-socials">
-                        <a href="#" class="social-icon" aria-label="Twitter"><i data-lucide="twitter"></i></a>
-                        <a href="#" class="social-icon" aria-label="Instagram"><i data-lucide="instagram"></i></a>
-                        <a href="#" class="social-icon" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
-                        <a href="#" class="social-icon" aria-label="Dribbble"><i data-lucide="dribbble"></i></a>
-                    </div>
-                    <p class="footer-email">hello@thememint.studio</p>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2024 ThemeMint Studio. All rights reserved.</p>
-                <div class="footer-bottom-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Modal removed: template details now open on dedicated pages -->
-
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
-        <i data-lucide="arrow-up"></i>
-    </button>
-
-    <script>
-        // Project Data
-        const projects = [
-            {
-                id: 14,
-                slug: "fork-fire",
-                name: "Fork & Fire",
-                category: "Food",
-                tagline: "Where Flavor Meets Flame",
-                shortDesc: "Premium restaurant landing page designed to highlight a bold, fire-inspired dining experience.",
-                description: "Fork & Fire is a premium restaurant landing page designed to highlight a bold, fire-inspired dining experience. The website focuses on rich visuals, elegant typography, and a balanced layout that reflects both passion and professionalism. It showcases signature dishes, chef specials, and the restaurant’s unique atmosphere in a way that instantly builds appetite and trust. The design blends modern aesthetics with warmth, making it ideal for upscale cafés, grills, and contemporary restaurants looking to create a strong digital impression.",
-                problem: "Many restaurant websites fail to communicate their brand story and food quality effectively, resulting in low engagement and weak customer interest.",
-                solution: "Fork & Fire presents a visually immersive and brand-driven landing page that highlights food presentation, ambiance, and menu clarity—encouraging users to explore, visit, or place an order.",
-                features: ["Elegant, fire-inspired visual theme", "High-quality food imagery and hero sections", "Clear menu highlights and featured dishes", "Smooth scrolling and intuitive navigation", "Strong branding through typography and colors"],
-                techStackDetails: [
-                    "HTML5 — Semantic and SEO-friendly structure",
-                    "CSS3 — Custom layouts, transitions, and visual effects",
-                    "JavaScript (Vanilla JS) — Smooth scrolling and interactive elements",
-                    "Responsive Design — Fully optimized for mobile, tablet, and desktop",
-                    "Performance Optimized UI — Fast loading and clean user experience"
-                ],
-                audience: "Food lovers, café visitors, restaurant owners, and modern dining brands.",
-                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Performance Optimized"],
-                image: "https://picsum.photos/seed/forkfire/1200/800",
-                link: "https://fork-fire-preview.vercel.app/",
-                featured: false
-            },
-            {
-                id: 15,
-                slug: "veloura-bakery",
-                name: "Veloura Bakery",
-                category: "Food",
-                tagline: "Crafted with Love. Baked to Perfection",
-                shortDesc: "Soft, elegant bakery landing page designed to showcase handcrafted baked goods.",
-                description: "Veloura Bakery is a soft, elegant bakery landing page designed to showcase handcrafted baked goods in a warm and inviting way. The design emphasizes pastel tones, smooth spacing, and mouth-watering product visuals to create a comforting user experience. From fresh breads to luxury desserts, the layout guides visitors through products effortlessly while highlighting quality, freshness, and craftsmanship. It’s built to boost brand trust, product discovery, and customer engagement.",
-                problem: "Many bakery websites feel cluttered or outdated, making premium products look ordinary and reducing customer interest.",
-                solution: "Veloura Bakery delivers a clean, aesthetically pleasing landing page that elevates product presentation and emotionally connects with customers through design and storytelling.",
-                features: ["Soft, elegant bakery-themed UI", "Product-focused sections with clean spacing", "Clear highlights for best-selling items", "Smooth scrolling and simple navigation", "Brand-consistent color palette and typography"],
-                techStackDetails: [
-                    "HTML5 — Well-structured content layout",
-                    "CSS3 — Smooth animations and refined styling",
-                    "JavaScript (Vanilla JS) — UI interactions and scrolling effects",
-                    "Responsive Design — Seamless experience on all devices",
-                    "User-Centered Layout — Designed for clarity and comfort"
-                ],
-                audience: "Bakery customers, dessert lovers, café brands, and small food businesses.",
-                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "User-Centered Layout"],
-                image: "https://picsum.photos/seed/veloura/1200/800",
-                link: "https://veloura-bakery-preview.vercel.app/",
-                featured: false
-            },
-            {
-                id: 16,
-                slug: "cafe-ember",
-                name: "Café Ember",
-                category: "Food",
-                tagline: "Warm Moments. Perfect Brews",
-                shortDesc: "Cozy and modern café landing page built to reflect warmth, comfort, and lifestyle appeal.",
-                description: "Café Ember is a cozy and modern café landing page built to reflect warmth, comfort, and lifestyle appeal. The design uses earthy tones, minimal layouts, and atmospheric imagery to create an inviting digital café experience. It highlights beverages, snacks, and café ambiance while encouraging visitors to relax, explore, and visit in person. The layout focuses on storytelling, mood, and brand personality rather than cluttered content.",
-                problem: "Many café websites lack emotional connection and atmosphere, failing to represent the in-store experience online.",
-                solution: "Café Ember recreates the café’s cozy vibe digitally through thoughtful design, smooth navigation, and visually rich sections that engage users instantly.",
-                features: ["Cozy, lifestyle-focused visual design", "Strong hero section with brand messaging", "Highlighted drinks and café specials", "Smooth scrolling and minimal navigation", "Atmosphere-driven color scheme"],
-                techStackDetails: [
-                    "HTML5 — Clean and accessible markup",
-                    "CSS3 — Custom styling, transitions, and layout control",
-                    "JavaScript (Vanilla JS) — Interactive UI and smooth effects",
-                    "Responsive Design — Optimized for every screen size",
-                    "Brand-First UI — Focused on mood and storytelling"
-                ],
-                audience: "Coffee lovers, café visitors, lifestyle brands, and boutique cafés.",
-                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Brand-First UI"],
-                image: "https://picsum.photos/seed/cafeember/1200/800",
-                link: "https://cafe-ember-preview.vercel.app/",
-                featured: false
-            },
-            {
-                id: 1,
-                slug: "zoom-taxi",
-                name: "Zoom Taxi",
-                category: "Transportation",
-                tagline: "Fast. Reliable. On-Demand Mobility",
-                shortDesc: "Modern transportation platform for fast, reliable ride booking.",
-                description: "Zoom Taxi is a modern transportation platform designed to provide fast, reliable, and user-friendly ride booking experiences. The platform connects passengers with nearby drivers in real time, enabling quick pickups, transparent pricing, and seamless ride management. Built with a clean and intuitive interface, Zoom Taxi focuses on speed, accessibility, and trust. Users can easily book rides, track drivers live, and manage trips without confusion. The landing page is optimized for conversions, clearly highlighting service benefits, coverage, and ease of use. Zoom Taxi is ideal for urban commuters, travelers, and businesses seeking dependable ride solutions.",
-                problem: "Traditional taxi services often suffer from delayed pickups, unclear pricing, poor user experience, and lack of real-time tracking, leading to frustration and distrust among users.",
-                solution: "Zoom Taxi solves these issues by offering real-time ride booking, transparent fare information, and live driver tracking through a streamlined digital experience that prioritizes convenience and reliability.",
-                features: ["Instant ride booking", "Real-time driver tracking", "Transparent pricing system", "User-friendly booking interface", "Mobile-first responsive design"],
-                techStackDetails: [
-                    "HTML5 — Semantic and SEO-friendly structure",
-                    "CSS3 — Modern layouts with Flexbox & Grid",
-                    "JavaScript (Vanilla JS) — Interactive UI and smooth user flow",
-                    "Responsive Design — Optimized for mobile and desktop",
-                    "Performance Optimized — Fast loading and lightweight assets"
-                ],
-                audience: "Urban commuters, travelers, and businesses seeking dependable ride solutions.",
-                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Performance Optimized"],
-                image: "https://picsum.photos/seed/zoomtaxi/1200/800",
-                link: "https://zoom-taxi-preview.vercel.app/",
-                featured: true
-            },
-            {
-                id: 2,
-                slug: "bite-haven",
-                name: "Bite Haven",
-                category: "Food",
-                tagline: "Bold Flavors. Fast Service. Better Experience",
-                shortDesc: "High-impact fast food restaurant landing page for menus and orders.",
-                description: "Bite Haven is a high-impact fast food restaurant landing page crafted to showcase menu offerings, promotions, and brand personality in a visually engaging way. The platform focuses on appetizing visuals, clear navigation, and strong call-to-action placement to drive online orders and customer engagement. Designed with bold colors and modern typography, Bite Haven creates an instant craving-driven connection with users. The layout highlights best-selling items, categories, and special deals while maintaining a smooth and enjoyable browsing experience. It is built to help restaurants increase conversions and strengthen their digital presence.",
-                problem: "Many restaurant websites lack visual appeal, clear menus, and strong CTAs, causing visitors to leave without placing an order or visiting the restaurant.",
-                solution: "Bite Haven delivers a visually rich, conversion-focused landing page that highlights food items clearly, guides users effortlessly through the menu, and encourages quick action through prominent CTAs.",
-                features: ["Visually rich food-focused design", "Clear menu categories and sections", "Strong call-to-action buttons", "Smooth scrolling navigation", "Brand-focused color system"],
-                techStackDetails: [
-                    "HTML5 — Clean, structured markup",
-                    "CSS3 — Custom styling with animations and hover effects",
-                    "JavaScript (Vanilla JS) — Smooth scrolling and UI interactions",
-                    "Responsive Design — Optimized for all devices",
-                    "Conversion Optimized UI — Designed to drive orders and engagement"
-                ],
-                audience: "Foodies, hungry customers, restaurant owners.",
-                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Conversion Optimized UI"],
-                image: "https://picsum.photos/seed/bitehaven/1200/800",
-                link: "https://bite-haven-preview.vercel.app/",
-                featured: true
-            },
-            {
-                id: 3,
-                slug: "green-yard",
-                name: "Green Yard",
-                category: "Service",
-                tagline: "Professional Outdoor Care Made Simple",
-                shortDesc: "Professional service landing page for garden maintenance and lawn care.",
-                description: "Green Yard is a professional service landing page designed for garden maintenance, lawn care, and outdoor landscaping businesses. The platform presents services clearly and professionally, building trust with potential customers through clean layouts, service highlights, and strong visual hierarchy. The design emphasizes reliability, expertise, and eco-friendly practices while guiding users toward service inquiries and bookings. Green Yard is ideal for local service providers looking to establish credibility and attract consistent clients through a modern online presence.",
-                problem: "Many lawn and garden service providers rely on outdated or unclear websites that fail to communicate professionalism, service quality, and trust.",
-                solution: "Green Yard provides a clean, structured, and trustworthy digital experience that clearly explains services, showcases expertise, and encourages users to contact or book services easily.",
-                features: ["Clear service breakdowns", "Trust-focused professional design", "Easy contact and inquiry flow", "Service-specific sections with visuals", "Local business–friendly layout"],
-                techStackDetails: [
-                    "HTML5 — Semantic and accessible structure",
-                    "CSS3 — Modern layouts using Flexbox & Grid",
-                    "JavaScript (Vanilla JS) — Interactive elements and smooth UX",
-                    "Responsive Design — Mobile-first optimization",
-                    "SEO-Friendly Structure — Built for discoverability"
-                ],
-                audience: "Homeowners, property managers, local businesses.",
-                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "SEO-Friendly Structure"],
-                image: "https://picsum.photos/seed/greenyard/1200/800",
-                link: "https://green-yard-preview.vercel.app/",
-                featured: true
-            },
-            {
-                id: 4,
-                slug: "neuroai",
-                name: "NeuroAI",
-                category: "SaaS",
-                tagline: "The Future of Intelligence",
-                shortDesc: "Advanced AI-driven data intelligence for modern enterprises.",
-                description: "NeuroAI is a powerful SaaS platform built to help modern enterprises harness the full potential of artificial intelligence. It enables organizations to analyze complex datasets, automate decision-making, and gain real-time insights through an intuitive and visually rich interface. Designed for scalability and performance, NeuroAI bridges the gap between raw data and actionable intelligence. Its clean dashboards and advanced analytics empower teams to move faster, smarter, and with confidence. Whether used for predictive analysis, automation, or optimization, NeuroAI adapts to evolving business needs. The platform is built with enterprise-grade reliability, ensuring data security and seamless collaboration across teams.",
-                problem: "Enterprises often deal with massive volumes of data that are difficult to process, analyze, and interpret in real time. Traditional analytics tools are slow, complex, and require heavy manual effort.",
-                solution: "NeuroAI transforms raw data into meaningful insights using AI-powered analytics and real-time visualization, allowing businesses to make faster and smarter decisions.",
-                features: ["Real-time data processing and visualization", "AI-driven analytics and predictions", "Customizable dashboards", "Team collaboration tools", "Enterprise-level security"],
-                techStackDetails: [
-                    "HTML5 — Semantic, SEO-optimized structure",
-                    "CSS3 — Modern layouts using Flexbox & Grid",
-                    "JavaScript (Vanilla JS) — Interactive dashboards & UI behavior",
-                    "Responsive Design — Optimized for all screen sizes",
-                    "Performance Optimized — Lightweight and fast-loading"
-                ],
-                audience: "Data Scientists, CTOs, Product Teams, Enterprise Decision Makers",
-                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Performance Optimized"],
-                image: "https://picsum.photos/seed/neuroai/1200/800",
-                link: "https://neuroai-preview.vercel.app/",
-                featured: false
-            },
-            {
-                id: 5,
-                slug: "thememint",
-                name: "ThemeMint",
-                category: "SaaS",
-                tagline: "Build, Launch, Scale Faster",
-                shortDesc: "A comprehensive toolkit for rapid UI development.",
-                description: "ThemeMint is a modern SaaS-focused landing page designed to help startups and digital products present their value with clarity and confidence. It combines bold visuals with conversion-optimized layouts to communicate features, benefits, and pricing effectively. The design is clean, flexible, and built to adapt to various SaaS use cases. ThemeMint focuses on storytelling, guiding users from problem awareness to solution adoption. Its modular sections make it easy to highlight features, integrations, and testimonials. Perfect for early-stage startups and growing SaaS products looking to establish a strong online presence.",
-                problem: "Many SaaS startups struggle to explain their product clearly and fail to convert visitors into users.",
-                solution: "ThemeMint provides a clear, structured layout that communicates value instantly and encourages user action.",
-                features: ["Conversion-focused hero section", "Feature and benefit breakdown", "Pricing and CTA sections", "Responsive layout", "Clean modern UI"],
-                techStackDetails: [
-                    "HTML5 — Clean and scalable page structure",
-                    "CSS3 — Conversion-focused layout and styling",
-                    "JavaScript (Vanilla JS) — Smooth interactions and navigation",
-                    "Responsive Design — Mobile-first approach",
-                    "Clean Code Architecture — Easy to customize and extend"
-                ],
-                audience: "SaaS Startups, Indie Founders, Product Launch Teams",
-                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Clean Code Architecture"],
-                image: "https://picsum.photos/seed/mint/1200/800",
-                link: "https://theme-mint-preview.vercel.app/",
-                featured: false
-            },
-            {
-                id: 6,
-                slug: "skill-forge-academy",
-                name: "Skill Forge Academy",
-                category: "Education",
-                tagline: "Learn Skills That Matter",
-                shortDesc: "Online learning platform for creative professionals.",
-                description: "Skill Forge Academy is an educational landing page crafted to promote online courses, training programs, and learning platforms. It focuses on clarity, trust, and engagement to encourage learners to enroll. The layout emphasizes course value, instructor credibility, and learning outcomes. With structured sections and smooth flow, it helps users understand the learning journey. The design supports both technical and non-technical education products. Ideal for academies, bootcamps, and e-learning startups.",
-                problem: "Online learners often feel overwhelmed by unclear course structures and lack of trust.",
-                solution: "Skill Forge Academy presents courses in a clear, engaging, and confidence-building format.",
-                features: ["Course highlights", "Instructor profiles", "Learning outcomes", "Enrollment CTA", "Mobile-friendly design"],
-                techStackDetails: [
-                    "HTML5 — Structured course and content sections",
-                    "CSS3 — Readable typography and layout system",
-                    "JavaScript (Vanilla JS) — Interactive sections and smooth scroll",
-                    "Responsive Design — Optimized for learners on all devices",
-                    "Accessibility-Friendly Markup — Clear UI and spacing"
-                ],
-                audience: "Students, Professionals, Online Learners",
-                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Accessibility-Friendly"],
-                image: "https://picsum.photos/seed/skillforge/1200/800",
-                link: "https://skill-forge-academy-preview.vercel.app/",
-                featured: false
-            },
-            {
-                id: 7,
-                slug: "shop-ease",
-                name: "Shop Ease",
-                category: "E-commerce",
-                tagline: "Simple Shopping, Smarter Sales",
-                shortDesc: "Modern, fast, and conversion-optimized e-commerce.",
-                description: "Shop Ease is a modern e-commerce landing page designed to showcase products with clarity and style. It focuses on clean layouts, strong visuals, and smooth user experience to drive conversions. The design highlights featured products, benefits, and trust signals. It is optimized for fast browsing and easy purchasing decisions. Ideal for startups and small businesses entering online retail.",
-                problem: "Many online stores lose customers due to cluttered layouts and confusing navigation.",
-                solution: "Shop Ease simplifies product presentation and purchasing flow to increase conversions.",
-                features: ["Product showcase sections", "Promotional banners", "Clear CTAs", "Responsive grid layout", "Trust indicators"],
-                techStackDetails: [
-                    "HTML5 — Product-focused semantic structure",
-                    "CSS3 — Grid-based product layouts",
-                    "JavaScript (Vanilla JS) — UI interactions and CTA behavior",
-                    "Responsive Design — Seamless shopping experience on mobile",
-                    "Optimized UI Performance — Fast rendering and clean visuals"
-                ],
-                audience: "Online Shoppers, Small Businesses, E-commerce Brands",
-                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Optimized UI Performance"],
-                image: "https://picsum.photos/seed/shopease/1200/800",
-                link: "https://shop-ease-e-commerce-preview.vercel.app/",
-                featured: false
-            },
-            {
-                id: 8,
-                slug: "next-gen-agency",
-                name: "Next Gen Agency",
-                category: "Agency",
-                tagline: "Creative Solutions for Modern Brands",
-                shortDesc: "Immersive agency portfolio with bold creative direction.",
-                description: "Next Gen Agency is a bold, creative landing page built for digital agencies and studios. It highlights services, expertise, and past work in a visually engaging way. The layout builds credibility and positions the agency as a premium service provider. Designed to attract clients and generate leads, it balances creativity with clarity.",
-                problem: "Agencies often struggle to stand out in a crowded digital market.",
-                solution: "Next Gen Agency presents services and value in a confident, professional format.",
-                features: ["Service highlights", "Portfolio showcase", "Client-focused CTAs", "Modern animations", "Strong branding"],
-                techStackDetails: [
-                    "HTML5 — Professional agency layout structure",
-                    "CSS3 — Creative animations and modern styling",
-                    "JavaScript (Vanilla JS) — Interactive UI and hover effects",
-                    "Responsive Design — Fully adaptive agency showcase",
-                    "Scalable Styling System — Easy branding customization"
-                ],
-                audience: "Startups, Businesses, Brands, Founders",
-                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Scalable Styling"],
-                image: "https://picsum.photos/seed/agency/1200/800",
-                link: "https://next-gen-agency-preview.vercel.app/",
-                featured: false
-            },
-            {
-                id: 9,
-                slug: "care-plus",
-                name: "Care Plus",
-                category: "Medical",
-                tagline: "Healthcare You Can Trust",
-                shortDesc: "Streamlined healthcare management for modern clinics.",
-                description: "Care Plus is a healthcare landing page designed to communicate trust, clarity, and professionalism. It presents medical services in a calm and accessible way. The design focuses on patient confidence, service transparency, and easy navigation. Ideal for clinics, hospitals, and health service providers.",
-                problem: "Patients often feel uncertain due to unclear medical information online.",
-                solution: "Care Plus delivers clear, reassuring, and structured healthcare information.",
-                features: ["Service listings", "Appointment CTA", "Trust-focused layout", "Clean medical UI", "Responsive design"],
-                techStackDetails: [
-                    "HTML5 — Trust-focused and structured markup",
-                    "CSS3 — Clean medical UI with calm visuals",
-                    "JavaScript (Vanilla JS) — Interactive navigation and CTAs",
-                    "Responsive Design — Optimized for patients on all devices",
-                    "Accessibility-Oriented Design — Clear contrast and readability"
-                ],
-                audience: "Patients, Clinics, Healthcare Providers",
-                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Accessibility-Oriented"],
-                image: "https://picsum.photos/seed/careplus/1200/800",
-                link: "https://care-plus-medical-preview.vercel.app/",
-                featured: false
-            },
-            {
-                id: 10,
-                slug: "lead-boost",
-                name: "Lead Boost",
-                category: "Marketing",
-                tagline: "Turn Visitors into Customers",
-                shortDesc: "Conversion-focused landing page for marketing teams.",
-                description: "Lead Boost is a marketing-focused landing page built to capture and convert leads. It uses persuasive content, strong CTAs, and conversion-driven layouts. The design emphasizes value propositions and results. Perfect for marketers and growth-focused businesses.",
-                problem: "Businesses struggle to convert traffic into qualified leads.",
-                solution: "Lead Boost optimizes messaging and layout to maximize conversions.",
-                features: ["Lead capture forms", "Conversion-focused sections", "Strong CTAs", "Analytics-ready structure", "Clean UI"],
-                techStackDetails: [
-                    "HTML5 — Conversion-driven layout structure",
-                    "CSS3 — Marketing-focused design and spacing",
-                    "JavaScript (Vanilla JS) — Lead forms and CTA interactions",
-                    "Responsive Design — Mobile-optimized conversion flow",
-                    "Performance Optimization — Lightweight and fast"
-                ],
-                audience: "Marketers, Agencies, Business Owners",
-                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Performance Optimization"],
-                image: "https://picsum.photos/seed/leadboost/1200/800",
-                link: "https://lead-boost-preview.vercel.app/",
-                featured: false
-            },
-            {
-                id: 11,
-                slug: "launch-pad",
-                name: "Launch Pad",
-                category: "SaaS",
-                tagline: "Launch Smarter. Grow Faster.",
-                shortDesc: "Growth tools and validation for early-stage startups.",
-                description: "Launch Pad is a startup-focused landing page designed to help founders and product teams launch their ideas with clarity and confidence. It provides a structured storytelling flow that introduces the product, highlights its value, and drives early adoption. The design emphasizes speed, simplicity, and conversion, making it ideal for MVPs and early-stage products. Launch Pad guides visitors from problem awareness to solution understanding in a smooth and engaging way. Its modern layout and focused sections ensure that key messages are delivered without distractions. Built for momentum, it helps startups make a strong first impression and validate their ideas quickly.",
-                problem: "Many startups struggle to clearly communicate their product vision and fail to convert early visitors into users or investors.",
-                solution: "Launch Pad offers a clear, launch-ready structure that presents the product story, benefits, and CTAs in a compelling and conversion-driven format.",
-                features: ["Startup-focused hero section", "Clear product value proposition", "Feature highlights with benefits", "Strong call-to-action placement", "Fully responsive launch layout"],
-                techStackDetails: [
-                    "HTML5 — Launch-ready semantic structure",
-                    "CSS3 — Modern startup layouts using Grid & Flexbox",
-                    "JavaScript (Vanilla JS) — Interactive sections and smooth transitions",
-                    "Responsive Design — Perfect for MVP and early-stage products",
-                    "Clean & Modular Code — Easy iteration and scaling"
-                ],
-                audience: "Startup Founders, Indie Hackers, Product Managers, Early-Stage Teams",
-                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Clean & Modular Code"],
-                image: "https://picsum.photos/seed/launchpad/1200/800",
-                link: "https://launch-pad-preview.vercel.app/",
-                featured: false
-            },
-            {
-                id: 12,
-                slug: "future-tech-summit",
-                name: "Future Tech Summit",
-                category: "Marketing",
-                tagline: "Where Innovation Meets the Future",
-                shortDesc: "Global tech conference landing page with full event info.",
-                description: "Future Tech Summit is a modern event landing page crafted for technology conferences, summits, and innovation-driven events. It is designed to generate excitement, communicate event value, and drive registrations. The layout highlights speakers, agenda, and key themes in a visually engaging manner. With a strong focus on credibility and anticipation, it positions the event as a must-attend experience. The design balances information and inspiration, ensuring visitors quickly understand what the event offers. Ideal for tech expos, startup events, and innovation forums, it delivers a professional and high-impact online presence.",
-                problem: "Event organizers often struggle to capture attention and clearly communicate the value of attending their events.",
-                solution: "Future Tech Summit presents event details, speakers, and highlights in a structured, visually appealing format that drives registrations.",
-                features: ["Speaker and agenda sections", "Event highlights and themes", "Registration-focused CTAs", "Countdown or timeline layout", "Engaging visual storytelling"],
-                techStackDetails: [
-                    "HTML5 — Structured event sections and content",
-                    "CSS3 — Visual hierarchy and engaging layouts",
-                    "JavaScript (Vanilla JS) — Countdown timers and dynamic UI",
-                    "Responsive Design — Event-ready across all devices",
-                    "Accessible & Readable UI — Clear event information flow"
-                ],
-                audience: "Tech Professionals, Entrepreneurs, Developers, Event Attendees",
-                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Accessible & Readable UI"],
-                image: "https://picsum.photos/seed/techsummit/1200/800",
-                link: "https://future-tech-summit-preview.vercel.app/",
-                featured: false
-            },
-            {
-                id: 13,
-                slug: "thememint-launch-kit",
-                name: "ThemeMint Launch Kit",
-                category: "SaaS",
-                tagline: "Everything You Need to Launch Faster",
-                shortDesc: "Comprehensive toolkit for successful product launches.",
-                description: "ThemeMint Launch Kit is a product-focused landing page designed to showcase a complete launch-ready UI and design kit. It communicates value through clarity, structure, and visual consistency. The page highlights what’s included, how it helps users, and why it saves time and effort. Built with creators and developers in mind, it positions the kit as a practical and premium solution. The layout focuses on benefits, usability, and real-world application. Ideal for designers, developers, and startups, it helps users understand the product quickly and make confident purchasing decisions.",
-                problem: "Creators and developers often waste time building launch pages and UI from scratch, slowing down product launches.",
-                solution: "ThemeMint Launch Kit provides a ready-to-use, professionally designed system that accelerates product launches and ensures consistency.",
-                features: ["Pre-built launch sections", "Modular and reusable components", "Clean, modern UI design", "Easy customization", "Launch-ready structure"],
-                techStackDetails: [
-                    "HTML5 — Modular, reusable layout components",
-                    "CSS3 — Scalable design system and styling",
-                    "JavaScript (Vanilla JS) — UI interactions and component behavior",
-                    "Responsive Design — Framework-free adaptive layout",
-                    "Maintainable Codebase — Creator-friendly customization"
-                ],
-                audience: "Designers, Developers, Startup Teams, Product Creators",
-                tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design", "Maintainable Codebase"],
-                image: "https://picsum.photos/seed/launchkit/1200/800",
-                link: "https://theme-mint-launch-kit-preview.vercel.app/",
-                featured: false
-            }
-        ];
-
-        // DOM Elements
-        const featuredContainer = document.getElementById('featured-container');
-        const portfolioContainer = document.getElementById('portfolio-container');
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const modal = document.getElementById('case-study-modal');
-        const modalContent = document.getElementById('modal-content');
-        const navbar = document.getElementById('navbar');
-        const backToTopBtn = document.getElementById('backToTop');
-        const heroCanvas = document.getElementById('hero-canvas');
-        // Initialize Lucide
-        lucide.createIcons();
-
-        // Hero Background Animation
-        const ctx = heroCanvas.getContext('2d');
-        let particles = [];
-
-        function initCanvas() {
-            heroCanvas.width = window.innerWidth;
-            heroCanvas.height = document.querySelector('.hero').offsetHeight;
-        }
-
-        class Particle {
-            constructor() {
-                this.reset();
-            }
-            reset() {
-                this.x = Math.random() * heroCanvas.width;
-                this.y = Math.random() * heroCanvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = Math.random() * 0.4 - 0.2;
-                this.speedY = Math.random() * 0.4 - 0.2;
-                this.opacity = Math.random() * 0.5;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0 || this.x > heroCanvas.width || this.y < 0 || this.y > heroCanvas.height) {
+            class Particle {
+                constructor() {
                     this.reset();
                 }
+                reset() {
+                    this.x = Math.random() * heroCanvas.width;
+                    this.y = Math.random() * heroCanvas.height;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speedX = Math.random() * 0.4 - 0.2;
+                    this.speedY = Math.random() * 0.4 - 0.2;
+                    this.opacity = Math.random() * 0.5;
+                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    if (this.x < 0 || this.x > heroCanvas.width || this.y < 0 || this.y > heroCanvas.height) {
+                        this.reset();
+                    }
+                }
+                draw() {
+                    const rgb = hexToRgb(getComputedStyle(document.documentElement).getPropertyValue('--primary').trim());
+                    ctx.fillStyle = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${this.opacity})`;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
             }
-            draw() {
-                ctx.fillStyle = `rgba(0, 255, 157, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
 
-        function createParticles() {
-            particles = [];
-            const count = Math.floor((heroCanvas.width * heroCanvas.height) / 15000);
-            for (let i = 0; i < count; i++) {
-                particles.push(new Particle());
+            function createParticles() {
+                particles = [];
+                // Limit max particles for performance
+                const maxParticles = 60;
+                const count = Math.min(Math.floor((heroCanvas.width * heroCanvas.height) / 15000), maxParticles);
+                for (let i = 0; i < count; i++) {
+                    particles.push(new Particle());
+                }
             }
-        }
 
-        function animateParticles() {
-            ctx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
+            function animateParticles() {
+                ctx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                requestAnimationFrame(animateParticles);
+            }
+
+            window.addEventListener('resize', () => {
+                // Debounce resize
+                clearTimeout(window._resizeTimeout);
+                window._resizeTimeout = setTimeout(() => {
+                    initCanvas();
+                    createParticles();
+                }, 150);
             });
-            requestAnimationFrame(animateParticles);
-        }
 
-        window.addEventListener('resize', () => {
             initCanvas();
             createParticles();
-        });
+            animateParticles();
 
-        initCanvas();
-        createParticles();
-        animateParticles();
+            // Scroll to Top Function
+            window.scrollToTop = function () {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
 
-        // Scroll to Top Function
-        window.scrollToTop = function () {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-
-        // Render Featured
-        function renderFeatured() {
-            const featured = projects.filter(p => p.featured);
-            featuredContainer.innerHTML = featured.map(p => `
-                <div class="featured-card" data-reveal>
-                    <div class="featured-img">
-                        <div class="iframe-wrapper">
-                            <iframe src="${p.link}" loading="eager" onload="this.parentElement.classList.add('loaded')"></iframe>
-                        </div>
-                        <a href="templates/${p.slug}.html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer;"></a>
-                    </div>
-                    <div class="featured-info">
-                        <span class="badge">${p.category}</span>
-                        <h3>${p.name}</h3>
-                        <p>${p.shortDesc}</p>
-                        <div class="hero-btns">
-                            <a href="templates/${p.slug}.html" class="btn btn-primary">View Case Study</a>
-                            <a href="${p.link}" target="_blank" class="btn btn-secondary">Live Preview <i data-lucide="external-link"></i></a>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-            lucide.createIcons();
-            setTimeout(updateIframeScales, 100);
-        }
-
-        // Render Portfolio
-        function renderPortfolio(filter = 'all') {
-            const filtered = filter === 'all'
-                ? projects
-                : projects.filter(p => p.category === filter);
-
-            portfolioContainer.innerHTML = filtered.map(p => `
-                <div class="project-card" data-reveal>
-                    <div class="card-thumb">
-                        <div class="iframe-wrapper">
-                            <iframe src="${p.link}" loading="lazy" onload="this.parentElement.classList.add('loaded')"></iframe>
-                        </div>
-                        <div class="card-overlay">
-                            <a href="templates/${p.slug}.html" class="btn btn-primary">View Details</a>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <span class="badge" style="margin-bottom: 0.5rem;">${p.category}</span>
-                        <h4>${p.name}</h4>
-                        <p>${p.shortDesc}</p>
-                        <div class="card-footer">
-                            <div class="tech-icons">
-                                <i data-lucide="code-2" style="width: 16px;"></i>
-                                <i data-lucide="layout" style="width: 16px;"></i>
-                                <i data-lucide="zap" style="width: 16px;"></i>
+            // Render Featured
+            function renderFeatured() {
+                const featured = projects.filter(p => p.featured);
+                featuredContainer.innerHTML = featured.map(p => `
+                    <div class="featured-card" data-reveal>
+                        <div class="featured-img">
+                            <div class="iframe-wrapper">
+                                <iframe src="${p.link}" loading="eager" onload="this.parentElement.classList.add('loaded')"></iframe>
                             </div>
-                            <a href="${p.link}" target="_blank" style="color: var(--primary); font-size: 0.8rem; font-weight: 700;">LIVE DEMO</a>
+                            <a href="templates/${p.slug}.html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer;"></a>
+                        </div>
+                        <div class="featured-info">
+                            <span class="badge">${p.category}</span>
+                            <h3>${p.name}</h3>
+                            <p>${p.shortDesc}</p>
+                            <div class="hero-btns">
+                                <a href="templates/${p.slug}.html" class="btn btn-primary">View Case Study</a>
+                                <a href="${p.link}" target="_blank" class="btn btn-secondary">Live Preview <i data-lucide="external-link"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
             `).join('');
-            lucide.createIcons();
-            // Start observing new elements
-            document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
-            setTimeout(updateIframeScales, 100);
-        }
+                lucide.createIcons();
+                setTimeout(updateIframeScales, 100);
+            }
 
-        // Filter Logic
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                renderPortfolio(btn.dataset.filter);
+            // Render Portfolio
+            function renderPortfolio(filter = 'all') {
+                const filtered = filter === 'all'
+                    ? projects
+                    : projects.filter(p => p.category.toLowerCase() === filter.toLowerCase());
+
+                portfolioContainer.innerHTML = filtered.map(p => `
+                    <div class="project-card" data-reveal>
+                        <div class="card-thumb">
+                            <div class="iframe-wrapper">
+                                <iframe src="${p.link}" loading="lazy" onload="this.parentElement.classList.add('loaded')"></iframe>
+                            </div>
+                            <div class="card-overlay">
+                                <a href="templates/${p.slug}.html" class="btn btn-primary">View Details</a>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <span class="badge" style="margin-bottom: 0.5rem;">${p.category}</span>
+                            <h4>${p.name}</h4>
+                            <p>${p.shortDesc}</p>
+                            <div class="card-footer">
+                                <div class="tech-icons">
+                                    <i data-lucide="code-2" style="width: 16px;"></i>
+                                    <i data-lucide="layout" style="width: 16px;"></i>
+                                    <i data-lucide="zap" style="width: 16px;"></i>
+                                </div>
+                                <a href="${p.link}" target="_blank" style="color: var(--primary); font-size: 0.8rem; font-weight: 700;">LIVE DEMO</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+                lucide.createIcons();
+                // Start observing new elements
+                document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
+                setTimeout(updateIframeScales, 100);
+            }
+
+            // Filter Logic
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderPortfolio(btn.dataset.filter);
+                });
             });
-        });
 
-        // Performance: Use Intersection Observer for reveal animations
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    revealObserver.unobserve(entry.target);
+            // Performance: Use Intersection Observer for reveal animations
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
+
+            // Performance: Use throttle for scroll events
+            let isScrolling = false;
+            window.addEventListener('scroll', () => {
+                if (!isScrolling) {
+                    window.requestAnimationFrame(() => {
+                        // Navbar Scroll Effect
+                        navbar.classList.toggle('scrolled', window.scrollY > 50);
+                        // Back to Top Visibility
+                        backToTopBtn.classList.toggle('visible', window.scrollY > 500);
+                        isScrolling = false;
+                    });
+                    isScrolling = true;
                 }
             });
-        }, { threshold: 0.1 });
 
-        document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
+            // Initial Render
+            function updateIframeScales() {
+                requestAnimationFrame(() => {
+                    document.querySelectorAll('.iframe-wrapper').forEach(wrapper => {
+                        const iframe = wrapper.querySelector('iframe');
+                        if (!iframe) return;
 
-        // Performance: Use throttle for scroll events
-        let isScrolling = false;
-        window.addEventListener('scroll', () => {
-            if (!isScrolling) {
-                window.requestAnimationFrame(() => {
-                    // Navbar Scroll Effect
-                    navbar.classList.toggle('scrolled', window.scrollY > 50);
-                    // Back to Top Visibility
-                    backToTopBtn.classList.toggle('visible', window.scrollY > 500);
-                    isScrolling = false;
+                        // Determine target width based on container class
+                        let targetWidth = 1440;
+                        if (wrapper.closest('.card-thumb')) {
+                            targetWidth = 1280;
+                        } else if (wrapper.closest('.featured-img')) {
+                            targetWidth = 1440;
+                        } else if (wrapper.closest('.modal-hero')) {
+                            targetWidth = 1440;
+                        }
+
+                        const containerWidth = wrapper.offsetWidth;
+                        const containerHeight = wrapper.offsetHeight;
+                        if (containerWidth === 0) return;
+
+                        const scale = containerWidth / targetWidth;
+                        iframe.style.width = targetWidth + 'px';
+                        iframe.style.height = (containerHeight / scale) + 'px';
+                        iframe.style.transform = `scale(${scale})`;
+                    });
                 });
-                isScrolling = true;
             }
-        });
 
-        // Initial Render
-        function updateIframeScales() {
-            requestAnimationFrame(() => {
-                document.querySelectorAll('.iframe-wrapper').forEach(wrapper => {
-                    const iframe = wrapper.querySelector('iframe');
-                    if (!iframe) return;
+            window.addEventListener('resize', updateIframeScales);
 
-                    // Determine target width based on container class
-                    let targetWidth = 1440;
-                    if (wrapper.closest('.card-thumb')) {
-                        targetWidth = 1280;
-                    } else if (wrapper.closest('.featured-img')) {
-                        targetWidth = 1440;
-                    } else if (wrapper.closest('.modal-hero')) {
-                        targetWidth = 1440;
-                    }
+            renderFeatured();
+            renderPortfolio();
+            updateIframeScales();
 
-                    const containerWidth = wrapper.offsetWidth;
-                    const containerHeight = wrapper.offsetHeight;
-                    if (containerWidth === 0) return;
-
-                    const scale = containerWidth / targetWidth;
-                    iframe.style.width = targetWidth + 'px';
-                    iframe.style.height = (containerHeight / scale) + 'px';
-                    iframe.style.transform = `scale(${scale})`;
-                });
-            });
-        }
-
-        window.addEventListener('resize', updateIframeScales);
-
-        renderFeatured();
-        renderPortfolio();
-        updateIframeScales();
-
-    </script>
-</body>
+        </script>
+    </body>
 
 </html>

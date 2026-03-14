@@ -136,16 +136,32 @@
     <script>
         const navbar = document.getElementById('navbar');
         const backToTopBtn = document.getElementById('backToTop');
+        
+        // Performance: Use throttle for scroll events
+        let isScrolling = false;
         window.addEventListener('scroll', () => {
-            navbar.classList.toggle('scrolled', window.scrollY > 50);
-            backToTopBtn.classList.toggle('visible', window.scrollY > 500);
-            revealOnScroll();
+            if (!isScrolling) {
+                window.requestAnimationFrame(() => {
+                    navbar.classList.toggle('scrolled', window.scrollY > 50);
+                    backToTopBtn.classList.toggle('visible', window.scrollY > 500);
+                    isScrolling = false;
+                });
+                isScrolling = true;
+            }
         });
-        function revealOnScroll() {
-            document.querySelectorAll('[data-reveal]').forEach(el => {
-                if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('visible');
+
+        // Performance: Use Intersection Observer for reveal animations
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
             });
-        }
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
+
         function scaleHero() {
             const w = document.getElementById('heroWrapper');
             const f = document.getElementById('heroIframe');
@@ -156,6 +172,10 @@
             f.style.width = '1440px';
             f.style.height = '900px';
             f.style.transform = 'scale(' + s + ')';
+            // Set wrapper height to match scaled iframe so scrolling works
+            if(w.parentElement.classList.contains('detail-hero')) {
+                 w.style.height = (900 * s) + 'px';
+            }
         }
 
         const lockBtn = document.getElementById('previewLockBtn');
@@ -166,29 +186,31 @@
         let isUnlocked = false;
         
         // Initial state: locked
-        heroIframe.style.pointerEvents = 'none';
+        if (heroIframe) heroIframe.style.pointerEvents = 'none';
 
         if(lockBtn) {
             lockBtn.addEventListener('click', () => {
                 isUnlocked = !isUnlocked;
-                if (isUnlocked) {
-                    lockBtn.classList.add('unlocked');
-                    iconLocked.style.display = 'none';
-                    iconUnlocked.style.display = 'block';
-                    heroIframe.style.pointerEvents = 'auto'; // allow interaction/scroll
-                    lockBtn.setAttribute('title', 'Lock preview to disable scroll');
-                } else {
-                    lockBtn.classList.remove('unlocked');
-                    iconLocked.style.display = 'block';
-                    iconUnlocked.style.display = 'none';
-                    heroIframe.style.pointerEvents = 'none'; // block interaction/scroll
-                    lockBtn.setAttribute('title', 'Unlock preview to scroll');
-                }
+                lockBtn.classList.toggle('unlocked', isUnlocked);
+                iconLocked.style.display = isUnlocked ? 'none' : 'block';
+                iconUnlocked.style.display = isUnlocked ? 'block' : 'none';
+                heroIframe.style.pointerEvents = isUnlocked ? 'auto' : 'none';
+                lockBtn.setAttribute('title', isUnlocked ? 'Lock preview to disable scroll' : 'Unlock preview to scroll');
+                
+                // Visual feedback
+                lockBtn.style.transform = 'scale(0.9)';
+                setTimeout(() => { lockBtn.style.transform = ''; }, 100);
             });
         }
         
-        window.addEventListener('resize', scaleHero);
-        scaleHero(); revealOnScroll();
-    </script>
+        // Performance: Debounce resize event
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(scaleHero, 150);
+        });
+        
+        scaleHero();
+</script>
 </body>
 </html>

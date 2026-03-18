@@ -659,7 +659,7 @@
         <div class="container">
             <div class="nav-content">
                 <a href="#" class="logo">
-                    <img src="Logo.png" alt="ThemeMint — Creative landing page studio logo">
+                    <img src="Logo.png" alt="ThemeMint Logo">
                 </a>
                 <div style="display: flex; align-items: center; gap: 2rem;">
                     <ul class="nav-links">
@@ -857,8 +857,8 @@
                 <!-- Column 1: Brand -->
                 <div class="footer-col brand">
                     <a href="#" class="footer-logo">
-                            <img src="Logo.png" alt="ThemeMint — Creative landing page studio logo">
-                        </a>
+                        <img src="Logo.png" alt="ThemeMint Logo">
+                    </a>
                     <p class="footer-desc">Premium digital design studio crafting high-performance landing pages for startups and agencies. Built for conversion, designed for impact.</p>
                 </div>
 
@@ -1307,21 +1307,13 @@
         const featuredContainer = document.getElementById('featured-container');
         const portfolioContainer = document.getElementById('portfolio-container');
         const filterBtns = document.querySelectorAll('.filter-btn');
-        // Modal functionality removed; pages open in dedicated template files
-        const modal = null;
-        const modalContent = null;
+        const modal = document.getElementById('case-study-modal');
+        const modalContent = document.getElementById('modal-content');
         const navbar = document.getElementById('navbar');
         const backToTopBtn = document.getElementById('backToTop');
         const heroCanvas = document.getElementById('hero-canvas');
         // Initialize Lucide
         lucide.createIcons();
-
-        // Ensure icons are created when featured/portfolio containers change
-        const lucideObserver = new MutationObserver(() => {
-            try { lucide.createIcons(); } catch (e) { /* ignore */ }
-        });
-        if (featuredContainer) lucideObserver.observe(featuredContainer, { childList: true, subtree: true });
-        if (portfolioContainer) lucideObserver.observe(portfolioContainer, { childList: true, subtree: true });
 
         // Hero Background Animation
         const ctx = heroCanvas.getContext('2d');
@@ -1330,22 +1322,6 @@
         function initCanvas() {
             heroCanvas.width = window.innerWidth;
             heroCanvas.height = document.querySelector('.hero').offsetHeight;
-        }
-
-        // Helper to convert hex CSS color to RGB
-        function hexToRgb(hex) {
-            if (!hex) return null;
-            hex = hex.trim();
-            if (hex.startsWith('rgb')) {
-                const m = hex.match(/(\d+),\s*(\d+),\s*(\d+)/);
-                if (m) return { r: +m[1], g: +m[2], b: +m[3] };
-                return null;
-            }
-            if (hex[0] === '#') hex = hex.slice(1);
-            if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
-            const int = parseInt(hex, 16);
-            if (isNaN(int)) return null;
-            return { r: (int >> 16) & 255, g: (int >> 8) & 255, b: int & 255 };
         }
 
         class Particle {
@@ -1368,9 +1344,7 @@
                 }
             }
             draw() {
-                const cssPrimary = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim() || '#00c87b';
-                const rgb = hexToRgb(cssPrimary) || { r: 0, g: 200, b: 123 };
-                ctx.fillStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${this.opacity})`;
+                ctx.fillStyle = `rgba(0, 255, 157, ${this.opacity})`;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
